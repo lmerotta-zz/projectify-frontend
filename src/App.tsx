@@ -1,5 +1,14 @@
+import { Input } from "components";
+import { FormProvider, useForm } from "react-hook-form";
+
 function App() {
-  return <h1>Test</h1>;
+  const form = useForm();
+
+  return (
+    <FormProvider {...form}>
+      <Input name="test" ref={form.register} label="pekpek" />
+    </FormProvider>
+  );
 }
 
 export default App;

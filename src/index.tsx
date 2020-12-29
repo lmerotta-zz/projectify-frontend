@@ -1,16 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Devtools } from "@ui-devtools/tailwind";
 import App from "./App";
 import { GlobalStyles } from "twin.macro";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Devtools>
-      <GlobalStyles />
-      <App />
-    </Devtools>
+    <GlobalStyles />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
