@@ -1,0 +1,21 @@
+name: Tests
+on:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - release/**
+jobs:
+  phpunit:
+    name: Jest unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - run: CI=true npm run test -- --coverage --json --outputFile=result.json --testLocationInResults
+      - uses: tanmen/jest-reporter@v1
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
