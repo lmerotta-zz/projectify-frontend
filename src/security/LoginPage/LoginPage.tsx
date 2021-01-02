@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { Input, SubTitle, Title } from "components";
+import { Button, Input, Link, SubTitle, Title } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import tw, { styled } from "twin.macro";
 import background from "./images/background.svg";
@@ -27,7 +27,7 @@ const LoginPage = () => {
             Your <span tw="text-secondary font-medium">projects</span>, your
             way.
           </SubTitle>
-          <p tw="text-white font-light text-sm lg:text-2xl">
+          <p tw="text-white font-light text-sm lg:text-xl">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             quis nunc a mauris faucibus aliquet. Nullam sed{" "}
           </p>
@@ -43,26 +43,20 @@ const LoginPage = () => {
           <div tw="mb-8 lg:mb-2">
             <Input name="password" type="password" label="Password" />
           </div>
-          <a href="/pek" tw="text-dark font-light text-sm mb-10 lg:text-xs">
+          <Link href="/pek" tw="font-light text-sm mb-10 lg:text-xs">
             Forgot password?
-          </a>
+          </Link>
 
           <div tw="flex justify-evenly items-center flex-col">
-            <button
-              type="submit"
-              tw="text-white w-full mb-5 flex-1 bg-primary px-6 py-4 rounded-md font-bold transition hover:bg-primary-hover"
-            >
+            <Button type="submit" tw="w-full mb-5 flex-1 py-4 font-bold">
               Log In
-            </button>
+            </Button>
 
             <span tw="text-sm text-default">
               Don't have an account ?{" "}
-              <a
-                href="/pek"
-                tw="text-secondary transition hover:text-secondary-hover"
-              >
+              <Link href="/pek" color="secondary">
                 Register here
-              </a>
+              </Link>
             </span>
           </div>
         </FormProvider>
