@@ -5,15 +5,15 @@ import ErrorMessage from "components/ErrorMessage/ErrorMessage";
 
 const Wrapper = motion.custom(tw.div`relative outline-none`);
 
-const labelFilledStyles = tw`text-purple-600 top-0 translate-y-0.5 text-xs`;
+const labelFilledStyles = tw`text-primary top-0 translate-y-0.5 text-xs`;
 
 const Label = styled.label`
-  ${tw`absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-400 cursor-text transition-all pointer-events-none`}
+  ${tw`absolute top-1/2 transform -translate-y-1/2 left-3 text-default cursor-text transition-all pointer-events-none`}
 `;
 
 const InputWrapper = motion.custom(tw.div`w-full relative`);
 const StyledInput = styled.input`
-  ${tw`w-full pt-4 pb-2 pl-3 pr-3 border rounded border-gray-400 appearance-none outline-none transition-colors focus:border-purple-600`}
+  ${tw`w-full pt-4 pb-2 pl-3 pr-3 border rounded border-gray-400 appearance-none outline-none transition-colors focus:border-primary`}
   &:focus {
     + .label {
       ${labelFilledStyles}
@@ -21,7 +21,7 @@ const StyledInput = styled.input`
   }
 
   :not(:placeholder-shown) {
-    ${tw`border-purple-600`}
+    ${tw`border-primary`}
     + .label {
       ${labelFilledStyles}
     }
