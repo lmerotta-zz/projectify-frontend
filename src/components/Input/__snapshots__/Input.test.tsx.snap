@@ -62,16 +62,6 @@ exports[`Input unit tests Applies focusing styles when input is focused 1`] = `
   line-height: 1rem;
 }
 
-.emotion-2:invalid {
-  --tw-border-opacity: 1;
-  border-color: rgba(220, 38, 38, var(--tw-border-opacity));
-}
-
-.emotion-2:invalid+.label {
-  --tw-text-opacity: 1;
-  color: rgba(220, 38, 38, var(--tw-text-opacity));
-}
-
 .emotion-3 {
   position: absolute;
   top: 50%;
