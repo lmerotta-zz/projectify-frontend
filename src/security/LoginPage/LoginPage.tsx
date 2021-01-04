@@ -3,6 +3,8 @@
 import { Button, Input, Link, SubTitle, Title } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import tw, { styled } from "twin.macro";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import background from "./images/background.svg";
 
 const Wrapper = tw.div`flex flex-col lg:flex-row min-h-screen`;
@@ -15,8 +17,15 @@ const Hero = styled.div`
 
 const HeroContent = tw.div`lg:self-start lg:w-2/3`;
 
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
 const LoginPage = () => {
-  const form = useForm();
+  const form = useForm({
+    resolver: yupResolver(schema),
+  });
 
   return (
     <Wrapper>
@@ -37,28 +46,40 @@ const LoginPage = () => {
         <Title>Login</Title>
         <SubTitle tw="mb-10 lg:mb-20">Log in to access your projects.</SubTitle>
         <FormProvider {...form}>
-          <div tw="mb-5 lg:mb-8">
-            <Input name="email" type="email" label="Email" />
-          </div>
-          <div tw="mb-8 lg:mb-2">
-            <Input name="password" type="password" label="Password" />
-          </div>
-          <Link href="/pek" tw="font-light text-sm mb-10 lg:text-xs">
-            Forgot password?
-          </Link>
+          <form onSubmit={form.handleSubmit(() => alert("pek"))}>
+            <div tw="mb-5 lg:mb-8">
+              <Input
+                name="email"
+                type="email"
+                label="Email"
+                ref={form.register}
+              />
+            </div>
+            <div tw="mb-8 lg:mb-2">
+              <Input
+                name="password"
+                type="password"
+                label="Password"
+                ref={form.register}
+              />
+            </div>
+            <Link href="/pek" tw="font-light text-sm mb-10 lg:text-xs">
+              Forgot password?
+            </Link>
 
-          <div tw="flex justify-evenly items-center flex-col">
-            <Button type="submit" tw="w-full mb-5 flex-1 py-4 font-bold">
-              Log In
-            </Button>
+            <div tw="flex justify-evenly items-center flex-col">
+              <Button type="submit" tw="w-full mb-5 flex-1 py-4 font-bold">
+                Log In
+              </Button>
 
-            <span tw="text-sm text-default">
-              Don't have an account ?{" "}
-              <Link href="/pek" color="secondary">
-                Register here
-              </Link>
-            </span>
-          </div>
+              <span tw="text-sm text-default">
+                Don't have an account ?{" "}
+                <Link href="/pek" color="secondary">
+                  Register here
+                </Link>
+              </span>
+            </div>
+          </form>
         </FormProvider>
       </div>
     </Wrapper>

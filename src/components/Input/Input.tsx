@@ -2,6 +2,7 @@ import { forwardRef, HTMLProps, ReactNode } from "react";
 import tw, { styled } from "twin.macro";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import ErrorMessage from "components/ErrorMessage/ErrorMessage";
+import { useFormContext } from "react-hook-form";
 
 const Wrapper = motion.custom(tw.div`relative outline-none`);
 
@@ -12,7 +13,7 @@ const Label = styled.label`
 `;
 
 const InputWrapper = motion.custom(tw.div`w-full relative`);
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ invalid?: boolean }>`
   ${tw`w-full pt-4 pb-2 pl-3 pr-3 border rounded border-gray-400 appearance-none outline-none transition-colors focus:border-primary`}
   &:focus {
     + .label {
@@ -27,11 +28,9 @@ const StyledInput = styled.input`
     }
   }
 
-  &:invalid {
-    ${tw`border-red-600`}
-    + .label {
-      ${tw`text-red-600`}
-    }
+  ${({ invalid }) => invalid && tw`border-red-600!`}
+  + .label {
+    ${({ invalid }) => invalid && tw`text-red-600!`}
   }
 `;
 
@@ -41,27 +40,31 @@ type InputProps = Omit<HTMLProps<HTMLInputElement>, "as" | "name"> & {
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, name, ...rest }, ref) => (
-    <AnimateSharedLayout>
-      <Wrapper layout>
-        <InputWrapper layout>
-          <StyledInput
-            ref={ref}
-            {...rest}
-            name={name}
-            placeholder="&nbsp;"
-            data-testid={`input-${name}`}
-          />
-          {label && (
-            <Label className="label" data-testid={`label-${name}`}>
-              {label}
-            </Label>
-          )}
-        </InputWrapper>
-        <ErrorMessage name={name} />
-      </Wrapper>
-    </AnimateSharedLayout>
-  )
+  ({ label, name, ...rest }, ref) => {
+    const { errors } = useFormContext();
+    return (
+      <AnimateSharedLayout>
+        <Wrapper layout>
+          <InputWrapper layout>
+            <StyledInput
+              ref={ref}
+              {...rest}
+              name={name}
+              placeholder="&nbsp;"
+              data-testid={`input-${name}`}
+              invalid={!!errors?.[name]}
+            />
+            {label && (
+              <Label className="label" data-testid={`label-${name}`}>
+                {label}
+              </Label>
+            )}
+          </InputWrapper>
+          <ErrorMessage name={name} />
+        </Wrapper>
+      </AnimateSharedLayout>
+    );
+  }
 );
 
 export default Input;
