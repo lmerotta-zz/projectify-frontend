@@ -33,7 +33,7 @@ const LoginPage = () => {
           </p>
         </HeroContent>
       </Hero>
-      <div tw="w-full bg-white flex flex-col px-8 py-16 lg:w-1/3 lg:px-16 lg:justify-center">
+      <div tw="w-full flex-1 bg-white flex flex-col px-8 py-10 lg:w-1/3 md:px-48 lg:px-16 md:justify-center">
         <Title>Login</Title>
         <SubTitle tw="mb-10 lg:mb-20">Log in to access your projects.</SubTitle>
         <FormProvider {...form}>
