@@ -3,11 +3,15 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { GlobalStyles } from "twin.macro";
 import reportWebVitals from "./reportWebVitals";
+import { ApolloProvider } from "@apollo/client";
+import client from "apollo/client";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyles />
-    <App />
+    <ApolloProvider client={client}>
+      <GlobalStyles />
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
