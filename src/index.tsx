@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { GlobalStyles } from "twin.macro";
@@ -6,12 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
 import client from "apollo/client";
 import "utils/i18n";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <GlobalStyles />
-      <App />
+      <Suspense fallback={null}>
+        <GlobalStyles />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Suspense>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
