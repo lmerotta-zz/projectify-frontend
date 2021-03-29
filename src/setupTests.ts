@@ -8,3 +8,13 @@ import { toMatchDiffSnapshot } from "snapshot-diff";
 
 expect.extend({ toMatchDiffSnapshot });
 expect.extend(matchers);
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (str: any) => str,
+    i18n: {
+      changeLanguage: () => new Promise(() => {}),
+    },
+  }),
+  Trans: ({ i18nKey }: any) => i18nKey,
+}));

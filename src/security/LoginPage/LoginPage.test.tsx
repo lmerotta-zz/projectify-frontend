@@ -64,6 +64,9 @@ describe("LoginPage unit tests", () => {
       {
         request: {
           query: AUTHORIZE_QUERY,
+          variables: {
+            challenge: "UdFfYchv1a6tryk3-n_EsFm9CuBZqq5ICCv29SXTiiI",
+          },
         },
         error: new Error("test"),
       },

@@ -9,6 +9,7 @@ import background from "./images/background.svg";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { oauthBag } from "apollo/oauth";
 import { motion } from "framer-motion";
+import { Trans, useTranslation } from "react-i18next";
 
 const Wrapper = tw.div`flex flex-col lg:flex-row min-h-screen`;
 
@@ -54,14 +55,15 @@ const LoginPage = () => {
     resolver: yupResolver(schema),
   });
 
+  const { t } = useTranslation();
+
   const [authorize] = useLazyQuery<{ code: string }>(AUTHORIZE_QUERY, {
     fetchPolicy: "no-cache",
     onCompleted: ({ code }) => {
       oauthBag({ ...oauthBag(), one_time_code: code });
       // TODO: redirect to a page that makes a graphql query just to see if it works !
     },
-    onError: (e) => {
-      console.log(e);
+    onError: () => {
       form.setError("global", {
         type: "server",
         message: "An error occured, please try again later",
@@ -87,18 +89,23 @@ const LoginPage = () => {
         <Title tw="text-light lg:my-auto">ProjectifyTmp</Title>
         <HeroContent>
           <SubTitle tw="text-white font-normal mb-3 lg:text-6xl">
-            Your <span tw="text-secondary font-medium">projects</span>, your
-            way.
+            <Trans
+              i18nKey="security.login_page.hero.subtitle"
+              components={{
+                highlight: <span tw="text-secondary font-medium" />,
+              }}
+            />
           </SubTitle>
           <p tw="text-white font-light text-sm lg:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            quis nunc a mauris faucibus aliquet. Nullam sed{" "}
+            {t("security.login_page.hero.caption")}
           </p>
         </HeroContent>
       </Hero>
       <div tw="w-full flex-1 bg-white flex flex-col px-8 py-10 lg:w-1/3 md:px-48 lg:px-16 md:justify-center">
-        <Title>Login</Title>
-        <SubTitle tw="mb-10 lg:mb-20">Log in to access your projects.</SubTitle>
+        <Title>{t("security.login_page.page_title")}</Title>
+        <SubTitle tw="mb-10 lg:mb-20">
+          {t("security.login_page.page_subtitle")}
+        </SubTitle>
         <FormProvider {...form}>
           <form
             onSubmit={form.handleSubmit(async (data) => {
@@ -124,7 +131,7 @@ const LoginPage = () => {
               />
             </div>
             <Link href="/pek" tw="font-light text-sm mb-10 lg:text-xs">
-              Forgot password?
+              {t("security.login_page.form.forgot_password_link")}
             </Link>
 
             <motion.div tw="flex justify-center mb-3" layout>
@@ -137,14 +144,16 @@ const LoginPage = () => {
                 type="submit"
                 tw="w-full mb-5 flex-1 py-4 font-bold"
               >
-                Log In
+                {t("security.login_page.form.btn_login")}
               </Button>
 
               <span tw="text-sm text-default">
-                Don't have an account ?{" "}
-                <Link href="/pek" color="secondary">
-                  Register here
-                </Link>
+                <Trans
+                  i18nKey="security.login_page.form.register_link"
+                  components={{
+                    link: <Link href="/pek" color="secondary" />,
+                  }}
+                />
               </span>
             </div>
           </form>
