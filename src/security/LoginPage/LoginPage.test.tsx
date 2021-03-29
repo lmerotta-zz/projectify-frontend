@@ -1,5 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { render, fireEvent, act } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import LoginPage, { AUTHORIZE_QUERY, LOGIN_MUTATION } from "./LoginPage";
 
 describe("LoginPage unit tests", () => {
@@ -23,7 +24,9 @@ describe("LoginPage unit tests", () => {
 
     const result = render(
       <MockedProvider mocks={mocks as any} addTypename={false}>
-        <LoginPage />
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
       </MockedProvider>
     );
 
@@ -74,7 +77,9 @@ describe("LoginPage unit tests", () => {
 
     const result = render(
       <MockedProvider mocks={mocks as any} addTypename={false}>
-        <LoginPage />
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
       </MockedProvider>
     );
 
@@ -129,7 +134,9 @@ describe("LoginPage unit tests", () => {
 
     const result = render(
       <MockedProvider mocks={mocks as any} addTypename={false}>
-        <LoginPage />
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
       </MockedProvider>
     );
 

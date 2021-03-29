@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { FC, HTMLProps } from "react";
+import { FC } from "react";
+import { NavLink, NavLinkProps } from "react-router-dom";
 import tw, { TwStyle } from "twin.macro";
 
 type TextColor = "dark" | "secondary";
@@ -15,13 +16,15 @@ const colorMapping: {
   secondary: tw`text-secondary transition hover:text-secondary-hover`,
 };
 
-const Link: FC<
-  Omit<HTMLProps<HTMLAnchorElement>, "as" | "color"> & LinkProps
-> = ({ children, color = "dark", ...rest }) => {
+const Link: FC<NavLinkProps & LinkProps> = ({
+  children,
+  color = "dark",
+  ...rest
+}) => {
   return (
-    <a {...rest} css={colorMapping[color]}>
+    <NavLink {...rest} css={colorMapping[color]}>
       {children}
-    </a>
+    </NavLink>
   );
 };
 

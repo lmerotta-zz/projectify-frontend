@@ -1,4 +1,9 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  from,
+  createHttpLink,
+} from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 import qs from "qs";
 import i18next from "i18next";
@@ -22,6 +27,10 @@ const restLink = new RestLink({
   credentials: "include",
 });
 
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_GRAPHQL_URL,
+});
+
 let locale = "";
 
 i18next.on("languageChanged", (lng) => {
@@ -29,12 +38,11 @@ i18next.on("languageChanged", (lng) => {
 });
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_GRAPHQL_URL,
   cache: new InMemoryCache(),
   headers: {
     "x-locale": locale,
   },
-  link: restLink,
+  link: from([restLink, httpLink]),
 });
 
 export default client;

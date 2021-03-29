@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import SecurityPage from "./index";
+import SecurityPage from ".";
 
 describe("Security main page unit tests", () => {
   it("Renders", () => {

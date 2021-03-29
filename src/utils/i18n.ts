@@ -8,6 +8,9 @@ export default i18n
   .use(Backend)
   .use(LanguageDetector)
   .init({
+    react: {
+      wait: true,
+    },
     lng: "en",
     backend: {
       loadPath: "/translations/{{lng}}.json",
