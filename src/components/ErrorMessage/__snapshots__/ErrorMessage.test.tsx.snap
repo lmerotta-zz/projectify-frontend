@@ -11,6 +11,7 @@ exports[`ErrorMessage unit tests Displays the error message 1`] = `
 
 <span
     class="emotion-0"
+    data-testid="error-message-my-input"
   >
     error-message
   </span>

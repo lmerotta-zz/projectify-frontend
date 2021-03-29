@@ -20,7 +20,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             name={name}
             placeholder="&nbsp;"
             data-testid={`input-${name}`}
-            invalid={!!errors?.[name]}
+            invalid={errors[name]?.length > 0}
           />
           {label && (
             <Styles.Label className="label" data-testid={`label-${name}`}>

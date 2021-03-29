@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import background from "./images/background.svg";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
-import { oauthBag } from "apollo/cache";
+import { oauthBag } from "apollo/oauth";
 import { motion } from "framer-motion";
 
 const Wrapper = tw.div`flex flex-col lg:flex-row min-h-screen`;
@@ -25,7 +25,7 @@ const schema = yup.object().shape({
   password: yup.string().required(),
 });
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!) {
     login(input: { username: $username, password: $password })
       @rest(
@@ -40,7 +40,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-const AUTHORIZE_QUERY = gql`
+export const AUTHORIZE_QUERY = gql`
   query authorize($challenge: String!) {
     authorize(response_type: "code", client_id: "${process.env.REACT_APP_OAUTH_CLIENTID}", code_challenge: $challenge, code_challenge_method: "S256", redirect_uri: "${process.env.REACT_APP_OAUTH_REDIRECTURI}", scope: ["public.profile", "email"])
       @rest(type: "Authorize", endpoint: "authorize", path:"?{args}", method: "GET") {
@@ -60,13 +60,20 @@ const LoginPage = () => {
       oauthBag({ ...oauthBag(), one_time_code: code });
       // TODO: redirect to a page that makes a graphql query just to see if it works !
     },
+    onError: (e) => {
+      console.log(e);
+      form.setError("global", {
+        type: "server",
+        message: "An error occured, please try again later",
+      });
+    },
   });
 
   const [login] = useMutation(LOGIN_MUTATION, {
     onError: (e) => {
       form.setError("global", {
         type: "server",
-        message: (e.networkError as any)?.result?.error,
+        message: (e.networkError as any)!.result!.error,
       });
     },
     onCompleted: async () => {
@@ -125,7 +132,11 @@ const LoginPage = () => {
             </motion.div>
 
             <div tw="flex justify-evenly items-center flex-col">
-              <Button type="submit" tw="w-full mb-5 flex-1 py-4 font-bold">
+              <Button
+                data-testid="btn-login"
+                type="submit"
+                tw="w-full mb-5 flex-1 py-4 font-bold"
+              >
                 Log In
               </Button>
 

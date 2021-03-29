@@ -7,7 +7,11 @@ type ErrorMessageProps = {
 const ErrorMessage = ({ name }: ErrorMessageProps) => (
   <FormErrorMessage
     name={name}
-    render={({ message }) => <Styles.Wrapper layout>{message}</Styles.Wrapper>}
+    render={({ message }) => (
+      <Styles.Wrapper data-testid={`error-message-${name}`} layout>
+        {message}
+      </Styles.Wrapper>
+    )}
   />
 );
 

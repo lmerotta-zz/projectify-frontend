@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Input from "./Input";
 
@@ -15,5 +16,29 @@ describe("Input unit tests", () => {
 
     const firstRender = asFragment();
     expect(firstRender).toMatchSnapshot();
+  });
+
+  it("Applies the error styles", () => {
+    const Component = () => {
+      const form = useForm();
+
+      useEffect(() => {
+        form.setError("my-input", {
+          type: "server",
+          message: "Test message",
+        });
+      }, []);
+      return (
+        <FormProvider {...form}>
+          <Input name="my-input" label="My input" />
+        </FormProvider>
+      );
+    };
+
+    const { getByTestId } = render(<Component />);
+
+    expect(getByTestId("error-message-my-input")).toHaveTextContent(
+      "Test message"
+    );
   });
 });
