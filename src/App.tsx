@@ -1,14 +1,5 @@
-import { Input } from "components";
-import { FormProvider, useForm } from "react-hook-form";
+import LoginPage from "security/LoginPage/LoginPage";
 
-function App() {
-  const form = useForm();
-
-  return (
-    <FormProvider {...form}>
-      <Input name="test" ref={form.register} label="pekpek" />
-    </FormProvider>
-  );
-}
+const App = () => <LoginPage />;
 
 export default App;

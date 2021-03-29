@@ -1,0 +1,4 @@
+{
+    "prettier.requireConfig": false,
+    "jest.coverageFormatter": "GutterFormatter"
+}
