@@ -107,6 +107,7 @@
       "src/**/*.{ts,tsx}",
       "!src/utils/i18n.ts",
       "!src/index.tsx",
+      "!src/apollo/oauth.ts",
       "!src/react-app-env.d.ts",
       "!src/reportWebVitals.ts",
       "!src/setupTests.ts",

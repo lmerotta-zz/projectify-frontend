@@ -140,6 +140,8 @@ describe("LoginPage unit tests", () => {
       </MockedProvider>
     );
 
+    expect(result.asFragment()).toMatchSnapshot();
+
     fireEvent.input(result.getByTestId("input-email"), {
       target: { value: "success@test.com" },
     });

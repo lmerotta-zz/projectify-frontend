@@ -37,12 +37,16 @@ const SecurityPage = () => {
           <Switch location={location} key={location.pathname}>
             <Route
               path={`${path}/login`}
-              component={lazy(() => import("security/LoginPage/LoginPage"))}
+              component={lazy(
+                /* istanbul ignore next */ () =>
+                  import("security/LoginPage/LoginPage")
+              )}
             />
             <Route
               path={`${path}/register`}
               component={lazy(
-                () => import("security/RegisterPage/RegisterPage")
+                /* istanbul ignore next */ () =>
+                  import("security/RegisterPage/RegisterPage")
               )}
             />
           </Switch>
