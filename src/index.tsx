@@ -7,8 +7,10 @@ import { ApolloProvider } from "@apollo/client";
 import client from "apollo/client";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import "react-toastify/dist/ReactToastify.css";
 import "utils/i18n";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 Sentry.init({
   dsn:
@@ -18,7 +20,7 @@ Sentry.init({
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
+  tracesSampleRate: process.env.NODE_ENV === "production" ? 1.0 : 0,
 });
 
 ReactDOM.render(
@@ -28,6 +30,7 @@ ReactDOM.render(
         <GlobalStyles />
         <BrowserRouter>
           <App />
+          <ToastContainer />
         </BrowserRouter>
       </Suspense>
     </ApolloProvider>

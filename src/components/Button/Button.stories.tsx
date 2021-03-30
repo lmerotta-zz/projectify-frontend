@@ -7,6 +7,9 @@ import { Story } from "@storybook/react/types-6-0";
 export default {
   title: "Button",
   component: Button,
+  argTypes: {
+    disabled: { control: { type: "boolean" } },
+  },
 };
 
 const Template: Story<ComponentProps<typeof Button>> = (args) => (

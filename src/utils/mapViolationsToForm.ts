@@ -11,7 +11,6 @@ function mapViolationsToForm<TFieldValues extends FieldValues = FieldValues>(
   setError: (name: keyof TFieldValues, error: ErrorOption) => void,
   e: ApolloError
 ) {
-  Sentry.captureException(e);
   if (
     e.graphQLErrors.length === 1 &&
     e.graphQLErrors[0].extensions?.violations?.length > 0
@@ -29,6 +28,7 @@ function mapViolationsToForm<TFieldValues extends FieldValues = FieldValues>(
     return true;
   }
 
+  Sentry.captureException(e);
   return false;
 }
 

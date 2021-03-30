@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         primary: colors.purple[600],
         'primary-hover': colors.purple[700],
+        'primary-dark': colors.purple[900],
         secondary: colors.yellow[500],
         'secondary-hover': colors.yellow[600],
         'default': colors.gray[400],

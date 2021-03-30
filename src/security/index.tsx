@@ -1,15 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
-import { lazy } from "react";
-import { Route, Switch, useRouteMatch } from "react-router";
+import { lazy, Suspense } from "react";
+import { Route, Switch, useLocation, useRouteMatch } from "react-router";
 import { SubTitle, Title } from "components";
 import * as Styles from "./index.styles";
 import { Trans, useTranslation } from "react-i18next";
 import "twin.macro";
+import { AnimatePresence } from "framer-motion";
 
 const SecurityPage = () => {
   const { path } = useRouteMatch();
   const { t } = useTranslation();
+  const location = useLocation();
 
   return (
     <Styles.Wrapper>
@@ -30,18 +32,22 @@ const SecurityPage = () => {
         </Styles.HeroContent>
       </Styles.Hero>
 
-      <div tw="w-full flex-1 bg-white flex flex-col px-8 py-10 lg:w-1/3 md:px-48 lg:px-16 md:justify-center">
-        <Switch>
-          <Route
-            path={`${path}/login`}
-            component={lazy(() => import("security/LoginPage/LoginPage"))}
-          />
-          <Route
-            path={`${path}/register`}
-            component={lazy(() => import("security/RegisterPage/RegisterPage"))}
-          />
-        </Switch>
-      </div>
+      <Suspense fallback="test">
+        <AnimatePresence exitBeforeEnter initial={false}>
+          <Switch location={location} key={location.pathname}>
+            <Route
+              path={`${path}/login`}
+              component={lazy(() => import("security/LoginPage/LoginPage"))}
+            />
+            <Route
+              path={`${path}/register`}
+              component={lazy(
+                () => import("security/RegisterPage/RegisterPage")
+              )}
+            />
+          </Switch>
+        </AnimatePresence>
+      </Suspense>
     </Styles.Wrapper>
   );
 };

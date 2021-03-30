@@ -63,8 +63,6 @@ exports[`Input unit tests Applies focusing styles when input is focused 1`] = `
 }
 
 .emotion-3 {
-  position: absolute;
-  top: 50%;
   --tw-translate-x: 0;
   --tw-translate-y: -50%;
   --tw-rotate: 0;
@@ -76,6 +74,8 @@ exports[`Input unit tests Applies focusing styles when input is focused 1`] = `
   -moz-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   -ms-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  position: absolute;
+  top: 50%;
   left: 0.75rem;
   --tw-text-opacity: 1;
   color: rgba(161, 161, 170, var(--tw-text-opacity));

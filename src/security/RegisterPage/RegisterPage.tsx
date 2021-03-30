@@ -11,6 +11,21 @@ import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
 import i18next from "i18next";
 import mapViolationsToForm from "utils/mapViolationsToForm";
+import LeftPane from "security/LeftPane";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
+
+const animationVariants = {
+  initial: {
+    opacity: 0,
+  },
+  in: {
+    opacity: 1,
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const schema = yup.object().shape({
   firstName: yup.string().required(),
@@ -63,6 +78,8 @@ const RegisterPage = () => {
     resolver: yupResolver(schema),
   });
 
+  const history = useHistory();
+
   const { t } = useTranslation();
 
   const [register] = useMutation(REGISTER_MUTATION, {
@@ -70,15 +87,23 @@ const RegisterPage = () => {
       if (!mapViolationsToForm(form.setError, e)) {
         form.setError("global", {
           type: "server",
-          message: "Oops...",
+          message: t("global.errors.internal-server-error"),
         });
       }
     },
-    // todo: onCompleted
+    onCompleted: () => {
+      toast.success(t("security.register_page.message.user_created"));
+      history.push(`${routePrefixes.security}/login`);
+    },
   });
 
   return (
-    <>
+    <LeftPane
+      variants={animationVariants}
+      initial="initial"
+      animate="in"
+      exit="out"
+    >
       <Title>{t("security.register_page.page_title")}</Title>
       <SubTitle tw="mb-10 lg:mb-20">
         {t("security.register_page.page_subtitle")}
@@ -127,7 +152,7 @@ const RegisterPage = () => {
             <Input
               name="repeatPassword"
               type="password"
-              label={t("security.register_page.form.label_repeatPasword")}
+              label={t("security.register_page.form.label_repeatPassword")}
               ref={form.register}
             />
           </div>
@@ -138,11 +163,12 @@ const RegisterPage = () => {
 
           <div tw="flex justify-evenly items-center flex-col">
             <Button
-              data-testid="btn-login"
+              data-testid="btn-register"
               type="submit"
+              disabled={form.formState.isSubmitting}
               tw="w-full mb-5 flex-1 py-4 font-bold"
             >
-              {t("security.register_page.form.btn_login")}
+              {t("security.register_page.form.btn_register")}
             </Button>
 
             <span tw="text-sm text-default">
@@ -161,7 +187,7 @@ const RegisterPage = () => {
           </div>
         </form>
       </FormProvider>
-    </>
+    </LeftPane>
   );
 };
 

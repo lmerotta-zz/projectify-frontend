@@ -16,8 +16,9 @@ exports[`Link unit tests Renders with color dark 1`] = `
 }
 
 <a
-    class="emotion-0"
-    href="#"
+    aria-current="page"
+    class="emotion-0 active"
+    href="/"
   >
     My Link
   </a>
@@ -40,8 +41,9 @@ exports[`Link unit tests Renders with color secondary 1`] = `
 }
 
 <a
-    class="emotion-0"
-    href="#"
+    aria-current="page"
+    class="emotion-0 active"
+    href="/"
   >
     My Link
   </a>

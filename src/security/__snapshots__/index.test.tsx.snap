@@ -133,45 +133,6 @@ exports[`Security main page unit tests Renders 1`] = `
   }
 }
 
-.emotion-6 {
-  width: 100%;
-  -webkit-flex: 1 1 0%;
-  -ms-flex: 1 1 0%;
-  flex: 1 1 0%;
-  --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-@media (min-width: 768px) {
-  .emotion-6 {
-    padding-left: 12rem;
-    padding-right: 12rem;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-  }
-}
-
-@media (min-width: 1024px) {
-  .emotion-6 {
-    width: 33.333333%;
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-}
-
 <div
     class="emotion-0"
   >
@@ -198,9 +159,6 @@ exports[`Security main page unit tests Renders 1`] = `
         </p>
       </div>
     </div>
-    <div
-      class="emotion-6"
-    />
   </div>
 </DocumentFragment>
 `;

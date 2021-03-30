@@ -10,6 +10,20 @@ import { oauthBag } from "apollo/oauth";
 import { motion } from "framer-motion";
 import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
+import LeftPane from "security/LeftPane";
+import mapViolationsToForm from "utils/mapViolationsToForm";
+
+const animationVariants = {
+  initial: {
+    opacity: 0,
+  },
+  in: {
+    opacity: 1,
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -69,10 +83,12 @@ const LoginPage = () => {
 
   const [login] = useMutation(LOGIN_MUTATION, {
     onError: (e) => {
-      form.setError("global", {
-        type: "server",
-        message: (e.networkError as any)!.result!.error,
-      });
+      if (!mapViolationsToForm(form.setError, e)) {
+        form.setError("global", {
+          type: "server",
+          message: (e.networkError as any)!.result!.error,
+        });
+      }
     },
     onCompleted: async () => {
       await authorize({ variables: { challenge: oauthBag().challenge } });
@@ -80,7 +96,12 @@ const LoginPage = () => {
   });
 
   return (
-    <>
+    <LeftPane
+      variants={animationVariants}
+      initial="initial"
+      animate="in"
+      exit="out"
+    >
       <Title>{t("security.login_page.page_title")}</Title>
       <SubTitle tw="mb-10 lg:mb-20">
         {t("security.login_page.page_subtitle")}
@@ -121,6 +142,7 @@ const LoginPage = () => {
             <Button
               data-testid="btn-login"
               type="submit"
+              disabled={form.formState.isSubmitting}
               tw="w-full mb-5 flex-1 py-4 font-bold"
             >
               {t("security.login_page.form.btn_login")}
@@ -142,7 +164,7 @@ const LoginPage = () => {
           </div>
         </form>
       </FormProvider>
-    </>
+    </LeftPane>
   );
 };
 
