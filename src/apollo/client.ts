@@ -5,23 +5,14 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
-import qs from "qs";
+import { setContext } from "@apollo/client/link/context";
 import i18next from "i18next";
+import AuthManager from "utils/AuthManager";
 
 const restLink = new RestLink({
   endpoints: {
     login: {
-      uri: `${process.env.REACT_APP_ACTIONS_URL}security/authentication/login`,
-    },
-    authorize: {
-      uri: `${process.env.REACT_APP_ACTIONS_URL}security/authentication/authorize`,
-      responseTransformer: (response: Response) => {
-        const url = response.url;
-        const decoded = qs.parse(url.slice(url.lastIndexOf("?") + 1));
-        return {
-          code: decoded.code,
-        };
-      },
+      uri: `${process.env.REACT_APP_ACTIONS_URL}/login`,
     },
   },
   credentials: "include",
@@ -29,6 +20,23 @@ const restLink = new RestLink({
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  const user = await AuthManager.isLoggedIn();
+  console.log("User", user);
+  if (user !== null) {
+    return {
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${user.id_token}`,
+      },
+    };
+  }
+
+  return {
+    headers,
+  };
 });
 
 let locale = "";
@@ -42,7 +50,7 @@ const client = new ApolloClient({
   headers: {
     "x-locale": locale,
   },
-  link: from([restLink, httpLink]),
+  link: from([restLink, authLink.concat(httpLink)]),
 });
 
 export default client;

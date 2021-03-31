@@ -49,6 +49,13 @@ const SecurityPage = () => {
                   import("security/RegisterPage/RegisterPage")
               )}
             />
+            <Route
+              path={`${path}/grant-access`}
+              component={lazy(
+                /* istanbul ignore next */ () =>
+                  import("security/LoginCallback/LoginCallback")
+              )}
+            />
           </Switch>
         </AnimatePresence>
       </Suspense>

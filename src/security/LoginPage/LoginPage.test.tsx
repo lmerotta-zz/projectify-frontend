@@ -1,7 +1,12 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { render, fireEvent, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import LoginPage, { AUTHORIZE_QUERY, LOGIN_MUTATION } from "./LoginPage";
+import AuthManager from "utils/AuthManager";
+import LoginPage, { LOGIN_MUTATION } from "./LoginPage";
+
+jest.mock("utils/AuthManager", () => ({
+  login: jest.fn(),
+}));
 
 describe("LoginPage unit tests", () => {
   it("Returns invalid credential on wrong username login", async () => {
@@ -50,59 +55,6 @@ describe("LoginPage unit tests", () => {
     );
   });
 
-  it("Returns another error message if authorize fails", async () => {
-    const mocks = [
-      {
-        request: {
-          query: LOGIN_MUTATION,
-          variables: {
-            username: "success@test.com",
-            password: "test",
-          },
-        },
-        result: {
-          data: null,
-        },
-      },
-      {
-        request: {
-          query: AUTHORIZE_QUERY,
-          variables: {
-            challenge: "UdFfYchv1a6tryk3-n_EsFm9CuBZqq5ICCv29SXTiiI",
-          },
-        },
-        error: new Error("test"),
-      },
-    ];
-
-    const result = render(
-      <MockedProvider mocks={mocks as any} addTypename={false}>
-        <MemoryRouter>
-          <LoginPage />
-        </MemoryRouter>
-      </MockedProvider>
-    );
-
-    fireEvent.input(result.getByTestId("input-email"), {
-      target: { value: "success@test.com" },
-    });
-    fireEvent.input(result.getByTestId("input-password"), {
-      target: { value: "test" },
-    });
-
-    await act(async () => {
-      fireEvent.click(result.getByTestId("btn-login"));
-    });
-
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    });
-
-    expect(result.getByTestId("error-message-global")).toHaveTextContent(
-      "An error occured, please try again later"
-    );
-  });
-
   it("Stores the oauth code when request succeeds", async () => {
     const mocks = [
       {
@@ -115,19 +67,6 @@ describe("LoginPage unit tests", () => {
         },
         result: {
           data: null,
-        },
-      },
-      {
-        request: {
-          query: AUTHORIZE_QUERY,
-          variables: {
-            challenge: "UdFfYchv1a6tryk3-n_EsFm9CuBZqq5ICCv29SXTiiI",
-          },
-        },
-        result: {
-          data: {
-            code: "abc123",
-          },
         },
       },
     ];
@@ -158,5 +97,6 @@ describe("LoginPage unit tests", () => {
     });
 
     expect(() => result.getByTestId("error-message-global")).toThrow();
+    expect(AuthManager.login).toHaveBeenCalled();
   });
 });

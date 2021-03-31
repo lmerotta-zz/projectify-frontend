@@ -5,13 +5,13 @@ import { Button, Input, Link, SubTitle, Title, ErrorMessage } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { gql, useLazyQuery, useMutation } from "@apollo/client";
-import { oauthBag } from "apollo/oauth";
+import { gql, useMutation } from "@apollo/client";
 import { motion } from "framer-motion";
 import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
 import LeftPane from "security/LeftPane";
 import mapViolationsToForm from "utils/mapViolationsToForm";
+import AuthManager from "utils/AuthManager";
 
 const animationVariants = {
   initial: {
@@ -45,15 +45,6 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
-export const AUTHORIZE_QUERY = gql`
-  query authorize($challenge: String!) {
-    authorize(response_type: "code", client_id: "${process.env.REACT_APP_OAUTH_CLIENTID}", code_challenge: $challenge, code_challenge_method: "S256", redirect_uri: "${process.env.REACT_APP_OAUTH_REDIRECTURI}", scope: ["public.profile", "email"])
-      @rest(type: "Authorize", endpoint: "authorize", path:"?{args}", method: "GET") {
-        code
-      }
-  }
-`;
-
 type LoginFormType = {
   email: string;
   password: string;
@@ -67,20 +58,6 @@ const LoginPage = () => {
 
   const { t } = useTranslation();
 
-  const [authorize] = useLazyQuery<{ code: string }>(AUTHORIZE_QUERY, {
-    fetchPolicy: "no-cache",
-    onCompleted: ({ code }) => {
-      oauthBag({ ...oauthBag(), one_time_code: code });
-      // TODO: redirect to a page that makes a graphql query just to see if it works !
-    },
-    onError: () => {
-      form.setError("global", {
-        type: "server",
-        message: "An error occured, please try again later",
-      });
-    },
-  });
-
   const [login] = useMutation(LOGIN_MUTATION, {
     onError: (e) => {
       /* istanbul ignore else */
@@ -92,7 +69,7 @@ const LoginPage = () => {
       }
     },
     onCompleted: async () => {
-      await authorize({ variables: { challenge: oauthBag().challenge } });
+      await AuthManager.login();
     },
   });
 
