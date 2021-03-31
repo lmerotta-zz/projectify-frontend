@@ -84,6 +84,7 @@ const RegisterPage = () => {
 
   const [register] = useMutation(REGISTER_MUTATION, {
     onError: (e) => {
+      /* istanbul ignore else */
       if (!mapViolationsToForm(form.setError, e)) {
         form.setError("global", {
           type: "server",

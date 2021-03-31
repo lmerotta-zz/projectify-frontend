@@ -50,8 +50,26 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
-      "!src/**/*.stories.tsx"
-    ]
+      "!src/**/*.stories.{ts,tsx}",
+      "!src/utils/i18n.ts",
+      "!src/index.tsx",
+      "!src/apollo/oauth.ts",
+      "!src/react-app-env.d.ts",
+      "!src/reportWebVitals.ts",
+      "!src/setupTests.ts",
+      "!src/twin.d.ts",
+      "!src/**/*.test.{ts,tsx}",
+      "!src/apollo/client.ts",
+      "!src/**/*.styles.{ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
   },
   "husky": {
     "hooks": {

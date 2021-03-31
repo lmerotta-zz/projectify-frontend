@@ -83,6 +83,7 @@ const LoginPage = () => {
 
   const [login] = useMutation(LOGIN_MUTATION, {
     onError: (e) => {
+      /* istanbul ignore else */
       if (!mapViolationsToForm(form.setError, e)) {
         form.setError("global", {
           type: "server",
