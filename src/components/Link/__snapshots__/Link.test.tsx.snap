@@ -3,11 +3,11 @@
 exports[`Link unit tests Renders with color dark 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  --tw-text-opacity: 1;
-  color: rgba(63, 63, 70, var(--tw-text-opacity));
   transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+  --tw-text-opacity: 1;
+  color: rgba(63, 63, 70, var(--tw-text-opacity));
 }
 
 .emotion-0:hover {
@@ -16,8 +16,9 @@ exports[`Link unit tests Renders with color dark 1`] = `
 }
 
 <a
-    class="emotion-0"
-    href="#"
+    aria-current="page"
+    class="emotion-0 active"
+    href="/"
   >
     My Link
   </a>
@@ -27,11 +28,11 @@ exports[`Link unit tests Renders with color dark 1`] = `
 exports[`Link unit tests Renders with color secondary 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  --tw-text-opacity: 1;
-  color: rgba(234, 179, 8, var(--tw-text-opacity));
   transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+  --tw-text-opacity: 1;
+  color: rgba(234, 179, 8, var(--tw-text-opacity));
 }
 
 .emotion-0:hover {
@@ -40,8 +41,9 @@ exports[`Link unit tests Renders with color secondary 1`] = `
 }
 
 <a
-    class="emotion-0"
-    href="#"
+    aria-current="page"
+    class="emotion-0 active"
+    href="/"
   >
     My Link
   </a>

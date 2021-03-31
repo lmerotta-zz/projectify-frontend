@@ -6,7 +6,7 @@ const App = () => (
   <Switch>
     <Route
       path={prefixes.security}
-      component={lazy(() => import("security"))}
+      component={lazy(/* istanbul ignore next */ () => import("security"))}
     />
   </Switch>
 );
