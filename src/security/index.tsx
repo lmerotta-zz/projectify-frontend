@@ -56,6 +56,13 @@ const SecurityPage = () => {
                   import("security/LoginCallback/LoginCallback")
               )}
             />
+            <Route
+              path={`${path}/direct-login`}
+              component={lazy(
+                /* istanbul ignore next */ () =>
+                  import("security/DirectLogin/DirectLogin")
+              )}
+            />
           </Switch>
         </AnimatePresence>
       </Suspense>
