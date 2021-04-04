@@ -12,6 +12,9 @@ import routePrefixes from "utils/routing-prefix";
 import LeftPane from "security/LeftPane";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import AuthManager from "utils/AuthManager";
+import { useLocation } from "react-router";
+import * as Styles from "./LoginPage.styles";
+import ghLogo from "./images/gh-logo.png";
 
 const animationVariants = {
   initial: {
@@ -55,6 +58,7 @@ const LoginPage = () => {
   const form = useForm<LoginFormType>({
     resolver: yupResolver(schema),
   });
+  const { state } = useLocation<{ referrer: string }>();
 
   const { t } = useTranslation();
 
@@ -69,7 +73,7 @@ const LoginPage = () => {
       }
     },
     onCompleted: async () => {
-      await AuthManager.login();
+      await AuthManager.login({ state: state?.referrer ?? "/" });
     },
   });
 
@@ -142,6 +146,20 @@ const LoginPage = () => {
           </div>
         </form>
       </FormProvider>
+      <div>
+        <Styles.Divider>Or</Styles.Divider>
+        <a
+          tw="px-3 py-2 border border-gray-400 text-gray-600 transition duration-300 bg-white rounded-md inline-flex items-center hover:bg-gray-100"
+          href={`${
+            process.env.REACT_APP_ACTIONS_URL
+          }/oauth/connect/github?_destination=${
+            process.env.REACT_APP_ACTIONS_URL
+          }/oauth/connected?target=${state?.referrer ?? "/"}`}
+        >
+          <img tw="object-contain h-8 mr-2" src={ghLogo} alt="GitHub Logo" />
+          Login with GitHub
+        </a>
+      </div>
     </LeftPane>
   );
 };

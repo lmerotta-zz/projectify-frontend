@@ -23,8 +23,14 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  const user = await AuthManager.isLoggedIn();
-  console.log("User", user);
+  let user = await AuthManager.getUser();
+  if (user === null || user.expired) {
+    try {
+      user = await AuthManager.isLoggedIn();
+    } catch (e) {
+      user = null;
+    }
+  }
   if (user !== null) {
     return {
       headers: {
