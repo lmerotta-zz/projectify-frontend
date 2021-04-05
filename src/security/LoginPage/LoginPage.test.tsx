@@ -9,6 +9,10 @@ jest.mock("utils/AuthManager", () => ({
 }));
 
 describe("LoginPage unit tests", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("Returns invalid credential on wrong username login", async () => {
     const mocks = [
       {

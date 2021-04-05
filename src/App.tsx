@@ -1,4 +1,5 @@
 import { captureException } from "@sentry/minimal";
+import { isAuthenticated } from "apollo/local-state";
 import { lazy, useEffect } from "react";
 import { Route, Switch } from "react-router";
 import AuthManager from "utils/AuthManager";
@@ -9,12 +10,10 @@ const App = () => {
     setTimeout(async () => {
       try {
         await AuthManager.isLoggedIn();
-        console.log("Authenticated");
-        // TODO: set authenticated to true
+        isAuthenticated(true);
       } catch (e) {
         captureException(e);
-        console.error("Not authenticated");
-        // TODO: set authenticated to false
+        isAuthenticated(false);
       }
     }, 1000);
   }, []);

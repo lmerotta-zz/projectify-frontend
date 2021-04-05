@@ -58,7 +58,11 @@ const LoginPage = () => {
   const form = useForm<LoginFormType>({
     resolver: yupResolver(schema),
   });
-  const { state } = useLocation<{ referrer: string }>();
+  const { state } = useLocation<{ referrer: Location }>();
+  /* istanbul ignore next */
+  const referrer = state?.referrer
+    ? `${state.referrer.pathname}${state.referrer.search}${state.referrer.hash}`
+    : "/";
 
   const { t } = useTranslation();
 
@@ -73,7 +77,7 @@ const LoginPage = () => {
       }
     },
     onCompleted: async () => {
-      await AuthManager.login({ state: state?.referrer ?? "/" });
+      await AuthManager.login({ state: referrer });
     },
   });
 
@@ -150,11 +154,7 @@ const LoginPage = () => {
         <Styles.Divider>Or</Styles.Divider>
         <a
           tw="px-3 py-2 border border-gray-400 text-gray-600 transition duration-300 bg-white rounded-md inline-flex items-center hover:bg-gray-100"
-          href={`${
-            process.env.REACT_APP_ACTIONS_URL
-          }/oauth/connect/github?_destination=${
-            process.env.REACT_APP_ACTIONS_URL
-          }/oauth/connected?target=${state?.referrer ?? "/"}`}
+          href={`${process.env.REACT_APP_ACTIONS_URL}/oauth/connect/github?_destination=${process.env.REACT_APP_ACTIONS_URL}/oauth/connected?target=${referrer}`}
         >
           <img tw="object-contain h-8 mr-2" src={ghLogo} alt="GitHub Logo" />
           Login with GitHub
