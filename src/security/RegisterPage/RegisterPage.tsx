@@ -1,17 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
 
-import { Button, Input, Link, SubTitle, Title, ErrorMessage } from "components";
+import { Button, FormGroup, Input, Link } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { gql, useMutation } from "@apollo/client";
-import { motion } from "framer-motion";
 import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
 import i18next from "i18next";
 import mapViolationsToForm from "utils/mapViolationsToForm";
-import LeftPane from "security/LeftPane";
+import {
+  LeftPane,
+  SectionSubTitle,
+  SectionTitle,
+  SubmitAdditionalLinkWrapper,
+  SubmitFormContainer,
+} from "security/components";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 
@@ -70,7 +75,6 @@ type RegisterFormType = {
   firstName: string;
   lastName: string;
   password: string;
-  global?: unknown;
 };
 
 const RegisterPage = () => {
@@ -86,10 +90,7 @@ const RegisterPage = () => {
     onError: (e) => {
       /* istanbul ignore else */
       if (!mapViolationsToForm(form.setError, e)) {
-        form.setError("global", {
-          type: "server",
-          message: t("global.errors.internal-server-error"),
-        });
+        toast.error(t("global.errors.internal-server-error"));
       }
     },
     onCompleted: () => {
@@ -105,10 +106,10 @@ const RegisterPage = () => {
       animate="in"
       exit="out"
     >
-      <Title>{t("security.register_page.page_title")}</Title>
-      <SubTitle tw="mb-10 lg:mb-20">
+      <SectionTitle>{t("security.register_page.page_title")}</SectionTitle>
+      <SectionSubTitle>
         {t("security.register_page.page_subtitle")}
-      </SubTitle>
+      </SectionSubTitle>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(async (data) => {
@@ -117,62 +118,58 @@ const RegisterPage = () => {
             });
           })}
         >
-          <div tw="mb-5 lg:mb-8">
+          <FormGroup>
             <Input
               name="firstName"
               type="text"
               label={t("security.register_page.form.label_firstName")}
               ref={form.register}
             />
-          </div>
-          <div tw="mb-5 lg:mb-8">
+          </FormGroup>
+          <FormGroup>
             <Input
               name="lastName"
               type="text"
               label={t("security.register_page.form.label_lastName")}
               ref={form.register}
             />
-          </div>
-          <div tw="mb-5 lg:mb-8">
+          </FormGroup>
+          <FormGroup>
             <Input
               name="email"
               type="email"
               label={t("security.register_page.form.label_email")}
               ref={form.register}
             />
-          </div>
-          <div tw="mb-8 lg:mb-8">
+          </FormGroup>
+          <FormGroup>
             <Input
               name="password"
               type="password"
               label={t("security.register_page.form.label_password")}
               ref={form.register}
             />
-          </div>
-          <div tw="mb-8 lg:mb-2">
+          </FormGroup>
+          <FormGroup>
             <Input
               name="repeatPassword"
               type="password"
               label={t("security.register_page.form.label_repeatPassword")}
               ref={form.register}
             />
-          </div>
+          </FormGroup>
 
-          <motion.div tw="flex justify-center mb-3" layout>
-            <ErrorMessage name="global" />
-          </motion.div>
-
-          <div tw="flex justify-evenly items-center flex-col">
+          <SubmitFormContainer>
             <Button
               data-testid="btn-register"
               type="submit"
+              color="secondary"
               disabled={form.formState.isSubmitting}
-              tw="w-full mb-5 flex-1 py-4 font-bold"
             >
               {t("security.register_page.form.btn_register")}
             </Button>
 
-            <span tw="text-sm text-default">
+            <SubmitAdditionalLinkWrapper>
               <Trans
                 i18nKey="security.register_page.form.existing_account_link"
                 components={{
@@ -184,8 +181,8 @@ const RegisterPage = () => {
                   ),
                 }}
               />
-            </span>
-          </div>
+            </SubmitAdditionalLinkWrapper>
+          </SubmitFormContainer>
         </form>
       </FormProvider>
     </LeftPane>

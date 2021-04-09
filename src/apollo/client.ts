@@ -8,6 +8,7 @@ import { RestLink } from "apollo-link-rest";
 import { setContext } from "@apollo/client/link/context";
 import i18next from "i18next";
 import AuthManager from "utils/AuthManager";
+import { isAuthenticated } from "./local-state";
 
 const restLink = new RestLink({
   endpoints: {
@@ -23,6 +24,9 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext(async (_, { headers }) => {
+  if (!isAuthenticated()) {
+    return;
+  }
   let user = await AuthManager.getUser();
   if (user === null || user.expired) {
     try {

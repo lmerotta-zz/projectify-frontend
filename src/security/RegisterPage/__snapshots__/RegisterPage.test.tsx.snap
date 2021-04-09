@@ -45,7 +45,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   font-size: 2.25rem;
   line-height: 2.5rem;
   --tw-text-opacity: 1;
-  color: rgba(63, 63, 70, var(--tw-text-opacity));
+  color: rgba(39, 39, 42, var(--tw-text-opacity));
   font-weight: 700;
 }
 
@@ -60,7 +60,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   font-size: 1.25rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
   font-weight: 500;
   margin-bottom: 2.5rem;
 }
@@ -164,7 +164,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   top: 50%;
   left: 0.75rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
   cursor: text;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -172,39 +172,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   pointer-events: none;
 }
 
-.emotion-18 {
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 1024px) {
-  .emotion-18 {
-    margin-bottom: 2rem;
-  }
-}
-
-.emotion-23 {
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 1024px) {
-  .emotion-23 {
-    margin-bottom: 0.5rem;
-  }
-}
-
 .emotion-28 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  margin-bottom: 0.75rem;
-}
-
-.emotion-29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -213,16 +181,27 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin-top: 0.75rem;
 }
 
-.emotion-30 {
+.emotion-28>*:first-child {
+  margin-bottom: 1.25rem;
+  -webkit-flex: 1 1 0%;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-weight: 700;
+}
+
+.emotion-29 {
   transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -234,43 +213,35 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgba(147, 51, 234, var(--tw-bg-opacity));
-  width: 100%;
-  margin-bottom: 1.25rem;
-  -webkit-flex: 1 1 0%;
-  -ms-flex: 1 1 0%;
-  flex: 1 1 0%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-weight: 700;
+  background-color: rgba(234, 179, 8, var(--tw-bg-opacity));
 }
 
-.emotion-30:hover {
+.emotion-29:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(126, 34, 206, var(--tw-bg-opacity));
+  background-color: rgba(202, 138, 4, var(--tw-bg-opacity));
 }
 
-.emotion-31 {
+.emotion-30 {
   font-size: 0.875rem;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
 }
 
 <div
     class="emotion-0"
     style="opacity: 0;"
   >
-    <h1
+    <h3
       class="emotion-1"
     >
       security.register_page.page_title
-    </h1>
-    <h2
+    </h3>
+    <h4
       class="emotion-2"
     >
       security.register_page.page_subtitle
-    </h2>
+    </h4>
     <form>
       <div
         class="emotion-3"
@@ -348,7 +319,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
         </div>
       </div>
       <div
-        class="emotion-18"
+        class="emotion-3"
       >
         <div
           class="emotion-4"
@@ -373,7 +344,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
         </div>
       </div>
       <div
-        class="emotion-23"
+        class="emotion-3"
       >
         <div
           class="emotion-4"
@@ -399,19 +370,16 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
       </div>
       <div
         class="emotion-28"
-      />
-      <div
-        class="emotion-29"
       >
         <button
-          class="emotion-30"
+          class="emotion-29"
           data-testid="btn-register"
           type="submit"
         >
           security.register_page.form.btn_register
         </button>
         <span
-          class="emotion-31"
+          class="emotion-30"
         >
           security.register_page.form.existing_account_link
         </span>

@@ -55,6 +55,12 @@ exports[`Security main page unit tests Renders 1`] = `
 
 @media (min-width: 1024px) {
   .emotion-1 {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .emotion-1 {
     width: 66.666667%;
   }
 }
@@ -63,10 +69,8 @@ exports[`Security main page unit tests Renders 1`] = `
   font-size: 2.25rem;
   line-height: 2.5rem;
   --tw-text-opacity: 1;
-  color: rgba(63, 63, 70, var(--tw-text-opacity));
+  color: rgba(212, 212, 216, var(--tw-text-opacity));
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgba(250, 250, 250, var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {
@@ -96,11 +100,7 @@ exports[`Security main page unit tests Renders 1`] = `
   font-size: 1.25rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
-  font-weight: 500;
-  --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
-  font-weight: 400;
   margin-bottom: 0.75rem;
 }
 
@@ -119,11 +119,11 @@ exports[`Security main page unit tests Renders 1`] = `
 }
 
 .emotion-5 {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
   font-weight: 300;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 @media (min-width: 1024px) {

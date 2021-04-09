@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "test-utils";
 import Link from "./Link";
 import each from "jest-each";
 import { MemoryRouter } from "react-router";

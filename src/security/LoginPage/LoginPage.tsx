@@ -1,20 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
-
-import { Button, Input, Link, SubTitle, Title, ErrorMessage } from "components";
+import { Button, Input, Link, FormGroup } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { gql, useMutation } from "@apollo/client";
-import { motion } from "framer-motion";
 import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
-import LeftPane from "security/LeftPane";
+import {
+  LeftPane,
+  SectionSubTitle,
+  SectionTitle,
+  SubmitFormContainer,
+  SubmitAdditionalLinkWrapper,
+} from "security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import AuthManager from "utils/AuthManager";
 import { useLocation } from "react-router";
 import * as Styles from "./LoginPage.styles";
 import ghLogo from "./images/gh-logo.png";
+import { toast } from "react-toastify";
 
 const animationVariants = {
   initial: {
@@ -51,7 +56,6 @@ export const LOGIN_MUTATION = gql`
 type LoginFormType = {
   email: string;
   password: string;
-  global?: unknown;
 };
 
 const LoginPage = () => {
@@ -70,10 +74,7 @@ const LoginPage = () => {
     onError: (e) => {
       /* istanbul ignore else */
       if (!mapViolationsToForm(form.setError, e)) {
-        form.setError("global", {
-          type: "server",
-          message: (e.networkError as any)!.result!.error,
-        });
+        toast.error((e.networkError as any)!.result!.error);
       }
     },
     onCompleted: async () => {
@@ -88,10 +89,10 @@ const LoginPage = () => {
       animate="in"
       exit="out"
     >
-      <Title>{t("security.login_page.page_title")}</Title>
-      <SubTitle tw="mb-10 lg:mb-20">
+      <SectionTitle>{t("security.login_page.page_title")}</SectionTitle>
+      <SectionSubTitle>
         {t("security.login_page.page_subtitle")}
-      </SubTitle>
+      </SectionSubTitle>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(async (data) => {
@@ -100,41 +101,36 @@ const LoginPage = () => {
             });
           })}
         >
-          <div tw="mb-5 lg:mb-8">
+          <FormGroup>
             <Input
               name="email"
               type="email"
               label={t("security.login_page.form.label_email")}
               ref={form.register}
             />
-          </div>
-          <div tw="mb-8 lg:mb-2">
+          </FormGroup>
+          <FormGroup last>
             <Input
               name="password"
               type="password"
               label={t("security.login_page.form.label_password")}
               ref={form.register}
             />
-          </div>
-          <Link to="/pek" tw="font-light text-sm mb-10 lg:text-xs">
+          </FormGroup>
+          <Styles.ForgotPasswordLink to="/pek">
             {t("security.login_page.form.forgot_password_link")}
-          </Link>
+          </Styles.ForgotPasswordLink>
 
-          <motion.div tw="flex justify-center mb-3" layout>
-            <ErrorMessage name="global" />
-          </motion.div>
-
-          <div tw="flex justify-evenly items-center flex-col">
+          <SubmitFormContainer>
             <Button
               data-testid="btn-login"
               type="submit"
               disabled={form.formState.isSubmitting}
-              tw="w-full mb-5 flex-1 py-4 font-bold"
             >
               {t("security.login_page.form.btn_login")}
             </Button>
 
-            <span tw="text-sm text-default">
+            <SubmitAdditionalLinkWrapper>
               <Trans
                 i18nKey="security.login_page.form.register_link"
                 components={{
@@ -146,19 +142,18 @@ const LoginPage = () => {
                   ),
                 }}
               />
-            </span>
-          </div>
+            </SubmitAdditionalLinkWrapper>
+          </SubmitFormContainer>
         </form>
       </FormProvider>
       <div>
         <Styles.Divider>Or</Styles.Divider>
-        <a
-          tw="px-3 py-2 border border-gray-400 text-gray-600 transition duration-300 bg-white rounded-md inline-flex items-center hover:bg-gray-100"
+        <Styles.GithubLink
           href={`${process.env.REACT_APP_ACTIONS_URL}/oauth/connect/github?_destination=${process.env.REACT_APP_ACTIONS_URL}/oauth/connected?target=${referrer}`}
         >
-          <img tw="object-contain h-8 mr-2" src={ghLogo} alt="GitHub Logo" />
+          <img src={ghLogo} alt="GitHub Logo" />
           Login with GitHub
-        </a>
+        </Styles.GithubLink>
       </div>
     </LeftPane>
   );

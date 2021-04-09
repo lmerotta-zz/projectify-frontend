@@ -14,8 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
-      - run: CI=true npm run test -- --coverage --json --outputFile=result.json --testLocationInResults
-      - uses: tanmen/jest-reporter@v1
-        if: always()
+      - name: Comment with Test Coverage
+        uses: dkershner6/jest-coverage-commenter-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          test_command: "CI=true npm run test -- --coverage"

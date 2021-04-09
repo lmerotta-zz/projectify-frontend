@@ -1,11 +1,8 @@
 /** @jsxImportSource @emotion/react */
-
 import { lazy, Suspense } from "react";
 import { Route, Switch, useLocation, useRouteMatch } from "react-router";
-import { SubTitle, Title } from "components";
 import * as Styles from "./index.styles";
 import { Trans, useTranslation } from "react-i18next";
-import "twin.macro";
 import { AnimatePresence } from "framer-motion";
 
 const SecurityPage = () => {
@@ -16,19 +13,19 @@ const SecurityPage = () => {
   return (
     <Styles.Wrapper>
       <Styles.Hero>
-        <Title tw="text-light lg:my-auto">ProjectifyTmp</Title>
+        <Styles.Title>ProjectifyTmp</Styles.Title>
         <Styles.HeroContent>
-          <SubTitle tw="text-white font-normal mb-3 lg:text-6xl">
+          <Styles.SubTitle>
             <Trans
               i18nKey="security.login_page.hero.subtitle"
               components={{
-                highlight: <span tw="text-secondary font-medium" />,
+                highlight: <Styles.SubTitleHighLight />,
               }}
             />
-          </SubTitle>
-          <p tw="text-white font-light text-sm lg:text-xl">
+          </Styles.SubTitle>
+          <Styles.Caption>
             {t("security.login_page.hero.caption")}
-          </p>
+          </Styles.Caption>
         </Styles.HeroContent>
       </Styles.Hero>
 
