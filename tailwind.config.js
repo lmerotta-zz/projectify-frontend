@@ -11,9 +11,11 @@ module.exports = {
         'primary-dark': colors.purple[900],
         secondary: colors.yellow[500],
         'secondary-hover': colors.yellow[600],
-        'default': colors.gray[400],
-        'dark': colors.gray[700],
-        'light': colors.gray[50]
+        'secondary-dark': colors.yellow[800],
+        'default': colors.gray[500],
+        'dark': colors.gray[800],
+        'light': colors.gray[300],
+        'danger': colors.red[600]
       }
     },
   },

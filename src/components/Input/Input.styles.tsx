@@ -25,8 +25,8 @@ export const Input = styled.input<{ invalid?: boolean }>`
     }
   }
 
-  ${({ invalid }) => invalid && tw`border-red-600!`}
+  ${({ invalid }) => invalid && tw`border-danger!`}
   + .label {
-    ${({ invalid }) => invalid && tw`text-red-600!`}
+    ${({ invalid }) => invalid && tw`text-danger!`}
   }
 `;
