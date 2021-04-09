@@ -1,8 +1,9 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { render, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act, waitFor } from "test-utils";
 import { MemoryRouter } from "react-router";
 import AuthManager from "utils/AuthManager";
 import LoginPage, { LOGIN_MUTATION } from "./LoginPage";
+import { toast } from "react-toastify";
 
 jest.mock("utils/AuthManager", () => ({
   login: jest.fn(),
@@ -14,6 +15,8 @@ describe("LoginPage unit tests", () => {
   });
 
   it("Returns invalid credential on wrong username login", async () => {
+    const toastSpy = jest.spyOn(toast, "error");
+
     const mocks = [
       {
         request: {
@@ -54,12 +57,12 @@ describe("LoginPage unit tests", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
-    expect(result.getByTestId("error-message-global")).toHaveTextContent(
-      "test"
-    );
+    await waitFor(() => expect(toastSpy).toHaveBeenCalled());
   });
 
   it("Stores the oauth code when request succeeds", async () => {
+    const toastSpy = jest.spyOn(toast, "error");
+
     const mocks = [
       {
         request: {
@@ -100,7 +103,7 @@ describe("LoginPage unit tests", () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     });
 
-    expect(() => result.getByTestId("error-message-global")).toThrow();
+    expect(toastSpy).not.toHaveBeenCalled();
     expect(AuthManager.login).toHaveBeenCalled();
   });
 });

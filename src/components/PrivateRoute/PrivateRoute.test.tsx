@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "test-utils";
 import { Router, Switch } from "react-router-dom";
 import { createMemoryHistory, MemoryHistory } from "history";
 import { isAuthenticated } from "apollo/local-state";

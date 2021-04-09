@@ -1,5 +1,5 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { render, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act } from "test-utils";
 import { MemoryRouter, Router } from "react-router";
 import { createMemoryHistory } from "history";
 import RegisterPage, { REGISTER_MUTATION } from "./RegisterPage";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 describe("RegisterPage unit tests", () => {
   it("Shows a global error on server error", async () => {
+    const toastSpy = jest.spyOn(toast, "error");
     const mocks = [
       {
         request: {
@@ -58,9 +59,7 @@ describe("RegisterPage unit tests", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
-    expect(result.getByTestId("error-message-global")).toHaveTextContent(
-      "global.errors.internal-server-error"
-    );
+    expect(toastSpy).toHaveBeenCalled();
   });
 
   it("Redirects to the login page on success", async () => {

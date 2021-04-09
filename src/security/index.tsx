@@ -13,26 +13,17 @@ const SecurityPage = () => {
   return (
     <Styles.Wrapper>
       <Styles.Hero>
-        <Styles.Title variant="h2" as="h1" color="light" weight="bold">
-          ProjectifyTmp
-        </Styles.Title>
+        <Styles.Title>ProjectifyTmp</Styles.Title>
         <Styles.HeroContent>
-          <Styles.SubTitle variant="h5" as="h2" color="white">
+          <Styles.SubTitle>
             <Trans
               i18nKey="security.login_page.hero.subtitle"
               components={{
-                highlight: (
-                  <Styles.SubTitleHighLight
-                    color="secondary"
-                    weight="medium"
-                    variant="h5"
-                    as="span"
-                  />
-                ),
+                highlight: <Styles.SubTitleHighLight />,
               }}
             />
           </Styles.SubTitle>
-          <Styles.Caption variant="sm" color="white" weight="light">
+          <Styles.Caption>
             {t("security.login_page.hero.caption")}
           </Styles.Caption>
         </Styles.HeroContent>

@@ -6,7 +6,7 @@ exports[`SubTitle unit tests Renders 1`] = `
   font-size: 1.25rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
   font-weight: 500;
 }
 

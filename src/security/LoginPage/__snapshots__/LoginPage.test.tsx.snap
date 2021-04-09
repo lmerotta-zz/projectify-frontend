@@ -45,7 +45,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   font-size: 2.25rem;
   line-height: 2.5rem;
   --tw-text-opacity: 1;
-  color: rgba(63, 63, 70, var(--tw-text-opacity));
+  color: rgba(39, 39, 42, var(--tw-text-opacity));
   font-weight: 700;
 }
 
@@ -60,7 +60,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   font-size: 1.25rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
   font-weight: 500;
   margin-bottom: 2.5rem;
 }
@@ -164,7 +164,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   top: 50%;
   left: 0.75rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
   cursor: text;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -173,7 +173,14 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 }
 
 .emotion-8 {
+  margin-bottom: 1.25rem;
   margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .emotion-8 {
+    margin-bottom: 2rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -187,16 +194,15 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   --tw-text-opacity: 1;
-  color: rgba(63, 63, 70, var(--tw-text-opacity));
+  color: rgba(39, 39, 42, var(--tw-text-opacity));
   font-weight: 300;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  margin-bottom: 2.5rem;
 }
 
 .emotion-13:hover {
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
 }
 
 @media (min-width: 1024px) {
@@ -211,32 +217,31 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  margin-bottom: 0.75rem;
-}
-
-.emotion-15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: space-evenly;
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin-top: 0.75rem;
 }
 
-.emotion-16 {
+.emotion-14>*:first-child {
+  margin-bottom: 1.25rem;
+  -webkit-flex: 1 1 0%;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-weight: 700;
+}
+
+.emotion-15 {
   transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -249,29 +254,21 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   color: rgba(255, 255, 255, var(--tw-text-opacity));
   --tw-bg-opacity: 1;
   background-color: rgba(147, 51, 234, var(--tw-bg-opacity));
-  width: 100%;
-  margin-bottom: 1.25rem;
-  -webkit-flex: 1 1 0%;
-  -ms-flex: 1 1 0%;
-  flex: 1 1 0%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-weight: 700;
 }
 
-.emotion-16:hover {
+.emotion-15:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(126, 34, 206, var(--tw-bg-opacity));
 }
 
-.emotion-17 {
+.emotion-16 {
   font-size: 0.875rem;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
 }
 
-.emotion-18 {
+.emotion-17 {
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
   text-align: center;
@@ -279,11 +276,11 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
   --tw-text-opacity: 1;
-  color: rgba(161, 161, 170, var(--tw-text-opacity));
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
 }
 
-.emotion-18:before,
-.emotion-18:after {
+.emotion-17:before,
+.emotion-17:after {
   content: " ";
   height: 1px;
   --tw-bg-opacity: 1;
@@ -293,17 +290,17 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   --tw-translate-y: -50%;
 }
 
-.emotion-18:before {
+.emotion-17:before {
   left: 0px;
   width: 40%;
 }
 
-.emotion-18:after {
+.emotion-17:after {
   right: 0px;
   width: 40%;
 }
 
-.emotion-19 {
+.emotion-18 {
   transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
@@ -329,12 +326,17 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   align-items: center;
 }
 
-.emotion-19:hover {
+.emotion-18:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
 }
 
-.emotion-20 {
+.emotion-18:active {
+  --tw-bg-opacity: 1;
+  background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+}
+
+.emotion-18>img {
   object-fit: contain;
   height: 2rem;
   margin-right: 0.5rem;
@@ -344,16 +346,16 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
     class="emotion-0"
     style="opacity: 0;"
   >
-    <h1
+    <h3
       class="emotion-1"
     >
       security.login_page.page_title
-    </h1>
-    <h2
+    </h3>
+    <h4
       class="emotion-2"
     >
       security.login_page.page_subtitle
-    </h2>
+    </h4>
     <form>
       <div
         class="emotion-3"
@@ -413,19 +415,16 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
       </a>
       <div
         class="emotion-14"
-      />
-      <div
-        class="emotion-15"
       >
         <button
-          class="emotion-16"
+          class="emotion-15"
           data-testid="btn-login"
           type="submit"
         >
           security.login_page.form.btn_login
         </button>
         <span
-          class="emotion-17"
+          class="emotion-16"
         >
           security.login_page.form.register_link
         </span>
@@ -433,17 +432,16 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
     </form>
     <div>
       <p
-        class="emotion-18"
+        class="emotion-17"
       >
         Or
       </p>
       <a
-        class="emotion-19"
+        class="emotion-18"
         href="http://localhost:8001/actions/security/authentication/oauth/connect/github?_destination=http://localhost:8001/actions/security/authentication/oauth/connected?target=/"
       >
         <img
           alt="GitHub Logo"
-          class="emotion-20"
           src="gh-logo.png"
         />
         Login with GitHub

@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "test-utils";
 import { isAuthenticated } from "apollo/local-state";
 import App from "App";
 import { MemoryRouter } from "react-router-dom";

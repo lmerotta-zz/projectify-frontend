@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "test-utils";
 import Title from "./Title";
 
 describe("Title unit tests", () => {

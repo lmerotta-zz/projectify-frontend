@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import tw, { styled } from "twin.macro";
-import { Typography } from "components";
 import background from "./images/background.svg";
 
 export const Wrapper = tw.div`flex flex-col lg:flex-row min-h-screen`;
@@ -10,14 +9,14 @@ export const Hero = styled.div`
   background-size: cover;
 `;
 
-export const Title = tw(Typography)`
-  lg:my-auto md:text-5xl
+export const Title = tw.h1`
+  text-4xl text-light font-bold md:text-5xl lg:my-auto
 `;
 
-export const SubTitle = tw(Typography)`mb-3 md:text-2xl lg:text-6xl`;
-export const SubTitleHighLight = tw(
-  Typography.withComponent("span")
-)`md:text-2xl lg:text-6xl`;
-export const Caption = tw(Typography)`lg:text-xl`;
+export const SubTitle = tw.h2`
+  text-xl text-white mb-3 md:text-2xl lg:text-6xl
+`;
+export const SubTitleHighLight = tw.span`text-secondary font-medium`;
+export const Caption = tw.p`text-sm text-white font-light lg:text-xl`;
 
 export const HeroContent = tw.div`lg:self-start lg:w-2/3`;
