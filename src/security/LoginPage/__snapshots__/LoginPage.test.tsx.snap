@@ -221,13 +221,14 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
+  text-align: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-align-items: stretch;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   margin-top: 0.75rem;
 }
 
@@ -434,7 +435,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
       <p
         class="emotion-17"
       >
-        Or
+        security.login_page.form.label_or
       </p>
       <a
         class="emotion-18"
@@ -444,7 +445,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
           alt="GitHub Logo"
           src="gh-logo.png"
         />
-        Login with GitHub
+        security.login_page.form.oauth_github_login
       </a>
     </div>
   </div>
