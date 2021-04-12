@@ -102,9 +102,11 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 .emotion-6 {
   width: 100%;
   padding-top: 1rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   border-width: 1px;
   border-radius: 0.25rem;
   --tw-border-opacity: 1;
@@ -128,8 +130,8 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 .emotion-6:focus+.label {
   --tw-text-opacity: 1;
   color: rgba(147, 51, 234, var(--tw-text-opacity));
-  top: 0px;
-  --tw-translate-y: 0.125rem;
+  top: 0.125rem;
+  --tw-translate-y: 0px;
   font-size: 0.75rem;
   line-height: 1rem;
 }
@@ -142,8 +144,8 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 .emotion-6:not(:placeholder-shown)+.label {
   --tw-text-opacity: 1;
   color: rgba(147, 51, 234, var(--tw-text-opacity));
-  top: 0px;
-  --tw-translate-y: 0.125rem;
+  top: 0.125rem;
+  --tw-translate-y: 0px;
   font-size: 0.75rem;
   line-height: 1rem;
 }
@@ -165,6 +167,8 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   left: 0.75rem;
   --tw-text-opacity: 1;
   color: rgba(113, 113, 122, var(--tw-text-opacity));
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   cursor: text;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -221,13 +225,14 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
+  text-align: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-align-items: stretch;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   margin-top: 0.75rem;
 }
 
@@ -434,7 +439,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
       <p
         class="emotion-17"
       >
-        Or
+        security.login_page.form.label_or
       </p>
       <a
         class="emotion-18"
@@ -444,7 +449,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
           alt="GitHub Logo"
           src="gh-logo.png"
         />
-        Login with GitHub
+        security.login_page.form.oauth_github_login
       </a>
     </div>
   </div>

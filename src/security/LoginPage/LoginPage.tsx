@@ -147,12 +147,14 @@ const LoginPage = () => {
         </form>
       </FormProvider>
       <div>
-        <Styles.Divider>Or</Styles.Divider>
+        <Styles.Divider>
+          {t("security.login_page.form.label_or")}
+        </Styles.Divider>
         <Styles.GithubLink
           href={`${process.env.REACT_APP_ACTIONS_URL}/oauth/connect/github?_destination=${process.env.REACT_APP_ACTIONS_URL}/oauth/connected?target=${referrer}`}
         >
           <img src={ghLogo} alt="GitHub Logo" />
-          Login with GitHub
+          {t("security.login_page.form.oauth_github_login")}
         </Styles.GithubLink>
       </div>
     </LeftPane>
