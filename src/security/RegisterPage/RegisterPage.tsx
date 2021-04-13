@@ -19,6 +19,10 @@ import {
 } from "security/components";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
+import {
+  registerUserVariables,
+  registerUser_createUser,
+} from "apollo/types/registerUser";
 
 const animationVariants = {
   initial: {
@@ -86,7 +90,10 @@ const RegisterPage = () => {
 
   const { t } = useTranslation();
 
-  const [register] = useMutation(REGISTER_MUTATION, {
+  const [register] = useMutation<
+    registerUser_createUser,
+    registerUserVariables
+  >(REGISTER_MUTATION, {
     onError: (e) => {
       /* istanbul ignore else */
       if (!mapViolationsToForm(form.setError, e)) {

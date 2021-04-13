@@ -1,0 +1,20 @@
+type LoginInput {
+  username: String!
+  password: String!
+}
+
+type NoResponse {
+  NoResponse: String
+}
+
+extend type Mutation {
+  login(input: LoginInput): NoResponse
+}
+
+directive @rest(
+  type: String!
+  path: String!
+  method: String!
+  endpoint: String!
+  bodyKey: String!
+) on FIELD

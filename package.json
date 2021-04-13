@@ -89,7 +89,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "download-schema": "apollo service:download --endpoint=http://localhost:8001/api/graphql graphql/graphql-schema.json",
+    "codegen": "apollo codegen:generate --localSchemaFile=graphql/graphql-schema.json,graphql/rest-schema.graphql --target=typescript --tagName=gql --outputFlat src/apollo/types/"
   },
   "eslintConfig": {
     "extends": [
@@ -117,8 +119,10 @@
     "@storybook/node-logger": "^6.2.7",
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.7",
+    "@types/graphql": "^14.5.0",
     "@types/react": "^16.14.5",
     "@types/react-router-dom": "^5.1.7",
+    "apollo": "^2.32.5",
     "poeditor": "git+https://github.com/Reggionick/poeditor-cli.git#fix/key_value_json"
   },
   "wallaby": {

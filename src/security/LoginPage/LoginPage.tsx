@@ -20,6 +20,7 @@ import { useLocation } from "react-router";
 import * as Styles from "./LoginPage.styles";
 import ghLogo from "./images/gh-logo.png";
 import { toast } from "react-toastify";
+import { login, loginVariables } from "apollo/types/login";
 
 const animationVariants = {
   initial: {
@@ -70,7 +71,7 @@ const LoginPage = () => {
 
   const { t } = useTranslation();
 
-  const [login] = useMutation(LOGIN_MUTATION, {
+  const [login] = useMutation<login, loginVariables>(LOGIN_MUTATION, {
     onError: (e) => {
       /* istanbul ignore else */
       if (!mapViolationsToForm(form.setError, e)) {
