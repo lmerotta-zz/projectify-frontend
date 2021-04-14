@@ -1,12 +1,8 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  from,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, from } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 import { setContext } from "@apollo/client/link/context";
 import i18next from "i18next";
+import { createUploadLink } from "apollo-upload-client";
 import AuthManager from "utils/AuthManager";
 import { isAuthenticated } from "./local-state";
 
@@ -19,7 +15,7 @@ const restLink = new RestLink({
   credentials: "include",
 });
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
@@ -39,7 +35,7 @@ const authLink = setContext(async (_, { headers }) => {
     return {
       headers: {
         ...headers,
-        Authorization: `Bearer ${user.id_token}`,
+        Authorization: `Bearer ${user.access_token}`,
       },
     };
   }

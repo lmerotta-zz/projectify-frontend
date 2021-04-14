@@ -24,6 +24,12 @@ const App = () => {
         path={prefixes.security}
         component={lazy(/* istanbul ignore next */ () => import("security"))}
       />
+      <Route
+        path={prefixes.userManagement}
+        component={lazy(
+          /* istanbul ignore next */ () => import("user-management")
+        )}
+      />
     </Switch>
   );
 };
