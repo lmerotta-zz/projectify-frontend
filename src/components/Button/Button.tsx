@@ -6,6 +6,7 @@ type ButtonColor = "primary" | "secondary";
 
 type ButtonProps = ComponentProps<"button"> & {
   color?: ButtonColor;
+  block?: boolean;
 };
 
 const colorMapping: {
@@ -23,11 +24,15 @@ const disabledMapping: {
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, color = "primary", ...rest }, ref) => {
+  ({ children, color = "primary", block, ...rest }, ref) => {
     return (
       <button
         {...rest}
-        css={[colorMapping[color], rest.disabled && disabledMapping[color]]}
+        css={[
+          block && tw`w-full`,
+          colorMapping[color],
+          rest.disabled && disabledMapping[color],
+        ]}
         ref={ref}
       >
         {children}

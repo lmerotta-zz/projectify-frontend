@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
 
-import { Button, FormGroup, Input, Link } from "components";
+import { Button, FormGroup, Input, Link, Form, FormRow } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -15,7 +15,6 @@ import {
   SectionSubTitle,
   SectionTitle,
   SubmitAdditionalLinkWrapper,
-  SubmitFormContainer,
 } from "security/components";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
@@ -118,79 +117,94 @@ const RegisterPage = () => {
         {t("security.register_page.page_subtitle")}
       </SectionSubTitle>
       <FormProvider {...form}>
-        <form
+        <Form
           onSubmit={form.handleSubmit(async (data) => {
             await register({
               variables: data,
             });
           })}
         >
-          <FormGroup>
-            <Input
-              name="firstName"
-              type="text"
-              label={t("security.register_page.form.label_firstName")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              name="lastName"
-              type="text"
-              label={t("security.register_page.form.label_lastName")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              name="email"
-              type="email"
-              label={t("security.register_page.form.label_email")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              name="password"
-              type="password"
-              label={t("security.register_page.form.label_password")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              name="repeatPassword"
-              type="password"
-              label={t("security.register_page.form.label_repeatPassword")}
-              ref={form.register}
-            />
-          </FormGroup>
-
-          <SubmitFormContainer>
-            <Button
-              data-testid="btn-register"
-              type="submit"
-              color="secondary"
-              disabled={form.formState.isSubmitting}
-            >
-              {t("security.register_page.form.btn_register")}
-            </Button>
-
-            <SubmitAdditionalLinkWrapper>
-              <Trans
-                i18nKey="security.register_page.form.existing_account_link"
-                components={{
-                  Link: (
-                    <Link
-                      to={`${routePrefixes.security}/login`}
-                      color="secondary"
-                    />
-                  ),
-                }}
+          <FormRow>
+            <FormGroup>
+              <Input
+                name="firstName"
+                type="text"
+                label={t("security.register_page.form.label_firstName")}
+                ref={form.register}
               />
-            </SubmitAdditionalLinkWrapper>
-          </SubmitFormContainer>
-        </form>
+            </FormGroup>
+
+            <FormGroup>
+              <Input
+                name="lastName"
+                type="text"
+                label={t("security.register_page.form.label_lastName")}
+                ref={form.register}
+              />
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Input
+                name="email"
+                type="email"
+                label={t("security.register_page.form.label_email")}
+                ref={form.register}
+              />
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Input
+                name="password"
+                type="password"
+                label={t("security.register_page.form.label_password")}
+                ref={form.register}
+              />
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Input
+                name="repeatPassword"
+                type="password"
+                label={t("security.register_page.form.label_repeatPassword")}
+                ref={form.register}
+              />
+            </FormGroup>
+          </FormRow>
+
+          <FormRow>
+            <FormGroup>
+              <Button
+                block
+                data-testid="btn-register"
+                type="submit"
+                color="secondary"
+                disabled={form.formState.isSubmitting}
+              >
+                {t("security.register_page.form.btn_register")}
+              </Button>
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <SubmitAdditionalLinkWrapper>
+                <Trans
+                  i18nKey="security.register_page.form.existing_account_link"
+                  components={{
+                    Link: (
+                      <Link
+                        to={`${routePrefixes.security}/login`}
+                        color="secondary"
+                      />
+                    ),
+                  }}
+                />
+              </SubmitAdditionalLinkWrapper>
+            </FormGroup>
+          </FormRow>
+        </Form>
       </FormProvider>
     </LeftPane>
   );

@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 import { motion } from "framer-motion";
 
-export const Wrapper = motion(tw.div`relative outline-none`);
+export const Wrapper = motion(tw.div`relative outline-none w-full`);
 
 export const labelFilledStyles = tw`text-primary top-0.5 translate-y-0 text-xs`;
 

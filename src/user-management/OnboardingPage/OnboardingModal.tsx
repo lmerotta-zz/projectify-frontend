@@ -93,7 +93,7 @@ const OnboardingModal = () => {
                 defaultValue={currentUserQuery.data.currentUser.lastName}
               />
             </FormGroup>
-            <FormGroup last tw="w-full justify-center">
+            <FormGroup tw="w-full justify-center">
               <FileInput
                 name="picture"
                 label="Profile picture"

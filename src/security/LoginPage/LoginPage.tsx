@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
-import { Button, Input, Link, FormGroup } from "components";
+import { Button, Input, Link, FormGroup, Form, FormRow } from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,7 +11,6 @@ import {
   LeftPane,
   SectionSubTitle,
   SectionTitle,
-  SubmitFormContainer,
   SubmitAdditionalLinkWrapper,
 } from "security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
@@ -95,57 +94,72 @@ const LoginPage = () => {
         {t("security.login_page.page_subtitle")}
       </SectionSubTitle>
       <FormProvider {...form}>
-        <form
+        <Form
           onSubmit={form.handleSubmit(async (data) => {
             await login({
               variables: { username: data.email, password: data.password },
             });
           })}
         >
-          <FormGroup>
-            <Input
-              name="email"
-              type="email"
-              label={t("security.login_page.form.label_email")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <FormGroup last>
-            <Input
-              name="password"
-              type="password"
-              label={t("security.login_page.form.label_password")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <Styles.ForgotPasswordLink to="/pek">
-            {t("security.login_page.form.forgot_password_link")}
-          </Styles.ForgotPasswordLink>
-
-          <SubmitFormContainer>
-            <Button
-              data-testid="btn-login"
-              type="submit"
-              disabled={form.formState.isSubmitting}
-            >
-              {t("security.login_page.form.btn_login")}
-            </Button>
-
-            <SubmitAdditionalLinkWrapper>
-              <Trans
-                i18nKey="security.login_page.form.register_link"
-                components={{
-                  Link: (
-                    <Link
-                      to={`${routePrefixes.security}/register`}
-                      color="secondary"
-                    />
-                  ),
-                }}
+          <FormRow>
+            <FormGroup>
+              <Input
+                name="email"
+                type="email"
+                label={t("security.login_page.form.label_email")}
+                ref={form.register}
               />
-            </SubmitAdditionalLinkWrapper>
-          </SubmitFormContainer>
-        </form>
+            </FormGroup>
+          </FormRow>
+
+          <FormRow>
+            <FormGroup>
+              <Input
+                name="password"
+                type="password"
+                label={t("security.login_page.form.label_password")}
+                ref={form.register}
+              />
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Styles.ForgotPasswordLink to="/pek">
+                {t("security.login_page.form.forgot_password_link")}
+              </Styles.ForgotPasswordLink>
+            </FormGroup>
+          </FormRow>
+
+          <FormRow>
+            <FormGroup>
+              <Button
+                block
+                data-testid="btn-login"
+                type="submit"
+                disabled={form.formState.isSubmitting}
+              >
+                {t("security.login_page.form.btn_login")}
+              </Button>
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <SubmitAdditionalLinkWrapper>
+                <Trans
+                  i18nKey="security.login_page.form.register_link"
+                  components={{
+                    Link: (
+                      <Link
+                        to={`${routePrefixes.security}/register`}
+                        color="secondary"
+                      />
+                    ),
+                  }}
+                />
+              </SubmitAdditionalLinkWrapper>
+            </FormGroup>
+          </FormRow>
+        </Form>
       </FormProvider>
       <div>
         <Styles.Divider>

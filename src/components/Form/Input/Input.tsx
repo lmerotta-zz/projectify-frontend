@@ -1,6 +1,6 @@
 import { forwardRef, HTMLProps, ReactNode } from "react";
 import * as Styles from "./Input.styles";
-import ErrorMessage from "components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useFormContext } from "react-hook-form";
 
 type InputProps = Omit<HTMLProps<HTMLInputElement>, "as" | "name"> & {

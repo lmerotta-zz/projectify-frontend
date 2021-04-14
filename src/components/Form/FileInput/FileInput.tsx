@@ -3,7 +3,7 @@ import "twin.macro";
 import { HTMLProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
-import ErrorMessage from "components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 type InputProps = HTMLProps<HTMLInputElement> & { name: string } & {
   dropzone?: DropzoneOptions;
