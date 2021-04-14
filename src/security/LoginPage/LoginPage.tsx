@@ -1,6 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
-import { Button, Input, Link, FormGroup, Form, FormRow } from "components";
+import {
+  Button,
+  Input,
+  Link,
+  FormGroup,
+  Form,
+  FormRow,
+  FormLabel,
+} from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -103,23 +111,18 @@ const LoginPage = () => {
         >
           <FormRow>
             <FormGroup>
-              <Input
-                name="email"
-                type="email"
-                label={t("security.login_page.form.label_email")}
-                ref={form.register}
-              />
+              <FormLabel>{t("security.login_page.form.label_email")}</FormLabel>
+              <Input name="email" type="email" ref={form.register} />
             </FormGroup>
           </FormRow>
 
           <FormRow>
             <FormGroup>
-              <Input
-                name="password"
-                type="password"
-                label={t("security.login_page.form.label_password")}
-                ref={form.register}
-              />
+              <FormLabel>
+                {t("security.login_page.form.label_password")}
+              </FormLabel>
+
+              <Input name="password" type="password" ref={form.register} />
             </FormGroup>
           </FormRow>
           <FormRow>

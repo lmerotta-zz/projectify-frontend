@@ -1,7 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
 
-import { Button, FormGroup, Input, Link, Form, FormRow } from "components";
+import {
+  Button,
+  FormGroup,
+  Input,
+  Link,
+  Form,
+  FormRow,
+  FormLabel,
+} from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -126,49 +134,43 @@ const RegisterPage = () => {
         >
           <FormRow>
             <FormGroup>
-              <Input
-                name="firstName"
-                type="text"
-                label={t("security.register_page.form.label_firstName")}
-                ref={form.register}
-              />
+              <FormLabel>
+                {t("security.register_page.form.label_firstName")}
+              </FormLabel>
+              <Input name="firstName" type="text" ref={form.register} />
             </FormGroup>
 
             <FormGroup>
-              <Input
-                name="lastName"
-                type="text"
-                label={t("security.register_page.form.label_lastName")}
-                ref={form.register}
-              />
+              <FormLabel>
+                {t("security.register_page.form.label_lastName")}
+              </FormLabel>
+              <Input name="lastName" type="text" ref={form.register} />
             </FormGroup>
           </FormRow>
           <FormRow>
             <FormGroup>
-              <Input
-                name="email"
-                type="email"
-                label={t("security.register_page.form.label_email")}
-                ref={form.register}
-              />
+              <FormLabel>
+                {t("security.register_page.form.label_email")}
+              </FormLabel>
+              <Input name="email" type="email" ref={form.register} />
             </FormGroup>
           </FormRow>
           <FormRow>
             <FormGroup>
-              <Input
-                name="password"
-                type="password"
-                label={t("security.register_page.form.label_password")}
-                ref={form.register}
-              />
+              <FormLabel>
+                {t("security.register_page.form.label_password")}
+              </FormLabel>
+              <Input name="password" type="password" ref={form.register} />
             </FormGroup>
           </FormRow>
           <FormRow>
             <FormGroup>
+              <FormLabel>
+                {t("security.register_page.form.label_repeatPassword")}
+              </FormLabel>
               <Input
                 name="repeatPassword"
                 type="password"
-                label={t("security.register_page.form.label_repeatPassword")}
                 ref={form.register}
               />
             </FormGroup>

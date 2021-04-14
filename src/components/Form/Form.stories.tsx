@@ -5,6 +5,7 @@ import { Story } from "@storybook/react/types-6-0";
 import { FormProvider, useForm } from "react-hook-form";
 import FormGroup from "./FormGroup";
 import Input from "./Input/Input";
+import FormLabel from "./FormLabel";
 import { Button } from "components";
 import FormRow from "./FormRow";
 import * as yup from "yup";
@@ -18,6 +19,7 @@ export default {
 
 const schema = yup.object().shape({
   pek1: yup.string().required(),
+  pek4: yup.string().required(),
 });
 
 const Template: Story<ComponentProps<typeof Form>> = (args) => {
@@ -33,26 +35,28 @@ const Template: Story<ComponentProps<typeof Form>> = (args) => {
       >
         <FormRow>
           <FormGroup>
-            <Input type="text" name="pek1" label="pekpek" ref={form.register} />
+            <FormLabel htmlFor="pek1">Label</FormLabel>
+            <Input type="text" id="pek1" name="pek1" ref={form.register} />
           </FormGroup>
           <FormGroup>
-            <Input type="text" name="pek2" label="pekpek" />
-          </FormGroup>
-        </FormRow>
-        <FormRow>
-          <FormGroup>
-            <Input type="text" name="pek3" label="pekpek" />
-          </FormGroup>
-          <FormGroup>
-            <Input type="text" name="pek4" label="pekpek" />
-          </FormGroup>
-          <FormGroup>
-            <Input type="text" name="pek5" label="pekpek" />
+            <FormLabel>Label2</FormLabel>
+            <Input type="text" name="pek2" />
           </FormGroup>
         </FormRow>
         <FormRow>
           <FormGroup>
-            <Input type="text" name="pek6" label="pekpek" />
+            <Input type="text" name="pek3" />
+          </FormGroup>
+          <FormGroup>
+            <Input type="text" name="pek4" ref={form.register} />
+          </FormGroup>
+          <FormGroup>
+            <Input type="text" name="pek5" />
+          </FormGroup>
+        </FormRow>
+        <FormRow>
+          <FormGroup>
+            <Input type="text" name="pek6" />
           </FormGroup>
         </FormRow>
         <FormRow>
