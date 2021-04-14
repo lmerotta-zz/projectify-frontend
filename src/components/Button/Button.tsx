@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { ComponentProps, forwardRef } from "react";
-import tw, { TwStyle } from "twin.macro";
+import { ComponentProps } from "react";
+import tw, { styled } from "twin.macro";
 
 type ButtonColor = "primary" | "secondary";
 
@@ -9,36 +9,26 @@ type ButtonProps = ComponentProps<"button"> & {
   block?: boolean;
 };
 
-const colorMapping: {
-  [key in ButtonColor]: TwStyle;
-} = {
-  primary: tw`px-3 py-2 rounded-md text-white bg-primary transition duration-150 hover:bg-primary-hover `,
-  secondary: tw`px-3 py-2 rounded-md text-white bg-secondary transition duration-150 hover:bg-secondary-hover `,
-};
+const Button = styled.button<ButtonProps>`
+  ${tw`px-3 py-3 text-white transition duration-150`}
+  ${({ color = "primary" }) =>
+    color === "primary"
+      ? tw`bg-primary hover:bg-primary-hover`
+      : tw`bg-secondary hover:bg-secondary-hover`}
 
-const disabledMapping: {
-  [key in ButtonColor]: TwStyle;
-} = {
-  primary: tw`bg-primary-dark text-gray-300 hover:bg-primary-dark`,
-  secondary: tw`bg-secondary-dark text-gray-300 hover:bg-secondary-dark`,
-};
+  ${({ block }) => block && tw`w-full`}
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, color = "primary", block, ...rest }, ref) => {
-    return (
-      <button
-        {...rest}
-        css={[
-          block && tw`w-full`,
-          colorMapping[color],
-          rest.disabled && disabledMapping[color],
-        ]}
-        ref={ref}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+  ${({ disabled }) => disabled && tw`text-gray-300`}
+  ${({ disabled, color = "primary" }) => {
+    if (disabled) {
+      switch (color) {
+        case "primary":
+          return tw`bg-primary-dark hover:bg-primary-dark`;
+        case "secondary":
+          return tw`bg-secondary-dark hover:bg-secondary-dark`;
+      }
+    }
+  }}
+`;
 
 export default Button;
