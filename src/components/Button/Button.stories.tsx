@@ -12,8 +12,7 @@ export default {
   },
 };
 
-const Template: Story<ComponentProps<typeof Button>> = (args) => (
-  <Button {...args}>My Button</Button>
-);
+type Props = Omit<ComponentProps<typeof Button>, "as">;
+const Template: Story<Props> = (args) => <Button {...args}>My Button</Button>;
 
 export const Default = Template.bind({});

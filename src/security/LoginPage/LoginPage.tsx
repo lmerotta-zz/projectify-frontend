@@ -1,6 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import "twin.macro";
-import { Button, Input, Link, FormGroup } from "components";
+import {
+  Button,
+  Input,
+  Link,
+  FormGroup,
+  Form,
+  FormRow,
+  FormLabel,
+} from "components";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,7 +19,6 @@ import {
   LeftPane,
   SectionSubTitle,
   SectionTitle,
-  SubmitFormContainer,
   SubmitAdditionalLinkWrapper,
 } from "security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
@@ -20,6 +27,7 @@ import { useLocation } from "react-router";
 import * as Styles from "./LoginPage.styles";
 import ghLogo from "./images/gh-logo.png";
 import { toast } from "react-toastify";
+import { login, loginVariables } from "apollo/types/login";
 
 const animationVariants = {
   initial: {
@@ -70,10 +78,10 @@ const LoginPage = () => {
 
   const { t } = useTranslation();
 
-  const [login] = useMutation(LOGIN_MUTATION, {
+  const [login] = useMutation<login, loginVariables>(LOGIN_MUTATION, {
     onError: (e) => {
       /* istanbul ignore else */
-      if (!mapViolationsToForm(form.setError, e)) {
+      if (!mapViolationsToForm<LoginFormType>(form.setError, e)) {
         toast.error((e.networkError as any)!.result!.error);
       }
     },
@@ -94,57 +102,67 @@ const LoginPage = () => {
         {t("security.login_page.page_subtitle")}
       </SectionSubTitle>
       <FormProvider {...form}>
-        <form
+        <Form
           onSubmit={form.handleSubmit(async (data) => {
             await login({
               variables: { username: data.email, password: data.password },
             });
           })}
         >
-          <FormGroup>
-            <Input
-              name="email"
-              type="email"
-              label={t("security.login_page.form.label_email")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <FormGroup last>
-            <Input
-              name="password"
-              type="password"
-              label={t("security.login_page.form.label_password")}
-              ref={form.register}
-            />
-          </FormGroup>
-          <Styles.ForgotPasswordLink to="/pek">
-            {t("security.login_page.form.forgot_password_link")}
-          </Styles.ForgotPasswordLink>
+          <FormRow>
+            <FormGroup>
+              <FormLabel>{t("security.login_page.form.label_email")}</FormLabel>
+              <Input name="email" type="email" ref={form.register} />
+            </FormGroup>
+          </FormRow>
 
-          <SubmitFormContainer>
-            <Button
-              data-testid="btn-login"
-              type="submit"
-              disabled={form.formState.isSubmitting}
-            >
-              {t("security.login_page.form.btn_login")}
-            </Button>
+          <FormRow>
+            <FormGroup>
+              <FormLabel>
+                {t("security.login_page.form.label_password")}
+              </FormLabel>
 
-            <SubmitAdditionalLinkWrapper>
-              <Trans
-                i18nKey="security.login_page.form.register_link"
-                components={{
-                  Link: (
-                    <Link
-                      to={`${routePrefixes.security}/register`}
-                      color="secondary"
-                    />
-                  ),
-                }}
-              />
-            </SubmitAdditionalLinkWrapper>
-          </SubmitFormContainer>
-        </form>
+              <Input name="password" type="password" ref={form.register} />
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Styles.ForgotPasswordLink to="/pek">
+                {t("security.login_page.form.forgot_password_link")}
+              </Styles.ForgotPasswordLink>
+            </FormGroup>
+          </FormRow>
+
+          <FormRow>
+            <FormGroup>
+              <Button
+                block
+                data-testid="btn-login"
+                type="submit"
+                disabled={form.formState.isSubmitting}
+              >
+                {t("security.login_page.form.btn_login")}
+              </Button>
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <SubmitAdditionalLinkWrapper>
+                <Trans
+                  i18nKey="security.login_page.form.register_link"
+                  components={{
+                    Link: (
+                      <Link
+                        to={`${routePrefixes.security}/register`}
+                        color="secondary"
+                      />
+                    ),
+                  }}
+                />
+              </SubmitAdditionalLinkWrapper>
+            </FormGroup>
+          </FormRow>
+        </Form>
       </FormProvider>
       <div>
         <Styles.Divider>

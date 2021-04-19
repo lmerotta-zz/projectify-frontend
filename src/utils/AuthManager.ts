@@ -26,6 +26,10 @@ class AuthManager {
   async getUser() {
     return await this.userManager.getUser();
   }
+
+  async logout() {
+    await this.userManager.removeUser();
+  }
 }
 
 export default new AuthManager();

@@ -1,12 +1,8 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  from,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, from } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 import { setContext } from "@apollo/client/link/context";
 import i18next from "i18next";
+import { createUploadLink } from "apollo-upload-client";
 import AuthManager from "utils/AuthManager";
 import { isAuthenticated } from "./local-state";
 
@@ -19,11 +15,17 @@ const restLink = new RestLink({
   credentials: "include",
 });
 
-const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URL,
+let locale = "";
+
+i18next.on("languageChanged", (lng) => {
+  locale = lng;
 });
 
-const authLink = setContext(async (_, { headers }) => {
+const authLink = setContext(async () => {
+  const headers = {
+    "x-locale": locale,
+  };
+
   if (!isAuthenticated()) {
     return;
   }
@@ -39,7 +41,7 @@ const authLink = setContext(async (_, { headers }) => {
     return {
       headers: {
         ...headers,
-        Authorization: `Bearer ${user.id_token}`,
+        Authorization: `Bearer ${user.access_token}`,
       },
     };
   }
@@ -49,17 +51,12 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-let locale = "";
-
-i18next.on("languageChanged", (lng) => {
-  locale = lng;
+const httpLink = createUploadLink({
+  uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  headers: {
-    "x-locale": locale,
-  },
   link: from([restLink, authLink.concat(httpLink)]),
 });
 
