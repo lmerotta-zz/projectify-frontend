@@ -209,6 +209,11 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
   width: 100%;
 }
 
+.emotion-20:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .emotion-20:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(126, 34, 206, var(--tw-bg-opacity));

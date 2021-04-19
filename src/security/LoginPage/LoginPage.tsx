@@ -81,7 +81,7 @@ const LoginPage = () => {
   const [login] = useMutation<login, loginVariables>(LOGIN_MUTATION, {
     onError: (e) => {
       /* istanbul ignore else */
-      if (!mapViolationsToForm(form.setError, e)) {
+      if (!mapViolationsToForm<LoginFormType>(form.setError, e)) {
         toast.error((e.networkError as any)!.result!.error);
       }
     },

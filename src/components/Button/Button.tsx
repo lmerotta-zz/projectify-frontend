@@ -10,7 +10,7 @@ type ButtonProps = ComponentProps<"button"> & {
 };
 
 const Button = styled.button<ButtonProps>`
-  ${tw`px-3 py-3 text-white transition duration-150`}
+  ${tw`px-3 py-3 text-white transition duration-150 focus:outline-none`}
   ${({ color = "primary" }) =>
     color === "primary"
       ? tw`bg-primary hover:bg-primary-hover`

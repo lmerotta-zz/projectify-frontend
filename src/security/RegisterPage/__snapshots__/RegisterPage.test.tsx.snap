@@ -186,6 +186,11 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
   width: 100%;
 }
 
+.emotion-34:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .emotion-34:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(202, 138, 4, var(--tw-bg-opacity));

@@ -6,17 +6,15 @@
 import { UserStatus } from "./globalTypes";
 
 // ====================================================
-// GraphQL query operation: getCurrentUser
+// GraphQL query operation: getOnboardedStatus
 // ====================================================
 
-export interface getCurrentUser_currentUser {
+export interface getOnboardedStatus_currentUser {
   __typename: "User";
   id: string;
-  firstName: string;
-  lastName: string;
   status: UserStatus;
 }
 
-export interface getCurrentUser {
-  currentUser: getCurrentUser_currentUser | null;
+export interface getOnboardedStatus {
+  currentUser: getOnboardedStatus_currentUser | null;
 }

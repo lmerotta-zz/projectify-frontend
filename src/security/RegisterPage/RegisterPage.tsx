@@ -103,7 +103,7 @@ const RegisterPage = () => {
   >(REGISTER_MUTATION, {
     onError: (e) => {
       /* istanbul ignore else */
-      if (!mapViolationsToForm(form.setError, e)) {
+      if (!mapViolationsToForm<RegisterFormType>(form.setError, e)) {
         toast.error(t("global.errors.internal-server-error"));
       }
     },

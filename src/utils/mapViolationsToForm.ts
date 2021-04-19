@@ -8,7 +8,7 @@ type ViolationsType<T extends FieldValues = FieldValues> = Array<{
 }>;
 
 function mapViolationsToForm<TFieldValues extends FieldValues = FieldValues>(
-  setError: (name: keyof TFieldValues, error: ErrorOption) => void,
+  setError: (name: FieldName<TFieldValues>, error: ErrorOption) => void,
   e: ApolloError
 ) {
   if (

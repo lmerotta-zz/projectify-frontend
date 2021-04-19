@@ -4,6 +4,7 @@ import { HTMLProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useTranslation } from "react-i18next";
 
 type InputProps = HTMLProps<HTMLInputElement> & { name: string } & {
   dropzone?: DropzoneOptions;
@@ -14,10 +15,16 @@ const FileInput = ({ dropzone, ...props }: InputProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     ...dropzone,
     onDrop: (accepted, rejected, event) => {
-      setValue(props.name, props.multiple ? accepted : accepted[0]);
+      /* istanbul ignore next */
+
+      setValue(props.name, props.multiple ? accepted : accepted[0], {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
       dropzone?.onDrop?.(accepted, rejected, event);
     },
   });
+  const { t } = useTranslation();
 
   return (
     <Controller
@@ -25,12 +32,14 @@ const FileInput = ({ dropzone, ...props }: InputProps) => {
       name={props.name}
       render={() => (
         <div tw="flex items-center flex-col border border-primary rounded-md pt-1 px-3  bg-purple-50">
-          <label tw="self-start mb-1 text-primary text-sm">{props.label}</label>
           <div
             {...getRootProps()}
+            data-testid={`file-input-${props.name}`}
             tw="w-full cursor-pointer h-32 flex justify-center items-center focus:ring-0 focus:outline-none"
           >
-            <p tw="text-primary">Drop your file(s) here</p>
+            <p tw="text-primary">
+              {t("components.form.fileinput.help_message")}
+            </p>
             <input {...props} {...getInputProps()} />
           </div>
           <ErrorMessage name={props.name} />
