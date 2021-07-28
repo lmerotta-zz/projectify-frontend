@@ -6,7 +6,9 @@ import { DropzoneOptions, useDropzone } from "react-dropzone";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useTranslation } from "react-i18next";
 
-type InputProps = HTMLProps<HTMLInputElement> & { name: string } & {
+type InputProps = Omit<HTMLProps<HTMLInputElement>, "css"> & {
+  name: string;
+} & {
   dropzone?: DropzoneOptions;
 };
 

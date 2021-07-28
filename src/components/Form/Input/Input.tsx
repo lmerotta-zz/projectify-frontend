@@ -3,13 +3,15 @@ import * as Styles from "./Input.styles";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useFormContext } from "react-hook-form";
 
-type InputProps = Omit<HTMLProps<HTMLInputElement>, "as" | "name"> & {
+type InputProps = Omit<HTMLProps<HTMLInputElement>, "as" | "name" | "css"> & {
   name: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, name, ...rest }, ref) => {
-    const { errors } = useFormContext();
+    const {
+      formState: { errors },
+    } = useFormContext();
     return (
       <Styles.Wrapper layout>
         <Styles.InputWrapper layout>

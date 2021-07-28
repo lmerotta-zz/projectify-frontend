@@ -112,7 +112,7 @@ const LoginPage = () => {
           <FormRow>
             <FormGroup>
               <FormLabel>{t("security.login_page.form.label_email")}</FormLabel>
-              <Input name="email" type="email" ref={form.register} />
+              <Input type="email" {...form.register("email")} />
             </FormGroup>
           </FormRow>
 
@@ -122,7 +122,7 @@ const LoginPage = () => {
                 {t("security.login_page.form.label_password")}
               </FormLabel>
 
-              <Input name="password" type="password" ref={form.register} />
+              <Input type="password" {...form.register("password")} />
             </FormGroup>
           </FormRow>
           <FormRow>

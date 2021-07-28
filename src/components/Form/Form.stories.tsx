@@ -36,7 +36,7 @@ const Template: Story<ComponentProps<typeof Form>> = (args) => {
         <FormRow>
           <FormGroup>
             <FormLabel htmlFor="pek1">Label</FormLabel>
-            <Input type="text" id="pek1" name="pek1" ref={form.register} />
+            <Input type="text" id="pek1" {...form.register("pek1")} />
           </FormGroup>
           <FormGroup>
             <FormLabel>Label2</FormLabel>
@@ -48,7 +48,7 @@ const Template: Story<ComponentProps<typeof Form>> = (args) => {
             <Input type="text" name="pek3" />
           </FormGroup>
           <FormGroup>
-            <Input type="text" name="pek4" ref={form.register} />
+            <Input type="text" {...form.register("pek4")} />
           </FormGroup>
           <FormGroup>
             <Input type="text" name="pek5" />

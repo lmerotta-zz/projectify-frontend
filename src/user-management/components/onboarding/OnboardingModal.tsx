@@ -121,10 +121,9 @@ const OnboardingModal = ({ user }: OnboardingModalProps) => {
                 </FormLabel>
                 <Input
                   type="text"
-                  name="firstName"
                   readOnly={user.status === UserStatus.SIGNED_UP}
                   defaultValue={user.firstName}
-                  ref={form.register}
+                  {...form.register("firstName")}
                 />
               </FormGroup>
               <FormGroup>
@@ -133,8 +132,7 @@ const OnboardingModal = ({ user }: OnboardingModalProps) => {
                 </FormLabel>
                 <Input
                   type="text"
-                  name="lastName"
-                  ref={form.register}
+                  {...form.register("lastName")}
                   readOnly={user.status === UserStatus.SIGNED_UP}
                   defaultValue={user.lastName}
                 />

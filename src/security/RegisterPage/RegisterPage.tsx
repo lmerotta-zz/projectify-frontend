@@ -86,6 +86,7 @@ type RegisterFormType = {
   firstName: string;
   lastName: string;
   password: string;
+  repeatPassword: string;
 };
 
 const RegisterPage = () => {
@@ -102,6 +103,7 @@ const RegisterPage = () => {
     registerUserVariables
   >(REGISTER_MUTATION, {
     onError: (e) => {
+      console.log(e);
       /* istanbul ignore else */
       if (!mapViolationsToForm<RegisterFormType>(form.setError, e)) {
         toast.error(t("global.errors.internal-server-error"));
@@ -126,25 +128,27 @@ const RegisterPage = () => {
       </SectionSubTitle>
       <FormProvider {...form}>
         <Form
-          onSubmit={form.handleSubmit(async (data) => {
-            await register({
-              variables: data,
-            });
-          })}
+          onSubmit={form.handleSubmit(
+            async ({ repeatPassword: _, ...data }) => {
+              await register({
+                variables: data,
+              });
+            }
+          )}
         >
           <FormRow>
             <FormGroup>
               <FormLabel>
                 {t("security.register_page.form.label_firstName")}
               </FormLabel>
-              <Input name="firstName" type="text" ref={form.register} />
+              <Input type="text" {...form.register("firstName")} />
             </FormGroup>
 
             <FormGroup>
               <FormLabel>
                 {t("security.register_page.form.label_lastName")}
               </FormLabel>
-              <Input name="lastName" type="text" ref={form.register} />
+              <Input type="text" {...form.register("lastName")} />
             </FormGroup>
           </FormRow>
           <FormRow>
@@ -152,7 +156,7 @@ const RegisterPage = () => {
               <FormLabel>
                 {t("security.register_page.form.label_email")}
               </FormLabel>
-              <Input name="email" type="email" ref={form.register} />
+              <Input type="email" {...form.register("email")} />
             </FormGroup>
           </FormRow>
           <FormRow>
@@ -160,7 +164,7 @@ const RegisterPage = () => {
               <FormLabel>
                 {t("security.register_page.form.label_password")}
               </FormLabel>
-              <Input name="password" type="password" ref={form.register} />
+              <Input type="password" {...form.register("password")} />
             </FormGroup>
           </FormRow>
           <FormRow>
@@ -168,11 +172,7 @@ const RegisterPage = () => {
               <FormLabel>
                 {t("security.register_page.form.label_repeatPassword")}
               </FormLabel>
-              <Input
-                name="repeatPassword"
-                type="password"
-                ref={form.register}
-              />
+              <Input type="password" {...form.register("repeatPassword")} />
             </FormGroup>
           </FormRow>
 

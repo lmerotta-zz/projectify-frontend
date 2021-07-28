@@ -1,14 +1,14 @@
 import { ApolloError } from "@apollo/client";
-import { ErrorOption, FieldName, FieldValues } from "react-hook-form";
+import { FieldValues, Path, UseFormSetError } from "react-hook-form";
 import * as Sentry from "@sentry/react";
 
 type ViolationsType<T extends FieldValues = FieldValues> = Array<{
-  path: FieldName<T>;
+  path: Path<T>;
   message: string;
 }>;
 
 function mapViolationsToForm<TFieldValues extends FieldValues = FieldValues>(
-  setError: (name: FieldName<TFieldValues>, error: ErrorOption) => void,
+  setError: UseFormSetError<TFieldValues>,
   e: ApolloError
 ) {
   if (

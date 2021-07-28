@@ -2,7 +2,7 @@
 import { HTMLProps } from "react";
 import "twin.macro";
 
-type FormProps = HTMLProps<HTMLFormElement>;
+type FormProps = Omit<HTMLProps<HTMLFormElement>, "css">;
 
 const Form = (props: FormProps) => <form {...props} />;
 

@@ -74,7 +74,6 @@ describe("RegisterPage unit tests", () => {
             lastName: "test",
             email: "test@test.com",
             password: "test",
-            repeatPassword: "test",
           },
         },
         result: {},
