@@ -172,7 +172,7 @@ exports[`RegisterPage unit tests Shows a global error on server error 1`] = `
 }
 
 .emotion-34 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;

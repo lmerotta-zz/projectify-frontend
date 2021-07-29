@@ -309,7 +309,7 @@ exports[`OnboardingModal unit tests Puts first name and last name as readonly if
 }
 
 .emotion-30 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;
@@ -804,7 +804,7 @@ exports[`OnboardingModal unit tests throws an error if the user is already onboa
 }
 
 .emotion-31 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;
