@@ -12,7 +12,7 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
 import {
@@ -27,7 +27,7 @@ import { useLocation } from "react-router";
 import * as Styles from "./LoginPage.styles";
 import ghLogo from "./images/gh-logo.png";
 import { toast } from "react-toastify";
-import { login, loginVariables } from "apollo/types/login";
+import { useLoginMutation } from "generated/graphql";
 
 const animationVariants = {
   initial: {
@@ -78,10 +78,10 @@ const LoginPage = () => {
 
   const { t } = useTranslation();
 
-  const [login] = useMutation<login, loginVariables>(LOGIN_MUTATION, {
+  const [login] = useLoginMutation({
     onError: (e) => {
       /* istanbul ignore else */
-      if (!mapViolationsToForm<LoginFormType>(form.setError, e)) {
+      if (!mapViolationsToForm(form.setError, e)) {
         toast.error((e.networkError as any)!.result!.error);
       }
     },

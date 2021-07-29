@@ -42,6 +42,7 @@
     "react-toastify": "^7.0.4",
     "snapshot-diff": "^0.9.0",
     "tailwindcss": "^2.2.7",
+    "ts-deep-extract-types": "^1.0.1",
     "twin.macro": "^2.6.2",
     "typescript": "^4.3.5",
     "web-vitals": "^2.1.0",
@@ -91,8 +92,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "download-schema": "apollo service:download --endpoint=http://localhost:8001/api/graphql graphql/graphql-schema.json",
-    "codegen": "apollo codegen:generate --localSchemaFile=graphql/graphql-schema.json,graphql/rest-schema.graphql --target=typescript --tagName=gql --outputFlat src/apollo/types/"
+    "generate-graphql": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
@@ -113,6 +113,7 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.8",
     "@storybook/addon-actions": "^6.3.6",
     "@storybook/addon-controls": "^6.3.6",
     "@storybook/addon-essentials": "^6.3.6",
@@ -124,8 +125,11 @@
     "@types/graphql": "^14.5.0",
     "@types/react": "^17.0.15",
     "@types/react-router-dom": "^5.1.8",
-    "apollo": "^2.33.4",
-    "poeditor": "git+https://github.com/Reggionick/poeditor-cli.git#fix/key_value_json"
+    "poeditor": "git+https://github.com/Reggionick/poeditor-cli.git#fix/key_value_json",
+    "@graphql-codegen/typescript-operations": "1.18.4",
+    "@graphql-codegen/typescript-react-apollo": "2.3.1",
+    "@graphql-codegen/typescript": "1.23.0",
+    "@graphql-codegen/introspection": "1.18.2"
   },
   "wallaby": {
     "autoDetect": true,
