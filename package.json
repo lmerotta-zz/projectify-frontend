@@ -53,6 +53,7 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
+      "!src/generated/**.*",
       "!src/utils/AuthManager.ts",
       "!src/**/*.stories.{ts,tsx}",
       "!src/utils/i18n.ts",
@@ -143,6 +144,7 @@
       "!src/setupTests.ts",
       "!src/twin.d.ts",
       "!src/**/*.test.{ts,tsx}",
+      "!src/generated/**.*",
       "!src/apollo/client.ts",
       "!src/**/*.styles.{ts,tsx}"
     ]
