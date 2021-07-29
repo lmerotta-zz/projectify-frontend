@@ -1,6 +1,6 @@
-import { useQuery, useReactiveVar } from "@apollo/client";
+import { useReactiveVar } from "@apollo/client";
 import { isAuthenticated } from "apollo/local-state";
-import { getCurrentUser } from "apollo/types/getCurrentUser";
+import { useGetCurrentUserQuery } from "generated/graphql";
 import gql from "graphql-tag";
 import OnboardingModal from "./OnboardingModal";
 
@@ -17,7 +17,7 @@ export const CURRENT_USER_QUERY = gql`
 
 const OnboardingProcess = () => {
   const authenticated = useReactiveVar(isAuthenticated);
-  const currentUserQuery = useQuery<getCurrentUser>(CURRENT_USER_QUERY, {
+  const currentUserQuery = useGetCurrentUserQuery({
     skip: authenticated !== true,
   });
 

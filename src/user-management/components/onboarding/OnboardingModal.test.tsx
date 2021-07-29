@@ -3,8 +3,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import OnboardingModal, { ONBOARD_USER_MUTATION } from "./OnboardingModal";
 import { toast } from "react-toastify";
 import { GraphQLError } from "graphql";
-import { UserStatus } from "apollo/types/globalTypes";
-import { waitFor } from "@testing-library/dom";
+import { UserStatus } from "generated/graphql";
 
 describe("OnboardingModal unit tests", () => {
   beforeEach(() => {
@@ -52,7 +51,7 @@ describe("OnboardingModal unit tests", () => {
             firstName: "test",
             lastName: "tost",
             id: "abcd",
-            status: UserStatus.SIGNED_UP_OAUTH,
+            status: UserStatus.SignedUpOauth,
           }}
         />
       </MockedProvider>
@@ -120,7 +119,7 @@ describe("OnboardingModal unit tests", () => {
             firstName: "test",
             lastName: "tost",
             id: "abcd",
-            status: UserStatus.SIGNED_UP_OAUTH,
+            status: UserStatus.SignedUpOauth,
           }}
         />
       </MockedProvider>
@@ -170,7 +169,7 @@ describe("OnboardingModal unit tests", () => {
           data: {
             user: {
               id: "abcd",
-              status: UserStatus.ONBOARDED,
+              status: UserStatus.Onboarded,
               profilePictureUrl: "url",
             },
           },
@@ -186,7 +185,7 @@ describe("OnboardingModal unit tests", () => {
             firstName: "test",
             lastName: "tost",
             id: "abcd",
-            status: UserStatus.SIGNED_UP_OAUTH,
+            status: UserStatus.SignedUpOauth,
           }}
         />
       </MockedProvider>
@@ -225,7 +224,7 @@ describe("OnboardingModal unit tests", () => {
             firstName: "test",
             lastName: "tost",
             id: "abcd",
-            status: UserStatus.SIGNED_UP,
+            status: UserStatus.SignedUp,
           }}
         />
       </MockedProvider>

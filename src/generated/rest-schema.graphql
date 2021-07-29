@@ -1,4 +1,4 @@
-type LoginInput {
+input LoginInput {
   username: String!
   password: String!
 }

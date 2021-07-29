@@ -13,18 +13,20 @@ import {
   FormRow,
 } from "components";
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/client";
-import { getCurrentUser_currentUser } from "apollo/types/getCurrentUser";
-import { UserStatus } from "apollo/types/globalTypes";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "components";
-import { onboard, onboardVariables } from "apollo/types/onboard";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  GetCurrentUserQuery,
+  useOnboardMutation,
+  UserStatus,
+} from "generated/graphql";
+import { DeepExtractType } from "ts-deep-extract-types";
 
 export const ONBOARD_USER_MUTATION = gql`
   mutation onboard($firstName: String!, $lastName: String!, $picture: Upload!) {
@@ -47,7 +49,7 @@ type OnboardingFormType = {
 };
 
 type OnboardingModalProps = {
-  user: getCurrentUser_currentUser;
+  user: DeepExtractType<GetCurrentUserQuery, ["currentUser"]>;
 };
 
 const schema = yup.object().shape({
@@ -65,26 +67,21 @@ const OnboardingModal = ({ user }: OnboardingModalProps) => {
     resolver: yupResolver(schema),
   });
 
-  const [onboardUser] = useMutation<onboard["onboardUser"], onboardVariables>(
-    ONBOARD_USER_MUTATION,
-    {
-      onError: (e) => {
-        /* istanbul ignore else */
-        if (!mapViolationsToForm<OnboardingFormType>(form.setError, e)) {
-          toast.error(
-            e.graphQLErrors?.[0].extensions?.["exception_code"] === 4203
-              ? t(
-                  "usermanagement.onboarding.modal.error.user_already_onboarded"
-                )
-              : t("global.errors.internal-server-error")
-          );
-        }
-      },
-      onCompleted: () => {
-        toast.success(t("usermanagement.onboarding.modal.user_onboarded"));
-      },
-    }
-  );
+  const [onboardUser] = useOnboardMutation({
+    onError: (e) => {
+      /* istanbul ignore else */
+      if (!mapViolationsToForm(form.setError, e)) {
+        toast.error(
+          e.graphQLErrors?.[0].extensions?.["exception_code"] === 4203
+            ? t("usermanagement.onboarding.modal.error.user_already_onboarded")
+            : t("global.errors.internal-server-error")
+        );
+      }
+    },
+    onCompleted: () => {
+      toast.success(t("usermanagement.onboarding.modal.user_onboarded"));
+    },
+  });
 
   const onSubmit = form.handleSubmit(async (data) => {
     await onboardUser({
@@ -102,7 +99,7 @@ const OnboardingModal = ({ user }: OnboardingModalProps) => {
   };
 
   return (
-    <Modal isOpen={user.status !== UserStatus.ONBOARDED}>
+    <Modal isOpen={user.status !== UserStatus.Onboarded}>
       <ModalHeader>{t("usermanagement.onboarding.modal.title")}</ModalHeader>
       <FormProvider {...form}>
         <Form onSubmit={onSubmit}>
@@ -121,7 +118,7 @@ const OnboardingModal = ({ user }: OnboardingModalProps) => {
                 </FormLabel>
                 <Input
                   type="text"
-                  readOnly={user.status === UserStatus.SIGNED_UP}
+                  readOnly={user.status === UserStatus.SignedUp}
                   defaultValue={user.firstName}
                   {...form.register("firstName")}
                 />
@@ -133,7 +130,7 @@ const OnboardingModal = ({ user }: OnboardingModalProps) => {
                 <Input
                   type="text"
                   {...form.register("lastName")}
-                  readOnly={user.status === UserStatus.SIGNED_UP}
+                  readOnly={user.status === UserStatus.SignedUp}
                   defaultValue={user.lastName}
                 />
               </FormGroup>

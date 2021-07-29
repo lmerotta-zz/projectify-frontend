@@ -2,7 +2,7 @@ import { render, waitFor, act } from "test-utils";
 import { MockedProvider } from "@apollo/client/testing";
 import { isAuthenticated } from "apollo/local-state";
 import OnboardingProcess, { CURRENT_USER_QUERY } from "./OnboardingProcess";
-import { UserStatus } from "apollo/types/globalTypes";
+import { UserStatus } from "generated/graphql";
 
 jest.mock("./OnboardingModal", () => () => (
   <div data-testid="onboarding-modal" />
@@ -36,7 +36,7 @@ describe("OnboardingProcess unit tests", () => {
               id: "abcdef",
               firstName: "test",
               lastName: "tost",
-              status: UserStatus.ONBOARDED,
+              status: UserStatus.Onboarded,
             },
           },
         },

@@ -4,9 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 import { matchers } from "@emotion/jest";
-import { toMatchDiffSnapshot } from "snapshot-diff";
 
-expect.extend({ toMatchDiffSnapshot });
 expect.extend(matchers);
 
 jest.mock("react-i18next", () => ({

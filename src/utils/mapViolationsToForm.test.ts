@@ -21,7 +21,7 @@ describe("Validation error mapping unit test", () => {
 
     const result = mapViolationsToForm(
       formError,
-      (error as unknown) as ApolloError
+      error as unknown as ApolloError
     );
 
     expect(result).toBe(true);
@@ -38,7 +38,7 @@ describe("Validation error mapping unit test", () => {
     };
 
     expect(
-      mapViolationsToForm(formError, (error as unknown) as ApolloError)
+      mapViolationsToForm(formError, error as unknown as ApolloError)
     ).toBe(false);
 
     error = {
@@ -50,7 +50,7 @@ describe("Validation error mapping unit test", () => {
     };
 
     expect(
-      mapViolationsToForm(formError, (error as unknown) as ApolloError)
+      mapViolationsToForm(formError, error as unknown as ApolloError)
     ).toBe(false);
 
     error = {
@@ -64,7 +64,7 @@ describe("Validation error mapping unit test", () => {
     };
 
     expect(
-      mapViolationsToForm(formError, (error as unknown) as ApolloError)
+      mapViolationsToForm(formError, error as unknown as ApolloError)
     ).toBe(false);
   });
 });

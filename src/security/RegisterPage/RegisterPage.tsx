@@ -13,7 +13,7 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { Trans, useTranslation } from "react-i18next";
 import routePrefixes from "utils/routing-prefix";
 import i18next from "i18next";
@@ -26,10 +26,7 @@ import {
 } from "security/components";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
-import {
-  registerUserVariables,
-  registerUser_createUser,
-} from "apollo/types/registerUser";
+import { useRegisterUserMutation } from "generated/graphql";
 
 const animationVariants = {
   initial: {
@@ -98,14 +95,11 @@ const RegisterPage = () => {
 
   const { t } = useTranslation();
 
-  const [register] = useMutation<
-    registerUser_createUser,
-    registerUserVariables
-  >(REGISTER_MUTATION, {
+  const [register] = useRegisterUserMutation({
     onError: (e) => {
       console.log(e);
       /* istanbul ignore else */
-      if (!mapViolationsToForm<RegisterFormType>(form.setError, e)) {
+      if (!mapViolationsToForm(form.setError, e)) {
         toast.error(t("global.errors.internal-server-error"));
       }
     },

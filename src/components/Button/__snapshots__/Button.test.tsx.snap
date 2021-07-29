@@ -3,7 +3,7 @@
 exports[`Button unit tests Renders with color primary 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;
@@ -33,7 +33,7 @@ exports[`Button unit tests Renders with color primary 1`] = `
     My Button
   </button>
   .emotion-0 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;
@@ -78,7 +78,7 @@ exports[`Button unit tests Renders with color primary 1`] = `
 exports[`Button unit tests Renders with color secondary 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;
@@ -108,7 +108,7 @@ exports[`Button unit tests Renders with color secondary 1`] = `
     My Button
   </button>
   .emotion-0 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;

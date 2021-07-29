@@ -172,7 +172,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 }
 
 .emotion-17 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   --tw-text-opacity: 1;
@@ -195,7 +195,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 }
 
 .emotion-20 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   padding-left: 0.75rem;
@@ -259,7 +259,7 @@ exports[`LoginPage unit tests Stores the oauth code when request succeeds 1`] = 
 }
 
 .emotion-25 {
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
   padding-left: 0.75rem;
