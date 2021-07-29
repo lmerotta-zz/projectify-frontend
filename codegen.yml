@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://localhost:8001/api/graphql"
+schema: ${SCHEMA_PATH}
 documents: "src/**/*.tsx"
 generates:
   src/generated/graphql.tsx:
