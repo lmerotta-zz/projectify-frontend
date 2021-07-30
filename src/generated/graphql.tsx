@@ -167,8 +167,8 @@ export type User = Node & {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   email: Scalars['String'];
-  status: UserStatus;
   profilePictureUrl?: Maybe<Scalars['String']>;
+  status: UserStatus;
 };
 
 /** Describes a user status */
