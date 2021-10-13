@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
 import { lazy, useEffect } from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
 
 const App = () => {
