@@ -68,11 +68,7 @@ const RegisterPage = () => {
 
   const [register] = useRegisterUserMutation({
     onError: (e) => {
-      console.log(e);
-      /* istanbul ignore else */
-      if (!mapViolationsToForm(form.setError, e)) {
-        toast.error(t("global.errors.internal-server-error"));
-      }
+      mapViolationsToForm(form.setError, e);
     },
     onCompleted: () => {
       toast.success(t("security.register_page.message.user_created"));
