@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
 import { lazy, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
 
 const SecurityPage = lazy(
@@ -26,9 +26,9 @@ const App = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route path="/security" children={<SecurityPage />} />
-    </Switch>
+    <Routes>
+      <Route path="/security/*" element={<SecurityPage />} />
+    </Routes>
   );
 };
 

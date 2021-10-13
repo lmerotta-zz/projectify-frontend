@@ -1,8 +1,12 @@
 import { useReactiveVar } from "@apollo/client";
 import { isAuthenticated } from "apollo/local-state";
-import { Redirect, Route, RouteProps, useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute = (props: RouteProps) => {
+type PrivateRouteProps = {
+  element: JSX.Element;
+};
+
+const PrivateRoute = ({ element }: PrivateRouteProps) => {
   const authenticated = useReactiveVar(isAuthenticated);
   const location = useLocation();
 
@@ -11,14 +15,9 @@ const PrivateRoute = (props: RouteProps) => {
   }
 
   return authenticated ? (
-    <Route {...props} />
+    element
   ) : (
-    <Redirect
-      to={{
-        pathname: "/security/login",
-        state: { referrer: location },
-      }}
-    />
+    <Navigate to="/security/login" replace state={{ referrer: location }} />
   );
 };
 

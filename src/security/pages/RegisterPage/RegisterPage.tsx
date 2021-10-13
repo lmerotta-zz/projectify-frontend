@@ -6,7 +6,7 @@ import { useRegisterUserMutation } from "generated/graphql";
 import i18next from "i18next";
 import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RightPane, RightPaneFormWrapper } from "security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
@@ -63,8 +63,7 @@ const RegisterPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const history = useHistory();
-
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [register] = useRegisterUserMutation({
@@ -77,7 +76,7 @@ const RegisterPage = () => {
     },
     onCompleted: () => {
       toast.success(t("security.register_page.message.user_created"));
-      history.push("/login");
+      navigate("../login");
     },
   });
 
@@ -172,7 +171,7 @@ const RegisterPage = () => {
                     Link: (
                       <Link
                         component={RouterLink}
-                        to="/security/login"
+                        to="../login"
                         color="secondary"
                         underline="hover"
                         variant="inherit"

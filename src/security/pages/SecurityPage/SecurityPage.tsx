@@ -2,7 +2,7 @@ import { LinearProgress, Typography } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Route, Switch, useLocation, useRouteMatch } from "react-router";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { RightPane } from "security/components";
 import * as Styles from "./SecurityPage.styles";
 
@@ -12,7 +12,6 @@ const RegisterPage = lazy(
 );
 
 const SecurityPage = () => {
-  const { path } = useRouteMatch();
   const { t } = useTranslation();
   const location = useLocation();
 
@@ -59,10 +58,10 @@ const SecurityPage = () => {
         }
       >
         <AnimatePresence exitBeforeEnter initial={false}>
-          <Switch location={location} key={location.pathname}>
-            <Route path={`${path}/login`} children={<LoginPage />} />
-            <Route path={`${path}/register`} children={<RegisterPage />} />
-          </Switch>
+          <Routes location={location} key={location.pathname}>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Routes>
         </AnimatePresence>
       </Suspense>
     </Styles.Wrapper>

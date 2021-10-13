@@ -1,63 +1,63 @@
 import { isAuthenticated } from "apollo/local-state";
-import { createMemoryHistory, MemoryHistory } from "history";
-import { Router, Switch } from "react-router-dom";
+import { MemoryRouter as Router, Route, Routes } from "react-router-dom";
 import { render } from "test-utils";
 import PrivateRoute from "./PrivateRoute";
 
 describe("PrivateRoute unit tests", () => {
-  let history: MemoryHistory;
-
-  beforeEach(() => {
-    history = createMemoryHistory();
-    history.push("/testing");
-  });
-
   afterEach(() => {
     isAuthenticated(null);
   });
 
   it("Renders null by default", () => {
     const result = render(
-      <Router history={history}>
-        <Switch>
-          <PrivateRoute path="/testing" component={() => <h1>Test</h1>} />
-        </Switch>
+      <Router initialEntries={["/testing"]}>
+        <Routes>
+          <Route
+            path="/testing"
+            element={<PrivateRoute element={<h1>Test</h1>} />}
+          />
+          <Route path="/security/login" element={<h1>Security</h1>} />
+        </Routes>
       </Router>
     );
 
-    expect(result.container).toBeEmptyDOMElement();
+    expect(() => result.getByText("Test")).toThrow();
     result.unmount();
   });
 
   it("Redirects to login page if authenticated is false", () => {
     isAuthenticated(false);
     const result = render(
-      <Router history={history}>
-        <Switch>
-          <PrivateRoute path="/testing" component={() => <h1>Test</h1>} />
-        </Switch>
+      <Router initialEntries={["/testing"]}>
+        <Routes>
+          <Route
+            path="/testing"
+            element={<PrivateRoute element={<h1>Test</h1>} />}
+          />
+          <Route path="/security/login" element={<h1>Security</h1>} />
+        </Routes>
       </Router>
     );
 
-    expect(history.location.pathname).toEqual(`/security/login`);
+    expect(result.getByText("Security")).toBeVisible();
     result.unmount();
   });
 
   it("Shows testing if authenticated is true", () => {
     isAuthenticated(true);
     const result = render(
-      <Router history={history}>
-        <Switch>
-          <PrivateRoute
+      <Router initialEntries={["/testing"]}>
+        <Routes>
+          <Route
             path="/testing"
-            component={() => <h1 data-testid="testing">Test</h1>}
+            element={<PrivateRoute element={<h1>Test</h1>} />}
           />
-        </Switch>
+          <Route path="/security/login" element={<h1>Security</h1>} />
+        </Routes>
       </Router>
     );
 
-    expect(history.location.pathname).toEqual("/testing");
-    expect(result.getByTestId("testing")).not.toBeEmptyDOMElement();
+    expect(result.getByText("Test")).toBeVisible();
     result.unmount();
   });
 });
