@@ -8,7 +8,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RightPane, RightPaneFormWrapper } from "security/components";
+import { RightPane, RightPaneFormWrapper, rightPaneDefaultProps } from "security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
 
@@ -82,7 +82,7 @@ const RegisterPage = () => {
   });
 
   return (
-    <RightPane>
+    <RightPane {...rightPaneDefaultProps}>
       <Typography variant="h4" component="h1" sx={{ fontWeight: "medium" }}>
         {t("security.register_page.page_title")}
       </Typography>

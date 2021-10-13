@@ -4,6 +4,13 @@ import { lazy, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
 
+const SecurityPage = lazy(
+  /* istanbul ignore next */ () =>
+    import("security").then((module) => ({
+      default: module.SecurityPage,
+    }))
+);
+
 const App = () => {
   useEffect(() => {
     setTimeout(async () => {
@@ -20,15 +27,7 @@ const App = () => {
 
   return (
     <Switch>
-      <Route
-        path="/security"
-        component={lazy(
-          /* istanbul ignore next */ () =>
-            import("security").then((module) => ({
-              default: module.SecurityPage,
-            }))
-        )}
-      />
+      <Route path="/security" children={<SecurityPage />} />
     </Switch>
   );
 };

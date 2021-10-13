@@ -3,8 +3,13 @@ import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Route, Switch, useLocation, useRouteMatch } from "react-router";
-import { RightPane } from "security/components/RightPane/RightPane.styles";
+import { RightPane, rightPaneDefaultProps } from "security/components";
 import * as Styles from "./SecurityPage.styles";
+
+const LoginPage = lazy(() => import("security/pages/LoginPage/LoginPage"));
+const RegisterPage = lazy(
+  () => import("security/pages/RegisterPage/RegisterPage")
+);
 
 const SecurityPage = () => {
   const { path } = useRouteMatch();
@@ -48,25 +53,15 @@ const SecurityPage = () => {
 
       <Suspense
         fallback={
-          <RightPane>
+          <RightPane {...rightPaneDefaultProps}>
             <LinearProgress variant="indeterminate" />
           </RightPane>
         }
       >
         <AnimatePresence exitBeforeEnter initial={false}>
           <Switch location={location} key={location.pathname}>
-            <Route
-              path={`${path}/login`}
-              component={lazy(
-                () => import("security/pages/LoginPage/LoginPage")
-              )}
-            />
-            <Route
-              path={`${path}/register`}
-              component={lazy(
-                () => import("security/pages/RegisterPage/RegisterPage")
-              )}
-            />
+            <Route path={`${path}/login`} children={<LoginPage />} />
+            <Route path={`${path}/register`} children={<RegisterPage />} />
           </Switch>
         </AnimatePresence>
       </Suspense>

@@ -1,2 +1,2 @@
-export { default as RightPane } from "./RightPane/RightPane";
+export * from "./RightPane";
 export { default as RightPaneFormWrapper } from "./RightPaneFormWrapper";
