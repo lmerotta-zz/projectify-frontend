@@ -3,8 +3,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
@@ -14,6 +13,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import theme from "theme";
 import "utils/i18n";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -26,28 +26,6 @@ Sentry.init({
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
   tracesSampleRate: process.env.NODE_ENV === "production" ? 1.0 : 0,
-});
-
-declare module "@mui/material" {
-  interface Palette {
-    neutral: string;
-  }
-
-  interface PaletteOptions {
-    neutral?: string;
-  }
-}
-
-const theme = createTheme({
-  palette: {
-    neutral: grey[500],
-    primary: {
-      main: "rgb(147, 51, 234)",
-    },
-    secondary: {
-      main: "rgb(234, 179, 8)",
-    },
-  },
 });
 
 ReactDOM.render(
