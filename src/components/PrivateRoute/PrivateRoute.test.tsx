@@ -1,9 +1,8 @@
-import { render } from "test-utils";
-import { Router, Switch } from "react-router-dom";
-import { createMemoryHistory, MemoryHistory } from "history";
 import { isAuthenticated } from "apollo/local-state";
+import { createMemoryHistory, MemoryHistory } from "history";
+import { Router, Switch } from "react-router-dom";
+import { render } from "test-utils";
 import PrivateRoute from "./PrivateRoute";
-import routingPrefix from "utils/routing-prefix";
 
 describe("PrivateRoute unit tests", () => {
   let history: MemoryHistory;
@@ -40,9 +39,7 @@ describe("PrivateRoute unit tests", () => {
       </Router>
     );
 
-    expect(history.location.pathname).toEqual(
-      `${routingPrefix.security}/login`
-    );
+    expect(history.location.pathname).toEqual(`/security/login`);
     result.unmount();
   });
 

@@ -1,7 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import { isAuthenticated } from "apollo/local-state";
 import { Redirect, Route, RouteProps, useLocation } from "react-router";
-import routingPrefix from "utils/routing-prefix";
 
 const PrivateRoute = (props: RouteProps) => {
   const authenticated = useReactiveVar(isAuthenticated);
@@ -16,7 +15,7 @@ const PrivateRoute = (props: RouteProps) => {
   ) : (
     <Redirect
       to={{
-        pathname: `${routingPrefix.security}/login`,
+        pathname: "/security/login",
         state: { referrer: location },
       }}
     />
