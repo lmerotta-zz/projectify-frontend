@@ -9,11 +9,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  RightPane,
-  rightPaneDefaultProps,
-  RightPaneFormWrapper,
-} from "security/components";
+import { RightPane, RightPaneFormWrapper } from "security/components";
 import AuthManager from "utils/AuthManager";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
@@ -68,7 +64,7 @@ const LoginPage = () => {
   });
 
   return (
-    <RightPane {...rightPaneDefaultProps}>
+    <RightPane>
       <Typography variant="h4" component="h1" sx={{ fontWeight: "medium" }}>
         {t("security.login_page.page_title")}
       </Typography>

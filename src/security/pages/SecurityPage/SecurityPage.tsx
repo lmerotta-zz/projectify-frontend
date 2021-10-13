@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Route, Switch, useLocation, useRouteMatch } from "react-router";
-import { RightPane, rightPaneDefaultProps } from "security/components";
+import { RightPane } from "security/components";
 import * as Styles from "./SecurityPage.styles";
 
 const LoginPage = lazy(() => import("security/pages/LoginPage/LoginPage"));
@@ -53,7 +53,7 @@ const SecurityPage = () => {
 
       <Suspense
         fallback={
-          <RightPane {...rightPaneDefaultProps}>
+          <RightPane>
             <LinearProgress variant="indeterminate" />
           </RightPane>
         }
