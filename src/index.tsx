@@ -1,20 +1,25 @@
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { GlobalStyles } from "twin.macro";
-import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
-import client from "apollo/client";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { StyledEngineProvider } from "@mui/material/styles";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import "react-toastify/dist/ReactToastify.css";
-import "utils/i18n";
+import client from "apollo/client";
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import theme from "theme";
+import "utils/i18n";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 Sentry.init({
-  dsn:
-    "https://fa2fd408a3484083a4d963d8b5feb987@o560878.ingest.sentry.io/5696872",
+  dsn: "https://fa2fd408a3484083a4d963d8b5feb987@o560878.ingest.sentry.io/5696872",
   integrations: [new Integrations.BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -27,11 +32,15 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Suspense fallback={null}>
-        <GlobalStyles />
-        <BrowserRouter>
-          <App />
-          <ToastContainer />
-        </BrowserRouter>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <ToastContainer />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ThemeProvider>
+        </StyledEngineProvider>
       </Suspense>
     </ApolloProvider>
   </React.StrictMode>,

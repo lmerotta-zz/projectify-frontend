@@ -1,6 +1,8 @@
 import { ApolloError } from "@apollo/client";
-import { FieldValues, Path, UseFormSetError } from "react-hook-form";
 import * as Sentry from "@sentry/react";
+import i18next from "i18next";
+import { FieldValues, Path, UseFormSetError } from "react-hook-form";
+import { toast } from "react-toastify";
 
 type ViolationsType<T extends FieldValues = FieldValues> = Array<{
   path: Path<T>;
@@ -28,6 +30,7 @@ function mapViolationsToForm<TFieldValues extends FieldValues = FieldValues>(
   }
 
   Sentry.captureException(e);
+  toast.error(i18next.t("global.errors.internal-server-error"));
   return false;
 }
 

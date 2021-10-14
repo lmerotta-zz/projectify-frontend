@@ -1,10 +1,15 @@
 import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
 import { lazy, useEffect } from "react";
-import { Route, Switch } from "react-router";
-import OnboardingProcess from "user-management/components/onboarding/OnboardingProcess";
+import { Route, Routes } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
-import prefixes from "utils/routing-prefix";
+
+const SecurityPage = lazy(
+  /* istanbul ignore next */ () =>
+    import("security").then((module) => ({
+      default: module.SecurityPage,
+    }))
+);
 
 const App = () => {
   useEffect(() => {
@@ -21,15 +26,9 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <Switch>
-        <Route
-          path={prefixes.security}
-          component={lazy(/* istanbul ignore next */ () => import("security"))}
-        />
-      </Switch>
-      <OnboardingProcess />
-    </>
+    <Routes>
+      <Route path="/security/*" element={<SecurityPage />} />
+    </Routes>
   );
 };
 

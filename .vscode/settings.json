@@ -1,4 +1,5 @@
 {
     "prettier.requireConfig": false,
-    "jest.coverageFormatter": "GutterFormatter"
+    "jest.coverageFormatter": "GutterFormatter",
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
