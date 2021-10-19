@@ -16,10 +16,9 @@ export type Scalars = {
   Upload: any;
 };
 
-
 export type LoginInput = {
-  username: Scalars['String'];
   password: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type Mutation = {
@@ -66,9 +65,9 @@ export type Node = {
 
 export type Project = Node & {
   __typename?: 'Project';
+  creator: User;
   id: Scalars['ID'];
   name: Scalars['String'];
-  creator: User;
 };
 
 /** Connection for Project. */
@@ -82,23 +81,23 @@ export type ProjectConnection = {
 /** Edge of Project. */
 export type ProjectEdge = {
   __typename?: 'ProjectEdge';
-  node?: Maybe<Project>;
   cursor: Scalars['String'];
+  node?: Maybe<Project>;
 };
 
 /** Information about the current page. */
 export type ProjectPageInfo = {
   __typename?: 'ProjectPageInfo';
   endCursor?: Maybe<Scalars['String']>;
-  startCursor?: Maybe<Scalars['String']>;
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
+  startCursor?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  node?: Maybe<Node>;
   currentUser?: Maybe<User>;
+  node?: Maybe<Node>;
   project?: Maybe<Project>;
   projects?: Maybe<ProjectConnection>;
   roles?: Maybe<RoleConnection>;
@@ -116,18 +115,18 @@ export type QueryProjectArgs = {
 
 
 export type QueryProjectsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
 };
 
 
 export type QueryRolesArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
 };
 
 export type Role = Node & {
@@ -147,76 +146,75 @@ export type RoleConnection = {
 /** Edge of Role. */
 export type RoleEdge = {
   __typename?: 'RoleEdge';
-  node?: Maybe<Role>;
   cursor: Scalars['String'];
+  node?: Maybe<Role>;
 };
 
 /** Information about the current page. */
 export type RolePageInfo = {
   __typename?: 'RolePageInfo';
   endCursor?: Maybe<Scalars['String']>;
-  startCursor?: Maybe<Scalars['String']>;
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
+  startCursor?: Maybe<Scalars['String']>;
 };
-
 
 export type User = Node & {
   __typename?: 'User';
-  id: Scalars['ID'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
   email: Scalars['String'];
+  firstName: Scalars['String'];
+  id: Scalars['ID'];
+  lastName: Scalars['String'];
   profilePictureUrl?: Maybe<Scalars['String']>;
   status: UserStatus;
 };
 
 /** Describes a user status */
 export enum UserStatus {
+  Onboarded = 'ONBOARDED',
   SignedUp = 'SIGNED_UP',
-  SignedUpOauth = 'SIGNED_UP_OAUTH',
-  Onboarded = 'ONBOARDED'
+  SignedUpOauth = 'SIGNED_UP_OAUTH'
 }
 
 export type CreateProjectInput = {
-  name: Scalars['String'];
   clientMutationId?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type CreateProjectPayload = {
   __typename?: 'createProjectPayload';
-  project?: Maybe<Project>;
   clientMutationId?: Maybe<Scalars['String']>;
+  project?: Maybe<Project>;
 };
 
 export type CreateUserInput = {
+  clientMutationId?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   password: Scalars['String'];
-  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateUserPayload = {
   __typename?: 'createUserPayload';
-  user?: Maybe<User>;
   clientMutationId?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 export type OnboardUserInput = {
-  /** Profile picture file */
-  picture: Scalars['Upload'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** First name of the user */
   firstName: Scalars['String'];
   /** Last name of the user */
   lastName: Scalars['String'];
-  clientMutationId?: Maybe<Scalars['String']>;
+  /** Profile picture file */
+  picture: Scalars['Upload'];
 };
 
 export type OnboardUserPayload = {
   __typename?: 'onboardUserPayload';
-  user?: Maybe<User>;
   clientMutationId?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -225,13 +223,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = (
-  { __typename?: 'Mutation' }
-  & { login?: Maybe<(
-    { __typename?: 'NoResponse' }
-    & Pick<NoResponse, 'NoResponse'>
-  )> }
-);
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'NoResponse', NoResponse?: string | null | undefined } | null | undefined };
 
 export type RegisterUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -241,42 +233,7 @@ export type RegisterUserMutationVariables = Exact<{
 }>;
 
 
-export type RegisterUserMutation = (
-  { __typename?: 'Mutation' }
-  & { createUser?: Maybe<(
-    { __typename?: 'createUserPayload' }
-    & Pick<CreateUserPayload, 'clientMutationId'>
-  )> }
-);
-
-export type OnboardMutationVariables = Exact<{
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  picture: Scalars['Upload'];
-}>;
-
-
-export type OnboardMutation = (
-  { __typename?: 'Mutation' }
-  & { onboardUser?: Maybe<(
-    { __typename?: 'onboardUserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'status' | 'profilePictureUrl'>
-    )> }
-  )> }
-);
-
-export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCurrentUserQuery = (
-  { __typename?: 'Query' }
-  & { currentUser?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'firstName' | 'lastName' | 'status'>
-  )> }
-);
+export type RegisterUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'createUserPayload', clientMutationId?: string | null | undefined } | null | undefined };
 
 
 export const LoginDocument = gql`
@@ -351,81 +308,3 @@ export function useRegisterUserMutation(baseOptions?: Apollo.MutationHookOptions
 export type RegisterUserMutationHookResult = ReturnType<typeof useRegisterUserMutation>;
 export type RegisterUserMutationResult = Apollo.MutationResult<RegisterUserMutation>;
 export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<RegisterUserMutation, RegisterUserMutationVariables>;
-export const OnboardDocument = gql`
-    mutation onboard($firstName: String!, $lastName: String!, $picture: Upload!) {
-  onboardUser(
-    input: {picture: $picture, firstName: $firstName, lastName: $lastName}
-  ) {
-    user {
-      id
-      status
-      profilePictureUrl
-    }
-  }
-}
-    `;
-export type OnboardMutationFn = Apollo.MutationFunction<OnboardMutation, OnboardMutationVariables>;
-
-/**
- * __useOnboardMutation__
- *
- * To run a mutation, you first call `useOnboardMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useOnboardMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [onboardMutation, { data, loading, error }] = useOnboardMutation({
- *   variables: {
- *      firstName: // value for 'firstName'
- *      lastName: // value for 'lastName'
- *      picture: // value for 'picture'
- *   },
- * });
- */
-export function useOnboardMutation(baseOptions?: Apollo.MutationHookOptions<OnboardMutation, OnboardMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<OnboardMutation, OnboardMutationVariables>(OnboardDocument, options);
-      }
-export type OnboardMutationHookResult = ReturnType<typeof useOnboardMutation>;
-export type OnboardMutationResult = Apollo.MutationResult<OnboardMutation>;
-export type OnboardMutationOptions = Apollo.BaseMutationOptions<OnboardMutation, OnboardMutationVariables>;
-export const GetCurrentUserDocument = gql`
-    query getCurrentUser {
-  currentUser {
-    id
-    firstName
-    lastName
-    status
-  }
-}
-    `;
-
-/**
- * __useGetCurrentUserQuery__
- *
- * To run a query within a React component, call `useGetCurrentUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCurrentUserQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
-      }
-export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
-        }
-export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
-export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
-export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
