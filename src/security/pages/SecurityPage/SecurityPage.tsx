@@ -1,8 +1,10 @@
+import { useReactiveVar } from "@apollo/client";
 import { LinearProgress, Typography } from "@mui/material";
+import { isAuthenticated } from "apollo/local-state";
 import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { RightPane } from "security/components";
 import * as Styles from "./SecurityPage.styles";
 
@@ -14,8 +16,15 @@ const RegisterPage = lazy(
 const SecurityPage = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const authenticated = useReactiveVar(isAuthenticated);
 
-  return (
+  if (authenticated === null) {
+    return null;
+  }
+
+  return authenticated ? (
+    <Navigate to="/" replace />
+  ) : (
     <Styles.Wrapper container spacing={0}>
       <Styles.Hero
         item
@@ -61,6 +70,7 @@ const SecurityPage = () => {
           <Routes location={location} key={location.pathname}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
+            <Route path="*" element={<Navigate to="./login" replace />} />
           </Routes>
         </AnimatePresence>
       </Suspense>

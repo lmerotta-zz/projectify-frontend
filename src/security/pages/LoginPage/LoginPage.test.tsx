@@ -1,3 +1,4 @@
+import { isAuthenticated } from "apollo/local-state";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { renderWithProviders, userEvent, waitFor } from "test-utils";
 import AuthManager from "utils/AuthManager";
@@ -5,6 +6,14 @@ import SecurityPage from "../SecurityPage/SecurityPage";
 import { LOGIN_MUTATION } from "./LoginPage";
 
 describe("LoginPage functional tests", () => {
+  beforeEach(() => {
+    isAuthenticated(false);
+  });
+
+  afterEach(() => {
+    isAuthenticated(null);
+  });
+
   it("Returns an invalid credentials error on wrong credentials", async () => {
     jest.spyOn(AuthManager, "login").mockImplementation(async () => {});
 
@@ -14,20 +23,22 @@ describe("LoginPage functional tests", () => {
           query: LOGIN_MUTATION,
           variables: {
             username: "failed@test.com",
-            password: "test",
+            password: "passwordfailure",
           },
         },
-        error: new Error("Error occured"),
+        error: {
+          statusCode: 401,
+          message: "test",
+          name: "test",
+        },
       },
     ];
 
-    const { getByLabelText, getByText, asFragment } = renderWithProviders(
-      <SecurityPage />,
-      {
+    const { getByLabelText, getByText, asFragment, unmount } =
+      renderWithProviders(<SecurityPage />, {
         routerProps: { initialEntries: ["/login"] },
         graphqlProps: { mocks: mocks },
-      }
-    );
+      });
 
     await waitFor(() =>
       expect(getByText("security.login_page.page_title")).toBeVisible()
@@ -46,8 +57,55 @@ describe("LoginPage functional tests", () => {
     userEvent.click(getByText("security.login_page.form.btn_login"));
 
     await waitFor(() =>
+      expect(
+        getByText("security.login_page.errors.invalid_credentials")
+      ).toBeVisible()
+    );
+
+    unmount();
+  });
+
+  it("Returns an internal error if there is a network error", async () => {
+    jest.spyOn(AuthManager, "login").mockImplementation(async () => {});
+
+    const mocks = [
+      {
+        request: {
+          query: LOGIN_MUTATION,
+          variables: {
+            username: "failed@test.com",
+            password: "passwordfailure",
+          },
+        },
+        error: new Error("custom error"),
+      },
+    ];
+
+    const { getByLabelText, getByText, asFragment, unmount } =
+      renderWithProviders(<SecurityPage />, {
+        routerProps: { initialEntries: ["/login"] },
+        graphqlProps: { mocks: mocks },
+      });
+
+    await waitFor(() =>
+      expect(getByText("security.login_page.page_title")).toBeVisible()
+    );
+
+    userEvent.type(
+      getByLabelText("security.login_page.form.label_email"),
+      "failed@test.com"
+    );
+    userEvent.type(
+      getByLabelText("security.login_page.form.label_password"),
+      "passwordfailure"
+    );
+    userEvent.click(getByText("security.login_page.form.btn_login"));
+
+    await waitFor(() =>
       expect(getByText("global.errors.internal-server-error")).toBeVisible()
     );
+
+    unmount();
   });
 
   it("Logs in in with the correct referer", async () => {
@@ -72,7 +130,7 @@ describe("LoginPage functional tests", () => {
       },
     ];
 
-    const { getByLabelText, getByText } = renderWithProviders(
+    const { getByLabelText, getByText, unmount } = renderWithProviders(
       <Routes>
         <Route
           path="/test"
@@ -111,5 +169,7 @@ describe("LoginPage functional tests", () => {
     await waitFor(() =>
       expect(authManagerSpy).toHaveBeenCalledWith({ state: "/referred-by" })
     );
+
+    unmount();
   });
 });

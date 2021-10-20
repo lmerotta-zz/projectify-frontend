@@ -8,6 +8,7 @@ import { Location } from "history";
 import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import { RightPane, RightPaneFormWrapper } from "security/components";
 import AuthManager from "utils/AuthManager";
 import mapViolationsToForm from "utils/mapViolationsToForm";
@@ -52,7 +53,15 @@ const LoginPage = () => {
 
   const [login] = useLoginMutation({
     onError: (e) => {
-      mapViolationsToForm(form.setError, e);
+      if (
+        e.networkError &&
+        "statusCode" in e.networkError &&
+        e.networkError.statusCode === 401
+      ) {
+        toast.error(t("security.login_page.errors.invalid_credentials"));
+      } else {
+        mapViolationsToForm(form.setError, e);
+      }
     },
     onCompleted: async () => {
       await AuthManager.login({ state: referrer });
