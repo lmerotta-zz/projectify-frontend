@@ -9,7 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RightPane, RightPaneFormWrapper } from "security/components";
+import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import AuthManager from "utils/AuthManager";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";

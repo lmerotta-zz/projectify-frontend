@@ -5,12 +5,12 @@ import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { RightPane } from "security/components";
+import { RightPane } from "modules/security/components";
 import * as Styles from "./SecurityPage.styles";
 
-const LoginPage = lazy(() => import("security/pages/LoginPage/LoginPage"));
+const LoginPage = lazy(() => import("modules/security/pages/LoginPage/LoginPage"));
 const RegisterPage = lazy(
-  () => import("security/pages/RegisterPage/RegisterPage")
+  () => import("modules/security/pages/RegisterPage/RegisterPage")
 );
 
 const SecurityPage = () => {

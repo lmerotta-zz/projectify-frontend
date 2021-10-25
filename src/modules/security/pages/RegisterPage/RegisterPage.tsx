@@ -8,7 +8,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RightPane, RightPaneFormWrapper } from "security/components";
+import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
 
