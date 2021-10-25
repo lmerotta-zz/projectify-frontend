@@ -1,5 +1,7 @@
 import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
+import { PrivateRoute } from "components";
+import AppContainer from "core/components/AppContainer";
 import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
@@ -27,6 +29,7 @@ const App = () => {
 
   return (
     <Routes>
+      <Route path="/*" element={<PrivateRoute element={<AppContainer />} />} />
       <Route path="/security/*" element={<SecurityPage />} />
     </Routes>
   );

@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App unit tests Renders and sets isAuthenticated to false 1`] = `<DocumentFragment />`;
+exports[`App unit tests Renders and sets isAuthenticated to false 1`] = `
+<DocumentFragment>
+  <div
+    class="Toastify"
+    id="react-toastify"
+  />
+  <div
+    data-testid="root"
+  />
+</DocumentFragment>
+`;
 
-exports[`App unit tests Renders and sets isAuthenticated to true 1`] = `<DocumentFragment />`;
+exports[`App unit tests Renders and sets isAuthenticated to true 1`] = `
+<DocumentFragment>
+  <div
+    class="Toastify"
+    id="react-toastify"
+  />
+  <div
+    data-testid="root"
+  />
+</DocumentFragment>
+`;

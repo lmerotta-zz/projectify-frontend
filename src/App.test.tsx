@@ -1,8 +1,6 @@
-import { render, waitFor } from "test-utils";
-import { MockedProvider } from "@apollo/client/testing";
 import { isAuthenticated } from "apollo/local-state";
 import App from "App";
-import { MemoryRouter } from "react-router-dom";
+import { renderWithProviders, waitFor } from "test-utils";
 import AuthManager from "utils/AuthManager";
 
 jest.mock("utils/AuthManager", () => ({
@@ -22,13 +20,7 @@ describe("App unit tests", () => {
     AuthManager.isLoggedIn.mockImplementation(
       async () => await new Promise((resolve, reject) => reject({ wow: true }))
     );
-    const { asFragment } = render(
-      <MockedProvider mocks={[]}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </MockedProvider>
-    );
+    const { asFragment } = renderWithProviders(<App />);
 
     expect(asFragment()).toMatchSnapshot();
     jest.runAllTimers();
@@ -40,13 +32,7 @@ describe("App unit tests", () => {
     AuthManager.isLoggedIn.mockImplementation(
       async () => await new Promise((resolve) => resolve({ wow: true }))
     );
-    const { asFragment } = render(
-      <MockedProvider mocks={[]}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </MockedProvider>
-    );
+    const { asFragment } = renderWithProviders(<App />);
 
     expect(asFragment()).toMatchSnapshot();
     jest.runAllTimers();
