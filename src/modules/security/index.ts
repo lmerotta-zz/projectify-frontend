@@ -1,1 +1,5 @@
-export { default as SecurityPage } from "./pages/SecurityPage/SecurityPage";
+import { lazy } from "react";
+
+export const SecurityPage = lazy(
+  () => import("./pages/SecurityPage/SecurityPage")
+);

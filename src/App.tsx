@@ -2,16 +2,10 @@ import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
 import { PrivateRoute } from "components";
 import AppContainer from "modules/core/components/AppContainer";
-import { lazy, useEffect } from "react";
+import { SecurityPage } from "modules/security";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
-
-const SecurityPage = lazy(
-  /* istanbul ignore next */ () =>
-    import("modules/security").then((module) => ({
-      default: module.SecurityPage,
-    }))
-);
 
 const App = () => {
   useEffect(() => {
