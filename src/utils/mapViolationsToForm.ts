@@ -15,7 +15,7 @@ function mapViolationsToForm<TFieldValues extends FieldValues = FieldValues>(
 ) {
   if (
     e.graphQLErrors.length === 1 &&
-    e.graphQLErrors[0].extensions?.violations?.length > 0
+    (e.graphQLErrors[0].extensions?.violations as any)?.length > 0
   ) {
     (
       e.graphQLErrors[0].extensions!.violations as ViolationsType<TFieldValues>

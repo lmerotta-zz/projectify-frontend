@@ -19,14 +19,14 @@ const Header = () => {
   const theme = useTheme();
   const isDrawerPermanent = useMediaQuery(theme.breakpoints.up("sm"));
 
+  const toggleDrawer = /* istanbul ignore next */ () =>
+    setDrawerOpen((open) => !open);
+
   return (
     <>
       <Styles.AppBar position="fixed">
         <Toolbar>
-          <Styles.ToggleDrawerButton
-            color="inherit"
-            onClick={() => setDrawerOpen(!drawerOpen)}
-          >
+          <Styles.ToggleDrawerButton color="inherit" onClick={toggleDrawer}>
             {drawerOpen ? <ChevronLeft /> : <Menu />}
           </Styles.ToggleDrawerButton>
           <Typography flexGrow={1} variant="h6" component="div">
@@ -37,10 +37,10 @@ const Header = () => {
       <Styles.Drawer
         variant={isDrawerPermanent ? "permanent" : "temporary"}
         open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
+        onClose={toggleDrawer}
       >
         <Styles.DrawerHeader>
-          <IconButton onClick={() => setDrawerOpen(false)}>
+          <IconButton onClick={toggleDrawer}>
             <ChevronLeft fontSize="large" />
           </IconButton>
         </Styles.DrawerHeader>

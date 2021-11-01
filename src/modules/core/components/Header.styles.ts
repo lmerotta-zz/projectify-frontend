@@ -52,4 +52,4 @@ export const ListItem = styled(MUIListItem)(({ theme }) => ({
   "&.active": {
     backgroundColor: theme.palette.action.selected,
   },
-}));
+})) as any as typeof MUIListItem;
