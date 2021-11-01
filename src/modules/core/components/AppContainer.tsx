@@ -1,16 +1,15 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { Route, Routes } from "react-router";
+import Header from "./Header";
 
 const AppContainer = () => (
-  <Box display="flex" flexDirection="column" minHeight="100vh">
-    <AppBar position="static">
-      <Toolbar>
-        <Typography flexGrow={1} variant="h6" component="div">
-          Projectify
-        </Typography>
-      </Toolbar>
-    </AppBar>
-    <Box component="main" flexGrow={1}>
-      Main content
+  <Box display="flex" minHeight="100vh">
+    <Header />
+    <Box component="main" flexGrow={1} mt={7} p={3}>
+      <Routes>
+        <Route path="/" element={<Typography>Hello</Typography>} />
+        <Route path="*" element={<Typography>Notfound</Typography>} />
+      </Routes>
     </Box>
   </Box>
 );
