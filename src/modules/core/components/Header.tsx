@@ -46,6 +46,7 @@ const Header = () => {
         </Styles.DrawerHeader>
         <Divider />
         <List>
+          {/* TODO: generate this with plugins ! */}
           <Styles.ListItem component={NavLink} to="/">
             <ListItemIcon>
               <Assignment />

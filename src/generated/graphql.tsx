@@ -22,7 +22,7 @@ export type LoginInput = {
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename: 'Mutation';
   /** Creates a Project. */
   createProject?: Maybe<CreateProjectPayload>;
   /** Creates a User. */
@@ -53,7 +53,7 @@ export type MutationOnboardUserArgs = {
 };
 
 export type NoResponse = {
-  __typename?: 'NoResponse';
+  __typename: 'NoResponse';
   NoResponse?: Maybe<Scalars['String']>;
 };
 
@@ -64,7 +64,7 @@ export type Node = {
 };
 
 export type Project = Node & {
-  __typename?: 'Project';
+  __typename: 'Project';
   creator: User;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -72,7 +72,7 @@ export type Project = Node & {
 
 /** Connection for Project. */
 export type ProjectConnection = {
-  __typename?: 'ProjectConnection';
+  __typename: 'ProjectConnection';
   edges?: Maybe<Array<Maybe<ProjectEdge>>>;
   pageInfo: ProjectPageInfo;
   totalCount: Scalars['Int'];
@@ -80,14 +80,14 @@ export type ProjectConnection = {
 
 /** Edge of Project. */
 export type ProjectEdge = {
-  __typename?: 'ProjectEdge';
+  __typename: 'ProjectEdge';
   cursor: Scalars['String'];
   node?: Maybe<Project>;
 };
 
 /** Information about the current page. */
 export type ProjectPageInfo = {
-  __typename?: 'ProjectPageInfo';
+  __typename: 'ProjectPageInfo';
   endCursor?: Maybe<Scalars['String']>;
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
@@ -95,7 +95,7 @@ export type ProjectPageInfo = {
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename: 'Query';
   currentUser?: Maybe<User>;
   node?: Maybe<Node>;
   project?: Maybe<Project>;
@@ -130,14 +130,15 @@ export type QueryRolesArgs = {
 };
 
 export type Role = Node & {
-  __typename?: 'Role';
+  __typename: 'Role';
   id: Scalars['ID'];
   name: Scalars['String'];
+  permissions: UserPermissions;
 };
 
 /** Connection for Role. */
 export type RoleConnection = {
-  __typename?: 'RoleConnection';
+  __typename: 'RoleConnection';
   edges?: Maybe<Array<Maybe<RoleEdge>>>;
   pageInfo: RolePageInfo;
   totalCount: Scalars['Int'];
@@ -145,14 +146,14 @@ export type RoleConnection = {
 
 /** Edge of Role. */
 export type RoleEdge = {
-  __typename?: 'RoleEdge';
+  __typename: 'RoleEdge';
   cursor: Scalars['String'];
   node?: Maybe<Role>;
 };
 
 /** Information about the current page. */
 export type RolePageInfo = {
-  __typename?: 'RolePageInfo';
+  __typename: 'RolePageInfo';
   endCursor?: Maybe<Scalars['String']>;
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
@@ -160,13 +161,24 @@ export type RolePageInfo = {
 };
 
 export type User = Node & {
-  __typename?: 'User';
+  __typename: 'User';
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
   lastName: Scalars['String'];
+  /** Permission matrix. Available only for the currently logged in user */
+  permissions?: Maybe<UserPermissions>;
   profilePictureUrl?: Maybe<Scalars['String']>;
   status: UserStatus;
+};
+
+/** Describes a users' permission matrix */
+export type UserPermissions = {
+  __typename: 'UserPermissions';
+  PROJECT_CREATE: Scalars['Boolean'];
+  PROJECT_VIEW_OWN: Scalars['Boolean'];
+  USER_EDIT_SELF: Scalars['Boolean'];
+  USER_VIEW_SELF: Scalars['Boolean'];
 };
 
 /** Describes a user status */
@@ -182,7 +194,7 @@ export type CreateProjectInput = {
 };
 
 export type CreateProjectPayload = {
-  __typename?: 'createProjectPayload';
+  __typename: 'createProjectPayload';
   clientMutationId?: Maybe<Scalars['String']>;
   project?: Maybe<Project>;
 };
@@ -196,7 +208,7 @@ export type CreateUserInput = {
 };
 
 export type CreateUserPayload = {
-  __typename?: 'createUserPayload';
+  __typename: 'createUserPayload';
   clientMutationId?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
 };
@@ -212,10 +224,15 @@ export type OnboardUserInput = {
 };
 
 export type OnboardUserPayload = {
-  __typename?: 'onboardUserPayload';
+  __typename: 'onboardUserPayload';
   clientMutationId?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
 };
+
+export type GetCurrentUserPermissionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserPermissionsQuery = { __typename: 'Query', currentUser?: { __typename: 'User', id: string, permissions?: { __typename: 'UserPermissions', USER_EDIT_SELF: boolean, USER_VIEW_SELF: boolean, PROJECT_VIEW_OWN: boolean, PROJECT_CREATE: boolean } | null | undefined } | null | undefined };
 
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
@@ -223,7 +240,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'NoResponse', NoResponse?: string | null | undefined } | null | undefined };
+export type LoginMutation = { __typename: 'Mutation', login?: { __typename: 'NoResponse', NoResponse?: string | null | undefined } | null | undefined };
 
 export type RegisterUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -233,9 +250,49 @@ export type RegisterUserMutationVariables = Exact<{
 }>;
 
 
-export type RegisterUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'createUserPayload', clientMutationId?: string | null | undefined } | null | undefined };
+export type RegisterUserMutation = { __typename: 'Mutation', createUser?: { __typename: 'createUserPayload', clientMutationId?: string | null | undefined } | null | undefined };
 
 
+export const GetCurrentUserPermissionsDocument = gql`
+    query getCurrentUserPermissions {
+  currentUser {
+    id
+    permissions {
+      USER_EDIT_SELF
+      USER_VIEW_SELF
+      PROJECT_VIEW_OWN
+      PROJECT_CREATE
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetCurrentUserPermissionsQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentUserPermissionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentUserPermissionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentUserPermissionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentUserPermissionsQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentUserPermissionsQuery, GetCurrentUserPermissionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCurrentUserPermissionsQuery, GetCurrentUserPermissionsQueryVariables>(GetCurrentUserPermissionsDocument, options);
+      }
+export function useGetCurrentUserPermissionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentUserPermissionsQuery, GetCurrentUserPermissionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCurrentUserPermissionsQuery, GetCurrentUserPermissionsQueryVariables>(GetCurrentUserPermissionsDocument, options);
+        }
+export type GetCurrentUserPermissionsQueryHookResult = ReturnType<typeof useGetCurrentUserPermissionsQuery>;
+export type GetCurrentUserPermissionsLazyQueryHookResult = ReturnType<typeof useGetCurrentUserPermissionsLazyQuery>;
+export type GetCurrentUserPermissionsQueryResult = Apollo.QueryResult<GetCurrentUserPermissionsQuery, GetCurrentUserPermissionsQueryVariables>;
 export const LoginDocument = gql`
     mutation login($username: String!, $password: String!) {
   login(input: {username: $username, password: $password}) @rest(type: "Login", path: "", endpoint: "login", method: "POST", bodyKey: "input") {

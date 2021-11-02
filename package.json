@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@casl/ability": "^5.4.3",
+    "@casl/react": "^2.3.0",
     "@emotion/jest": "^11.5.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
