@@ -5,7 +5,7 @@ import AuthManager from "utils/AuthManager";
 
 jest.mock("utils/AuthManager", () => ({
   isLoggedIn: jest.fn(),
-  logout: jest.fn(),
+  removeUser: jest.fn(),
 }));
 
 describe("App unit tests", () => {

@@ -9,7 +9,7 @@ type RendererProps = {
   section: string;
 };
 
-export const Renderer = ({ section }: RendererProps) => {
+const Renderer = ({ section }: RendererProps) => {
   const pluginStore: PluginStore & RendererPluginType = usePluginStore();
   const [forced, forceUpdate] = useState(0);
 
@@ -31,11 +31,9 @@ export const Renderer = ({ section }: RendererProps) => {
     section
   );
 
-  return (
-    <>
-      {components.map(({ component: Component, name }) => (
-        <Component key={name} />
-      ))}
-    </>
-  );
+  return components.map(({ component: Component, name }) => (
+    <Component key={name} />
+  ));
 };
+
+export default Renderer;

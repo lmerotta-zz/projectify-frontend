@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { Renderer } from "plugins";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import * as Styles from "./Header.styles";
@@ -32,6 +33,7 @@ const Header = () => {
           <Typography flexGrow={1} variant="h6" component="div">
             Projectify
           </Typography>
+          <Renderer section="app-header" />
         </Toolbar>
       </Styles.AppBar>
       <Styles.Drawer

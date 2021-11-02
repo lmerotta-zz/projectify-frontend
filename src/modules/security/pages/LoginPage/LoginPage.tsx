@@ -4,12 +4,11 @@ import { GitHub } from "@mui/icons-material";
 import { Button, Divider, Grid, Link, Typography } from "@mui/material";
 import { TextField } from "components";
 import { useLoginMutation } from "generated/graphql";
-import { Location } from "history";
+import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import AuthManager from "utils/AuthManager";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
@@ -43,7 +42,7 @@ const LoginPage = () => {
   const form = useForm<LoginFormType>({
     resolver: yupResolver(schema),
   });
-  const { state } = useLocation() as Location<{ referrer?: Location }>;
+  const { state } = useLocation();
 
   const referrer = state?.referrer
     ? `${state.referrer.pathname}${state.referrer.search}${state.referrer.hash}`

@@ -19,6 +19,7 @@ export const USER_PERMISSIONS_HOOK_QUERY = gql`
   }
 `;
 
+/* istanbul ignore next */
 const usePermissions = () => {
   const authenticated = useReactiveVar(isAuthenticated);
   const userPermissionsQuery = useGetCurrentUserPermissionsQuery({

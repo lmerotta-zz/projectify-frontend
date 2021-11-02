@@ -2,8 +2,8 @@ import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
 import { PrivateRoute } from "components";
 import AppContainer from "modules/core/components/AppContainer";
-import { pluginStore } from "modules/core/pluginStore";
 import { SecurityPage } from "modules/security";
+import { pluginStore } from "plugins";
 import { useEffect } from "react";
 import { PluginProvider } from "react-pluggable";
 import { Route, Routes } from "react-router-dom";
@@ -16,7 +16,7 @@ const App = () => {
         await AuthManager.isLoggedIn();
         isAuthenticated(true);
       } catch (e) {
-        await AuthManager.logout();
+        await AuthManager.removeUser();
         captureException(e);
         isAuthenticated(false);
       }

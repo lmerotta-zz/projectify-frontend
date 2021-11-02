@@ -252,6 +252,11 @@ export type RegisterUserMutationVariables = Exact<{
 
 export type RegisterUserMutation = { __typename: 'Mutation', createUser?: { __typename: 'createUserPayload', clientMutationId?: string | null | undefined } | null | undefined };
 
+export type ProfileMenuItemQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProfileMenuItemQueryQuery = { __typename: 'Query', currentUser?: { __typename: 'User', id: string, profilePictureUrl?: string | null | undefined, firstName: string } | null | undefined };
+
 
 export const GetCurrentUserPermissionsDocument = gql`
     query getCurrentUserPermissions {
@@ -365,3 +370,39 @@ export function useRegisterUserMutation(baseOptions?: Apollo.MutationHookOptions
 export type RegisterUserMutationHookResult = ReturnType<typeof useRegisterUserMutation>;
 export type RegisterUserMutationResult = Apollo.MutationResult<RegisterUserMutation>;
 export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<RegisterUserMutation, RegisterUserMutationVariables>;
+export const ProfileMenuItemQueryDocument = gql`
+    query ProfileMenuItemQuery {
+  currentUser {
+    id
+    profilePictureUrl
+    firstName
+  }
+}
+    `;
+
+/**
+ * __useProfileMenuItemQueryQuery__
+ *
+ * To run a query within a React component, call `useProfileMenuItemQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProfileMenuItemQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProfileMenuItemQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useProfileMenuItemQueryQuery(baseOptions?: Apollo.QueryHookOptions<ProfileMenuItemQueryQuery, ProfileMenuItemQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProfileMenuItemQueryQuery, ProfileMenuItemQueryQueryVariables>(ProfileMenuItemQueryDocument, options);
+      }
+export function useProfileMenuItemQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProfileMenuItemQueryQuery, ProfileMenuItemQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProfileMenuItemQueryQuery, ProfileMenuItemQueryQueryVariables>(ProfileMenuItemQueryDocument, options);
+        }
+export type ProfileMenuItemQueryQueryHookResult = ReturnType<typeof useProfileMenuItemQueryQuery>;
+export type ProfileMenuItemQueryLazyQueryHookResult = ReturnType<typeof useProfileMenuItemQueryLazyQuery>;
+export type ProfileMenuItemQueryQueryResult = Apollo.QueryResult<ProfileMenuItemQueryQuery, ProfileMenuItemQueryQueryVariables>;

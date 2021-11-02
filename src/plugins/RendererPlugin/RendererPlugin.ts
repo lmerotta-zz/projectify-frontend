@@ -9,13 +9,13 @@ type ComponentItemType = {
 
 type ComponentMapType = Map<string, ComponentItemType[]>;
 
-class RendererPlugin implements IPlugin {
+export class RendererPlugin implements IPlugin {
   pluginStore!: PluginStore;
   namespace = "ProjectifyRenderer";
   componentMap: ComponentMapType = new Map();
 
   getPluginName() {
-    return `${this.namespace}@alpha-0`;
+    return `${this.namespace}@0.0.1`;
   }
 
   getDependencies() {
@@ -32,11 +32,24 @@ class RendererPlugin implements IPlugin {
     component: () => JSX.Element,
     priority: number = 0
   ) {
-    const componentSection = this.componentMap.get(section) || [];
+    const componentSection = (this.componentMap.get(section) || []).filter(
+      (component) => component.name !== name
+    );
     componentSection.push({ name, component, priority });
+
     componentSection.sort((a, b) => a.priority - b.priority);
 
     this.componentMap.set(section, componentSection);
+    this.pluginStore.dispatchEvent(new ComponentMapUpdatedEvent(section));
+  }
+
+  removeComponent(section: string, name: string) {
+    this.componentMap.set(
+      section,
+      (this.componentMap.get(section) || []).filter(
+        (component) => component.name !== name
+      )
+    );
     this.pluginStore.dispatchEvent(new ComponentMapUpdatedEvent(section));
   }
 
@@ -53,11 +66,16 @@ class RendererPlugin implements IPlugin {
       `${this.namespace}.get`,
       this.getComponentsForSection.bind(this)
     );
+    this.pluginStore.addFunction(
+      `${this.namespace}.remove`,
+      this.removeComponent.bind(this)
+    );
   }
 
   deactivate() {
     this.pluginStore.removeFunction(`${this.namespace}.add`);
     this.pluginStore.removeFunction(`${this.namespace}.get`);
+    this.pluginStore.removeFunction(`${this.namespace}.remove`);
   }
 }
 
@@ -81,6 +99,10 @@ export type RendererPluginType = {
     functionName: "ProjectifyRenderer.get",
     section: string
   ): ComponentItemType[];
-};
 
-export default RendererPlugin;
+  executeFunction(
+    functionName: "ProjectifyRenderer.remove",
+    section: string,
+    name: string
+  ): void;
+};
