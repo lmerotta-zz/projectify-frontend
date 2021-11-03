@@ -4,7 +4,6 @@ import { renderWithProviders } from "test-utils";
 import Can from "./Can";
 
 jest.mock("hooks", () => ({
-  ...jest.requireActual("hooks"),
   usePermissions: jest.fn(),
 }));
 

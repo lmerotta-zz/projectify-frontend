@@ -2,7 +2,6 @@ import {
   AppBar as MUIAppBar,
   Drawer as MUIDrawer,
   IconButton,
-  ListItem as MUIListItem,
   styled,
 } from "@mui/material";
 
@@ -23,13 +22,13 @@ export const Drawer = styled(MUIDrawer)(({ theme, open }) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing(7),
+    width: theme.spacing(9),
     "& .MuiDrawer-paper": {
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
+      width: theme.spacing(9),
       overflow: "hidden",
       ...(open && { width: "240px" }),
     },
@@ -47,9 +46,3 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 export const ToggleDrawerButton = styled(IconButton)(({ theme }) => ({
   marginRight: theme.spacing(3),
 }));
-
-export const ListItem = styled(MUIListItem)(({ theme }) => ({
-  "&.active": {
-    backgroundColor: theme.palette.action.selected,
-  },
-})) as any as typeof MUIListItem;

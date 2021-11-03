@@ -31,7 +31,7 @@ describe('ProfileMenuItem unit tests', () => {
         const profileButton = await findByText("Test");
 
         userEvent.click(profileButton);
-        userEvent.click(getByText("Logout"));
+        userEvent.click(getByText("user-management.plugins.profile_menu_item.btn_logout"));
 
         expect(AuthManager.logout).toHaveBeenCalled();
     })

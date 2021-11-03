@@ -1,15 +1,16 @@
-import { Box, Typography } from "@mui/material";
-import { Route, Routes } from "react-router";
+import { Box } from "@mui/material";
+import { ReactNode } from "react";
 import Header from "./Header";
 
-const AppContainer = () => (
+type AppContainerProps = {
+  children: ReactNode;
+};
+
+const AppContainer = ({ children }: AppContainerProps) => (
   <Box display="flex" minHeight="100vh">
     <Header />
     <Box component="main" flexGrow={1} mt={7} p={3}>
-      <Routes>
-        <Route path="/" element={<Typography>Hello</Typography>} />
-        <Route path="*" element={<Typography>Notfound</Typography>} />
-      </Routes>
+      {children}
     </Box>
   </Box>
 );

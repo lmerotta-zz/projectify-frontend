@@ -1,6 +1,7 @@
 import { gql, useReactiveVar } from "@apollo/client";
 import { isAuthenticated } from "apollo/local-state";
 import { useGetCurrentUserPermissionsQuery } from "generated/graphql";
+import { computeProjectAbility } from "modules/project-management";
 import { computeUserAbility } from "modules/user-management";
 import { useMemo } from "react";
 import { AppAbility } from "types";
@@ -31,14 +32,23 @@ const usePermissions = () => {
   );
 
   const computedAbility = useMemo(() => {
-    const pendingAbility = new AppAbility();
+    const pendingAbility = new AppAbility(undefined, {
+      detectSubjectType: (object) => object.__typename,
+    });
     if (!userPermissionsQuery.loading) {
       const userAbilities = computeUserAbility(
         userPermissionsQuery.data!.currentUser!.permissions!,
         userPermissionsQuery.data!.currentUser!.id
       );
+      const projectAbilities = computeProjectAbility(
+        userPermissionsQuery.data!.currentUser!.permissions!,
+        userPermissionsQuery.data!.currentUser!.id
+      );
 
-      pendingAbility.update(userAbilities.rules);
+      pendingAbility.update([
+        ...userAbilities.rules,
+        ...projectAbilities.rules,
+      ]);
     }
 
     return pendingAbility;

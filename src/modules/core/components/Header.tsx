@@ -1,10 +1,8 @@
-import { Assignment, ChevronLeft, Menu } from "@mui/icons-material";
+import { ChevronLeft, Menu } from "@mui/icons-material";
 import {
   Divider,
   IconButton,
   List,
-  ListItemIcon,
-  ListItemText,
   Toolbar,
   Typography,
   useMediaQuery,
@@ -12,7 +10,6 @@ import {
 } from "@mui/material";
 import { Renderer } from "plugins";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import * as Styles from "./Header.styles";
 
 const Header = () => {
@@ -48,13 +45,7 @@ const Header = () => {
         </Styles.DrawerHeader>
         <Divider />
         <List>
-          {/* TODO: generate this with plugins ! */}
-          <Styles.ListItem component={NavLink} to="/">
-            <ListItemIcon>
-              <Assignment />
-            </ListItemIcon>
-            <ListItemText primary="Projects" />
-          </Styles.ListItem>
+          <Renderer section="app-sidebar" />
         </List>
       </Styles.Drawer>
     </>
