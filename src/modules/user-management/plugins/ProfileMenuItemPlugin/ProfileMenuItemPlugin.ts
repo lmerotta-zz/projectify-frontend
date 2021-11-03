@@ -28,6 +28,7 @@ class ProfileMenuItemPlugin implements IPlugin {
     );
   }
 
+  /* istanbul ignore next */
   deactivate() {
     this.pluginStore.executeFunction(
       "ProjectifyRenderer.remove",

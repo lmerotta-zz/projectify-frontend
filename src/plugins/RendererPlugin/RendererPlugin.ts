@@ -72,6 +72,7 @@ export class RendererPlugin implements IPlugin {
     );
   }
 
+  /* istanbul ignore next */
   deactivate() {
     this.pluginStore.removeFunction(`${this.namespace}.add`);
     this.pluginStore.removeFunction(`${this.namespace}.get`);

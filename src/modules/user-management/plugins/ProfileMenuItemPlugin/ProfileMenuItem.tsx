@@ -18,6 +18,9 @@ export const PROFILE_MENU_ITEM_QUERY = gql`
 const ProfileMenuItem = () => {
   const userQuery = useProfileMenuItemQueryQuery();
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
+  const onClose = () => {
+    setMenuAnchor(null);
+  };
 
   return userQuery.loading ? null : (
     <div>
@@ -42,9 +45,14 @@ const ProfileMenuItem = () => {
         anchorEl={menuAnchor}
         keepMounted
         open={Boolean(menuAnchor)}
-        onClose={() => setMenuAnchor(null)}
+        onClose={onClose}
       >
-        <MenuItem onClick={async () => await AuthManager.logout()}>
+        <MenuItem
+          onClick={async () => {
+            onClose();
+            await AuthManager.logout();
+          }}
+        >
           Logout
         </MenuItem>
       </Menu>

@@ -31,9 +31,13 @@ const Renderer = ({ section }: RendererProps) => {
     section
   );
 
-  return components.map(({ component: Component, name }) => (
-    <Component key={name} />
-  ));
+  return (
+    <>
+      {components.map(({ component: Component, name }) => (
+        <Component key={name} />
+      ))}
+    </>
+  );
 };
 
 export default Renderer;
