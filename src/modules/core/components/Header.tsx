@@ -22,11 +22,13 @@ const Header = () => {
 
   return (
     <>
-      <Styles.AppBar position="fixed">
+      <Styles.AppBar position="fixed" open={drawerOpen}>
         <Toolbar>
-          <Styles.ToggleDrawerButton color="inherit" onClick={toggleDrawer}>
-            {drawerOpen ? <ChevronLeft /> : <Menu />}
-          </Styles.ToggleDrawerButton>
+          {!drawerOpen && (
+            <Styles.ToggleDrawerButton color="inherit" onClick={toggleDrawer}>
+              <Menu />
+            </Styles.ToggleDrawerButton>
+          )}
           <Typography flexGrow={1} variant="h6" component="div">
             Projectify
           </Typography>

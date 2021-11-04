@@ -3,6 +3,7 @@ import { isAuthenticated } from "apollo/local-state";
 import { PrivateRoute } from "components";
 import AppContainer from "modules/core/components/AppContainer";
 import "modules/project-management";
+import { ProjectManagementPage } from "modules/project-management";
 import { SecurityPage } from "modules/security";
 import { pluginStore } from "plugins";
 import { useEffect } from "react";
@@ -29,7 +30,20 @@ const App = () => {
       <Routes>
         <Route
           path="/*"
-          element={<PrivateRoute element={<AppContainer>Test</AppContainer>} />}
+          element={
+            <PrivateRoute
+              element={
+                <AppContainer>
+                  <Routes>
+                    <Route
+                      path="/projects/*"
+                      element={<ProjectManagementPage />}
+                    />
+                  </Routes>
+                </AppContainer>
+              }
+            />
+          }
         />
         <Route path="/security/*" element={<SecurityPage />} />
       </Routes>
