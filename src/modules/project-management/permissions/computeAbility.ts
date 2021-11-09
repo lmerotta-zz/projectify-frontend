@@ -5,10 +5,11 @@ import {
   InferSubjects,
 } from "@casl/ability";
 import { Project, User, UserPermissions } from "generated/graphql";
+import { PartialDeep } from "type-fest";
 
 export type ProjectManagementAbilitiesType = [
-  "view-own",
-  InferSubjects<Partial<Project> & { __typename: Project["__typename"] }>
+  "view" | "create",
+  InferSubjects<PartialDeep<Project> & { __typename: Project["__typename"] }>
 ];
 
 type ProjectManagementAbilityObjectType =
@@ -21,13 +22,17 @@ type FlatProject = Project & {
 };
 
 export const computeProjectAbility = (
-  permissions: Pick<UserPermissions, "PROJECT_VIEW_OWN">,
+  permissions: Pick<UserPermissions, "PROJECT_VIEW_OWN" | "PROJECT_CREATE">,
   userId: User["id"]
 ) => {
   const ability = new AbilityBuilder(ProjectManagementAbilityObject);
 
   if (permissions.PROJECT_VIEW_OWN) {
-    ability.can<FlatProject>("view-own", "Project", { "creator.id": userId });
+    ability.can<FlatProject>("view", "Project", { "creator.id": userId });
+  }
+
+  if (permissions.PROJECT_CREATE) {
+    ability.can("create", "Project");
   }
 
   return ability.build({ detectSubjectType: (object) => object.__typename });

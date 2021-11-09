@@ -65,10 +65,12 @@ export type Node = {
 
 export type Project = Node & {
   __typename: 'Project';
+  createdAt: Scalars['String'];
   creator: User;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
 };
 
 /** Connection for Project. */
@@ -244,9 +246,9 @@ export type ListProjectsQueryVariables = Exact<{
 }>;
 
 
-export type ListProjectsQuery = { __typename: 'Query', projects?: { __typename: 'ProjectConnection', totalCount: number, pageInfo: { __typename: 'ProjectPageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null | undefined, startCursor?: string | null | undefined }, edges?: Array<{ __typename: 'ProjectEdge', cursor: string, node?: { __typename: 'Project', id: string, name: string, description?: string | null | undefined, creator: { __typename: 'User', id: string, firstName: string, lastName: string, profilePictureUrl?: string | null | undefined } } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type ListProjectsQuery = { __typename: 'Query', projects?: { __typename: 'ProjectConnection', totalCount: number, pageInfo: { __typename: 'ProjectPageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null | undefined, startCursor?: string | null | undefined }, edges?: Array<{ __typename: 'ProjectEdge', cursor: string, node?: { __typename: 'Project', id: string, name: string, description?: string | null | undefined, createdAt: string, creator: { __typename: 'User', id: string, firstName: string, lastName: string, profilePictureUrl?: string | null | undefined } } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
-export type ProjectFragmentFragment = { __typename: 'Project', id: string, name: string, description?: string | null | undefined, creator: { __typename: 'User', id: string, firstName: string, lastName: string, profilePictureUrl?: string | null | undefined } };
+export type ProjectFragmentFragment = { __typename: 'Project', id: string, name: string, description?: string | null | undefined, createdAt: string, creator: { __typename: 'User', id: string, firstName: string, lastName: string, profilePictureUrl?: string | null | undefined } };
 
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
@@ -276,6 +278,7 @@ export const ProjectFragmentFragmentDoc = gql`
   id
   name
   description
+  createdAt
   creator {
     id
     firstName

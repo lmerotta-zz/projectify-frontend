@@ -7,7 +7,7 @@ import {
 import { User, UserPermissions } from "generated/graphql";
 
 export type UserManagementAbilitiesType = [
-  "view-self" | "edit-self",
+  "view" | "edit",
   InferSubjects<Partial<User> & { __typename: User["__typename"] }>
 ];
 
@@ -22,11 +22,11 @@ export const computeUserAbility = (
   const ability = new AbilityBuilder(UserManagementAbilityObject);
 
   if (permissions.USER_VIEW_SELF) {
-    ability.can("view-self", "User", { id: userId });
+    ability.can("view", "User", { id: userId });
   }
 
   if (permissions.USER_EDIT_SELF) {
-    ability.can("edit-self", "User", { id: userId });
+    ability.can("edit", "User", { id: userId });
   }
 
   return ability.build({ detectSubjectType: (object) => object.__typename });

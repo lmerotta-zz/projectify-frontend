@@ -11,7 +11,7 @@ const ProjectManagementPage = () => (
     <Route
       path="/"
       element={
-        <Can I="view-own" a="Project">
+        <Can I="view" a="Project">
           <ListProjectsPage />
         </Can>
       }

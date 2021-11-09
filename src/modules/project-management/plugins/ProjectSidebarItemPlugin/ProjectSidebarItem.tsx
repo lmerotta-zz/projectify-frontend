@@ -7,7 +7,7 @@ const ProjectSidebarItem = () => {
   const { t } = useTranslation();
 
   return (
-    <Can I="view-own" a="Project">
+    <Can I="view" a="Project">
       <HeaderListItem
         icon={<Assignment />}
         to="/projects"

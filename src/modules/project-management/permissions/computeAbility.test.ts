@@ -4,21 +4,21 @@ describe("Project management permissions", () => {
   const provider = [
     [
       "same Project",
-      "view-own",
+      "view",
       { PROJECT_VIEW_OWN: true },
       { creator: { id: "1234" } },
       true,
     ],
     [
       "same Project without permission",
-      "view-own",
+      "view",
       { PROJECT_VIEW_OWN: false },
       { creator: { id: "1234" } },
       false,
     ],
     [
       "different Project with permission",
-      "view-own",
+      "view",
       { PROJECT_VIEW_OWN: true },
       { creator: { id: "457" } },
       false,

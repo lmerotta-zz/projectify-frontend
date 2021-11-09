@@ -11,13 +11,13 @@ describe("Can unit tests", () => {
   it("renders the children if permission is granted", () => {
     usePermissions.mockImplementation(() => {
       const builder = new AbilityBuilder(Ability);
-      builder.can("view-self", "User");
+      builder.can("view", "User");
 
       return builder.build();
     });
 
     const { getByTestId } = renderWithProviders(
-      <Can I="view-self" a="User">
+      <Can I="view" a="User">
         <h1 data-testid="testing">Testing</h1>
       </Can>
     );
@@ -28,13 +28,13 @@ describe("Can unit tests", () => {
   it("does not the children if permission is not granted", () => {
     usePermissions.mockImplementation(() => {
       const builder = new AbilityBuilder(Ability);
-      builder.cannot("view-self", "User");
+      builder.cannot("view", "User");
 
       return builder.build();
     });
 
     const { getByTestId } = renderWithProviders(
-      <Can I="view-self" a="User">
+      <Can I="view" a="User">
         <h1 data-testid="testing">Testing</h1>
       </Can>
     );
@@ -45,28 +45,28 @@ describe("Can unit tests", () => {
   it("Accept a render prop", () => {
     usePermissions.mockImplementation(() => {
       const builder = new AbilityBuilder(Ability);
-      builder.cannot("view-self", "User");
-      builder.can("edit-self", "User");
+      builder.cannot("view", "User");
+      builder.can("edit", "User");
 
       return builder.build();
     });
 
     const { getByTestId } = renderWithProviders(
       <>
-        <Can I="view-self" a="User" passThrough>
+        <Can I="view" a="User" passThrough>
           {(allowed) => (
-            <h1 data-testid="view-self">{JSON.stringify(allowed)}</h1>
+            <h1 data-testid="view">{JSON.stringify(allowed)}</h1>
           )}
         </Can>
-        <Can I="edit-self" a="User">
+        <Can I="edit" a="User">
           {(allowed) => (
-            <h1 data-testid="edit-self">{JSON.stringify(allowed)}</h1>
+            <h1 data-testid="edit">{JSON.stringify(allowed)}</h1>
           )}
         </Can>
       </>
     );
 
-    expect(getByTestId("view-self")).toHaveTextContent("false");
-    expect(getByTestId("edit-self")).toHaveTextContent("true");
+    expect(getByTestId("view")).toHaveTextContent("false");
+    expect(getByTestId("edit")).toHaveTextContent("true");
   });
 });

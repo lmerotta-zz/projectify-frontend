@@ -11,7 +11,9 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { Can } from "components";
 import { ProjectFragmentFragment } from "generated/graphql";
+import { DateTime } from "luxon";
 import { useState } from "react";
 
 type ProjectProps = {
@@ -20,24 +22,6 @@ type ProjectProps = {
 
 const Project = ({ project }: ProjectProps) => {
   const [open, setOpen] = useState(false);
-  const desc = `This is a long description this is a long description this is a
-  long description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this This is a long
-  description this is a long description this is a long
-  description this is a long description this`;
 
   return (
     <>
@@ -48,9 +32,15 @@ const Project = ({ project }: ProjectProps) => {
           </IconButton>
         </TableCell>
         <TableCell>{project.name}</TableCell>
-        <TableCell>TODO</TableCell>
+        <TableCell>
+          {DateTime.fromISO(project.createdAt).toLocaleString(
+            DateTime.DATE_SHORT
+          )}
+        </TableCell>
         <TableCell align="right">
-          <Button>TODO</Button>
+          <Can I="view" this={project}>
+            <Button>TODO</Button>
+          </Can>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -92,6 +82,7 @@ Project.fragments = {
       id
       name
       description
+      createdAt
       creator {
         id
         firstName

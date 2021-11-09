@@ -15,6 +15,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { Can } from "components";
 import {
   ListProjectsQueryVariables,
   useListProjectsQuery,
@@ -170,9 +171,11 @@ const ListProjectsPage = () => {
         </Typography>
       )}
 
-      <CreateButton color="secondary">
-        <Add />
-      </CreateButton>
+      <Can I="create" a="Project">
+        <CreateButton color="secondary">
+          <Add />
+        </CreateButton>
+      </Can>
     </Container>
   );
 };
