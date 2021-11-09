@@ -66,6 +66,7 @@ export type Node = {
 export type Project = Node & {
   __typename: 'Project';
   creator: User;
+  description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
 };
@@ -190,6 +191,7 @@ export enum UserStatus {
 
 export type CreateProjectInput = {
   clientMutationId?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
@@ -234,6 +236,18 @@ export type GetCurrentUserPermissionsQueryVariables = Exact<{ [key: string]: nev
 
 export type GetCurrentUserPermissionsQuery = { __typename: 'Query', currentUser?: { __typename: 'User', id: string, permissions?: { __typename: 'UserPermissions', USER_EDIT_SELF: boolean, USER_VIEW_SELF: boolean, PROJECT_VIEW_OWN: boolean, PROJECT_CREATE: boolean } | null | undefined } | null | undefined };
 
+export type ListProjectsQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListProjectsQuery = { __typename: 'Query', projects?: { __typename: 'ProjectConnection', totalCount: number, pageInfo: { __typename: 'ProjectPageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null | undefined, startCursor?: string | null | undefined }, edges?: Array<{ __typename: 'ProjectEdge', cursor: string, node?: { __typename: 'Project', id: string, name: string, description?: string | null | undefined, creator: { __typename: 'User', id: string, firstName: string, lastName: string, profilePictureUrl?: string | null | undefined } } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type ProjectFragmentFragment = { __typename: 'Project', id: string, name: string, description?: string | null | undefined, creator: { __typename: 'User', id: string, firstName: string, lastName: string, profilePictureUrl?: string | null | undefined } };
+
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -257,7 +271,19 @@ export type ProfileMenuItemQueryQueryVariables = Exact<{ [key: string]: never; }
 
 export type ProfileMenuItemQueryQuery = { __typename: 'Query', currentUser?: { __typename: 'User', id: string, profilePictureUrl?: string | null | undefined, firstName: string } | null | undefined };
 
-
+export const ProjectFragmentFragmentDoc = gql`
+    fragment ProjectFragment on Project {
+  id
+  name
+  description
+  creator {
+    id
+    firstName
+    lastName
+    profilePictureUrl
+  }
+}
+    `;
 export const GetCurrentUserPermissionsDocument = gql`
     query getCurrentUserPermissions {
   currentUser {
@@ -298,6 +324,57 @@ export function useGetCurrentUserPermissionsLazyQuery(baseOptions?: Apollo.LazyQ
 export type GetCurrentUserPermissionsQueryHookResult = ReturnType<typeof useGetCurrentUserPermissionsQuery>;
 export type GetCurrentUserPermissionsLazyQueryHookResult = ReturnType<typeof useGetCurrentUserPermissionsLazyQuery>;
 export type GetCurrentUserPermissionsQueryResult = Apollo.QueryResult<GetCurrentUserPermissionsQuery, GetCurrentUserPermissionsQueryVariables>;
+export const ListProjectsDocument = gql`
+    query ListProjects($first: Int, $last: Int, $before: String, $after: String) {
+  projects(first: $first, last: $last, before: $before, after: $after) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+      startCursor
+    }
+    edges {
+      cursor
+      node {
+        id
+        ...ProjectFragment
+      }
+    }
+  }
+}
+    ${ProjectFragmentFragmentDoc}`;
+
+/**
+ * __useListProjectsQuery__
+ *
+ * To run a query within a React component, call `useListProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListProjectsQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      last: // value for 'last'
+ *      before: // value for 'before'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useListProjectsQuery(baseOptions?: Apollo.QueryHookOptions<ListProjectsQuery, ListProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListProjectsQuery, ListProjectsQueryVariables>(ListProjectsDocument, options);
+      }
+export function useListProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListProjectsQuery, ListProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListProjectsQuery, ListProjectsQueryVariables>(ListProjectsDocument, options);
+        }
+export type ListProjectsQueryHookResult = ReturnType<typeof useListProjectsQuery>;
+export type ListProjectsLazyQueryHookResult = ReturnType<typeof useListProjectsLazyQuery>;
+export type ListProjectsQueryResult = Apollo.QueryResult<ListProjectsQuery, ListProjectsQueryVariables>;
 export const LoginDocument = gql`
     mutation login($username: String!, $password: String!) {
   login(input: {username: $username, password: $password}) @rest(type: "Login", path: "", endpoint: "login", method: "POST", bodyKey: "input") {

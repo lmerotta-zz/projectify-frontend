@@ -1,8 +1,9 @@
-import { ApolloClient, InMemoryCache, from } from "@apollo/client";
-import { RestLink } from "apollo-link-rest";
+import { ApolloClient, from, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import i18next from "i18next";
+import { relayStylePagination } from "@apollo/client/utilities";
+import { RestLink } from "apollo-link-rest";
 import { createUploadLink } from "apollo-upload-client";
+import i18next from "i18next";
 import AuthManager from "utils/AuthManager";
 import { isAuthenticated } from "./local-state";
 
@@ -56,7 +57,15 @@ const httpLink = createUploadLink({
 });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          projects: relayStylePagination(),
+        },
+      },
+    },
+  }),
   link: from([restLink, authLink.concat(httpLink)]),
 });
 

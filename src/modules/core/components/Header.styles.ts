@@ -4,21 +4,42 @@ import {
   Drawer as MUIDrawer,
   IconButton,
   styled,
+  Toolbar as MUIToolbar,
+  Typography,
 } from "@mui/material";
 
 type AppBarProps = MUIAppBarProps & { open: boolean };
 
 export const AppBar = styled(MUIAppBar)<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  ...(open && {
-    marginLeft: "240px",
-    width: "calc(100% - 240px)",
-  }),
+  [theme.breakpoints.up("sm")]: {
+    zIndex: theme.zIndex.drawer + 1,
+    ...(open && {
+      marginLeft: "240px",
+      width: "calc(100% - 240px)",
+    }),
+  },
 }));
+
+export const Toolbar = styled(MUIToolbar)(({ theme }) => ({
+  // Override media queries injected by theme.mixins.toolbar
+  '@media all': {
+    minHeight: 128,
+    paddingTop: theme.spacing(1),
+    alignItems: "flex-start",
+    paddingBottom: theme.spacing(2),
+  },
+}));
+
+export const Title = styled(Typography)(({ theme }) => ({
+  flexGrow: 1,
+  '@media all': {
+    alignSelf: "flex-end",
+  },
+})) as typeof Typography;
 
 export const Drawer = styled(MUIDrawer)(({ theme, open }) => ({
   ...(open && {
@@ -55,6 +76,9 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
+  [theme.breakpoints.up("sm")]: {
+    minHeight: 128,
+  },
 }));
 
 export const ToggleDrawerButton = styled(IconButton)(({ theme }) => ({

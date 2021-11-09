@@ -3,8 +3,6 @@ import {
   Divider,
   IconButton,
   List,
-  Toolbar,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -23,17 +21,17 @@ const Header = () => {
   return (
     <>
       <Styles.AppBar position="fixed" open={drawerOpen}>
-        <Toolbar>
+        <Styles.Toolbar>
           {!drawerOpen && (
             <Styles.ToggleDrawerButton color="inherit" onClick={toggleDrawer}>
               <Menu />
             </Styles.ToggleDrawerButton>
           )}
-          <Typography flexGrow={1} variant="h6" component="div">
+          <Styles.Title variant="h6" component="div">
             Projectify
-          </Typography>
+          </Styles.Title>
           <Renderer section="app-header" />
-        </Toolbar>
+        </Styles.Toolbar>
       </Styles.AppBar>
       <Styles.Drawer
         variant={isDrawerPermanent ? "permanent" : "temporary"}

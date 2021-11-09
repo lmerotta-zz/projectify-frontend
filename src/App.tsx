@@ -8,7 +8,7 @@ import { SecurityPage } from "modules/security";
 import { pluginStore } from "plugins";
 import { useEffect } from "react";
 import { PluginProvider } from "react-pluggable";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AuthManager from "utils/AuthManager";
 
 const App = () => {
@@ -38,6 +38,10 @@ const App = () => {
                     <Route
                       path="/projects/*"
                       element={<ProjectManagementPage />}
+                    />
+                    <Route
+                      path="*"
+                      element={<Navigate to="/projects" replace />}
                     />
                   </Routes>
                 </AppContainer>
