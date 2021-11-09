@@ -1,7 +1,7 @@
 import { renderWithProviders } from "test-utils";
 import ProjectSidebarItem from "./ProjectSidebarItem";
 
-jest.mock("components", () => ({
+jest.mock("modules/core", () => ({
   Can: ({ children }: any) => children,
 }));
 
@@ -11,7 +11,9 @@ describe("ProjectSidebarItem unit tests", () => {
       <ProjectSidebarItem />
     );
 
-    expect(getByText("project-management.plugins.project_sidebar_item.btn_projects")).toBeVisible();
+    expect(
+      getByText("project-management.plugins.project_sidebar_item.btn_projects")
+    ).toBeVisible();
     expect(asFragment()).toMatchSnapshot();
   });
 });

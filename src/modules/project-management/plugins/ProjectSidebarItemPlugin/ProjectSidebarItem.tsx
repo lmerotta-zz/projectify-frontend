@@ -1,6 +1,5 @@
 import { Assignment } from "@mui/icons-material";
-import { Can } from "components";
-import { HeaderListItem } from "modules/core";
+import { Can, HeaderListItem } from "modules/core";
 import { useTranslation } from "react-i18next";
 
 const ProjectSidebarItem = () => {

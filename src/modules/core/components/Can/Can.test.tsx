@@ -1,9 +1,9 @@
 import { Ability, AbilityBuilder } from "@casl/ability";
-import { usePermissions } from "hooks";
+import { usePermissions } from "modules/core";
 import { renderWithProviders } from "test-utils";
 import Can from "./Can";
 
-jest.mock("hooks", () => ({
+jest.mock("modules/core", () => ({
   usePermissions: jest.fn(),
 }));
 

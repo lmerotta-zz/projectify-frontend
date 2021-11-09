@@ -70,7 +70,7 @@ export type Project = Node & {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['String'];
 };
 
 /** Connection for Project. */

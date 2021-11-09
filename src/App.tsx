@@ -1,7 +1,6 @@
 import { captureException } from "@sentry/minimal";
 import { isAuthenticated } from "apollo/local-state";
-import { PrivateRoute } from "components";
-import AppContainer from "modules/core/components/AppContainer";
+import { AppContainer, PrivateRoute } from "modules/core";
 import "modules/project-management";
 import { ProjectManagementPage } from "modules/project-management";
 import { SecurityPage } from "modules/security";

@@ -1,14 +1,14 @@
 import { gql } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Grid, Link, Typography } from "@mui/material";
-import { TextField } from "components";
 import { useRegisterUserMutation } from "generated/graphql";
 import i18next from "i18next";
+import { TextField } from "modules/core";
+import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
 

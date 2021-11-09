@@ -1,4 +1,4 @@
-import { Can } from "components";
+import { Can } from "modules/core";
 import { lazy } from "react";
 import { Route, Routes } from "react-router";
 

@@ -11,9 +11,9 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { Can } from "components";
 import { ProjectFragmentFragment } from "generated/graphql";
 import { DateTime } from "luxon";
+import { Can } from "modules/core";
 import { useState } from "react";
 
 type ProjectProps = {

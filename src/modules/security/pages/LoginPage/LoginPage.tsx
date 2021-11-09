@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { GitHub } from "@mui/icons-material";
 import { Button, Divider, Grid, Link, Typography } from "@mui/material";
-import { TextField } from "components";
+import { TextField } from "modules/core";
 import { useLoginMutation } from "generated/graphql";
 import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import { FormProvider, useForm } from "react-hook-form";

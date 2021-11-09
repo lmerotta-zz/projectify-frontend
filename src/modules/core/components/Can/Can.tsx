@@ -1,5 +1,5 @@
 import { BoundCanProps as CaslCanProps, Can as CaslCan } from "@casl/react";
-import { usePermissions } from "hooks";
+import { usePermissions } from "modules/core";
 import { ReactNode } from "react";
 import { AppAbilityType } from "types";
 

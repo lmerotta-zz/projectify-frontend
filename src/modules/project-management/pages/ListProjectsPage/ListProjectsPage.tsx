@@ -15,12 +15,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Can } from "components";
-import {
-  ListProjectsQueryVariables,
-  useListProjectsQuery,
-} from "generated/graphql";
-import { ChangeEvent, useCallback, useState } from "react";
+import { useListProjectsQuery } from "generated/graphql";
+import { Can, usePagination } from "modules/core";
 import Project from "./components/Project";
 
 const CreateButton = styled(Fab)(({ theme }) => ({
@@ -57,51 +53,14 @@ export const LIST_PROJECTS_PAGE_QUERY = gql`
 `;
 
 const ListProjectsPage = () => {
-  const projectsQuery = useListProjectsQuery({
+  const { refetch, ...projectsQuery } = useListProjectsQuery({
     variables: { first: 10 },
   });
-  const [currentPerPage, setCurrentPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(0);
 
-  const refetchPagination = useCallback(
-    (page: number, perPage: number) => {
-      const variables: ListProjectsQueryVariables = {
-        first: null,
-        last: null,
-        before: null,
-        after: null,
-      };
-      if (page === 0) {
-        variables.first = perPage;
-      } else if (page < currentPage) {
-        variables.last = perPage;
-        variables.before = projectsQuery.data?.projects?.pageInfo.startCursor;
-      } else if (page > currentPage) {
-        variables.first = perPage;
-        variables.after = projectsQuery.data?.projects?.pageInfo.endCursor;
-      }
-
-      projectsQuery.refetch(variables);
-    },
-    [currentPage, projectsQuery]
-  );
-
-  const onPageChange = useCallback(
-    (_, page: number) => {
-      refetchPagination(page, currentPerPage);
-      setCurrentPage(page);
-    },
-    [currentPerPage, refetchPagination]
-  );
-
-  const onPerPageChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      const perPage = parseInt(event.target.value, 10) || 10;
-      refetchPagination(0, perPage);
-      setCurrentPage(0);
-      setCurrentPerPage(perPage);
-    },
-    [refetchPagination]
+  const paginationParams = usePagination(
+    refetch,
+    projectsQuery.data?.projects?.pageInfo?.startCursor,
+    projectsQuery.data?.projects?.pageInfo?.endCursor
   );
 
   if (projectsQuery.loading) {
@@ -148,12 +107,9 @@ const ListProjectsPage = () => {
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPage={currentPerPage}
+                  {...paginationParams}
                   colSpan={4}
                   count={projectsQuery.data?.projects?.totalCount || 0}
-                  page={currentPage}
-                  onPageChange={onPageChange}
-                  onRowsPerPageChange={onPerPageChange}
                 />
               </TableRow>
             </TableFooter>
