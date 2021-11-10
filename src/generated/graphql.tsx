@@ -340,7 +340,6 @@ export const ListProjectsDocument = gql`
     edges {
       cursor
       node {
-        id
         ...ProjectFragment
       }
     }

@@ -20,7 +20,7 @@ const ProfileMenuItem = () => {
   const userQuery = useProfileMenuItemQueryQuery();
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
   const { t } = useTranslation();
-  
+
   const onClose = () => {
     setMenuAnchor(null);
   };
@@ -39,7 +39,6 @@ const ProfileMenuItem = () => {
           />
         }
         color="inherit"
-        sx={{ textTransform: "none" }}
       >
         {userQuery.data?.currentUser?.firstName}
       </Button>
@@ -56,7 +55,7 @@ const ProfileMenuItem = () => {
             await AuthManager.logout();
           }}
         >
-          {t('user-management.plugins.profile_menu_item.btn_logout')}
+          {t("user-management.plugins.profile_menu_item.btn_logout")}
         </MenuItem>
       </Menu>
     </div>

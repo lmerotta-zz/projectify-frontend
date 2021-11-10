@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { GitHub } from "@mui/icons-material";
 import { Button, Divider, Grid, Link, Typography } from "@mui/material";
-import { TextField } from "modules/core";
 import { useLoginMutation } from "generated/graphql";
+import { TextField } from "modules/core";
 import { RightPane, RightPaneFormWrapper } from "modules/security/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -69,14 +69,14 @@ const LoginPage = () => {
 
   return (
     <RightPane>
-      <Typography variant="h4" component="h1" sx={{ fontWeight: "medium" }}>
+      <Typography variant="h4" component="h1" fontWeight="medium">
         {t("security.login_page.page_title")}
       </Typography>
       <Typography
         variant="subtitle1"
         component="h3"
         color="neutral"
-        sx={{ fontWeight: "medium" }}
+        fontWeight="medium"
       >
         {t("security.login_page.page_subtitle")}
       </Typography>

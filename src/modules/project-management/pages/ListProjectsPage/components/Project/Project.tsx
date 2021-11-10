@@ -1,7 +1,6 @@
 import { gql } from "@apollo/client";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {
-  Avatar,
   Box,
   Button,
   Collapse,
@@ -15,6 +14,7 @@ import { ProjectFragmentFragment } from "generated/graphql";
 import { DateTime } from "luxon";
 import { Can } from "modules/core";
 import { useState } from "react";
+import * as Styles from "./Project.styles";
 
 type ProjectProps = {
   project: ProjectFragmentFragment;
@@ -25,9 +25,13 @@ const Project = ({ project }: ProjectProps) => {
 
   return (
     <>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <Styles.MainTableRow>
         <TableCell>
-          <IconButton onClick={() => setOpen(!open)} size="small">
+          <IconButton
+            aria-label="Toggle project details"
+            onClick={() => setOpen(!open)}
+            size="small"
+          >
             {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
           </IconButton>
         </TableCell>
@@ -42,30 +46,32 @@ const Project = ({ project }: ProjectProps) => {
             <Button>TODO</Button>
           </Can>
         </TableCell>
-      </TableRow>
+      </Styles.MainTableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 3 }}>
+            <Box m={3}>
               {project.description && (
                 <>
                   <Typography variant="h6" gutterBottom>
                     Description
                   </Typography>
-                  <Typography variant="body2">{project.description}</Typography>
+                  <Typography variant="body2" data-testid="project-description">
+                    {project.description}
+                  </Typography>
                 </>
               )}
 
-              <Typography variant="h6" component="p" sx={{ marginTop: 2 }}>
+              <Typography variant="h6" component="p" mt={2}>
                 Creator
               </Typography>
               <Tooltip
                 title={`${project.creator.firstName} ${project.creator.lastName}`}
               >
-                <Avatar
+                <Styles.Avatar
+                  data-testid="project-creator"
                   src={project.creator.profilePictureUrl || "undefined"}
                   alt={`${project.creator.firstName} ${project.creator.lastName}`}
-                  sx={{ display: "inline-flex", marginRight: 2 }}
                 />
               </Tooltip>
             </Box>

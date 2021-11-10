@@ -9,7 +9,7 @@ const ListProjectsPage = lazy(
 const ProjectManagementPage = () => (
   <Routes>
     <Route
-      path="/"
+      index
       element={
         <Can I="view" a="Project">
           <ListProjectsPage />

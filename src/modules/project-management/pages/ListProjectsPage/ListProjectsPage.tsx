@@ -1,14 +1,10 @@
 import { gql } from "@apollo/client";
 import { Add } from "@mui/icons-material";
 import {
-  Container,
-  Fab,
   Paper,
-  styled,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableFooter,
   TableHead,
   TablePagination,
@@ -16,22 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useListProjectsQuery } from "generated/graphql";
-import { Can, usePagination } from "modules/core";
-import Project from "./components/Project";
-
-const CreateButton = styled(Fab)(({ theme }) => ({
-  position: "fixed",
-  zIndex: theme.zIndex.drawer + 2,
-  right: theme.spacing(2),
-  top: 128,
-  transform: "translateY(-50%)",
-  [theme.breakpoints.up("sm")]: {
-    right: theme.spacing(10),
-  },
-}));
+import { Can, Fab, usePagination } from "modules/core";
+import Project from "./components/Project/Project";
+import * as Styles from "./ListProjectsPage.styles";
 
 export const LIST_PROJECTS_PAGE_QUERY = gql`
-  ${Project.fragments.project}
   query ListProjects($first: Int, $last: Int, $before: String, $after: String) {
     projects(first: $first, last: $last, before: $before, after: $after) {
       totalCount
@@ -44,12 +29,12 @@ export const LIST_PROJECTS_PAGE_QUERY = gql`
       edges {
         cursor
         node {
-          id
           ...ProjectFragment
         }
       }
     }
   }
+  ${Project.fragments.project}
 `;
 
 const ListProjectsPage = () => {
@@ -68,28 +53,13 @@ const ListProjectsPage = () => {
   }
 
   return (
-    <Container
-      sx={{
-        minHeight: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: 700 }}
-        gutterBottom
-        component="h1"
-      >
+    <Styles.Container>
+      <Typography variant="h4" fontWeight={700} gutterBottom component="h1">
         Projects
       </Typography>
 
       {projectsQuery.data?.projects?.edges?.length! > 0 ? (
-        <TableContainer
-          component={Paper}
-          elevation={2}
-          sx={{ flex: 1, flexGrow: 1 }}
-        >
+        <Styles.TableContainer component={Paper} elevation={2}>
           <Table>
             <TableHead>
               <TableRow>
@@ -109,30 +79,31 @@ const ListProjectsPage = () => {
                 <TablePagination
                   {...paginationParams}
                   colSpan={4}
-                  count={projectsQuery.data?.projects?.totalCount || 0}
+                  count={projectsQuery.data?.projects?.totalCount!}
                 />
               </TableRow>
             </TableFooter>
           </Table>
-        </TableContainer>
+        </Styles.TableContainer>
       ) : (
         <Typography
           variant="h5"
           component="p"
           alignSelf="center"
           justifySelf="center"
-          sx={{ marginTop: "auto", marginBottom: "auto" }}
+          marginTop="auto"
+          marginBottom="auto"
         >
           You have no projects, create one by clicking the button above!
         </Typography>
       )}
 
       <Can I="create" a="Project">
-        <CreateButton color="secondary">
+        <Fab color="secondary">
           <Add />
-        </CreateButton>
+        </Fab>
       </Can>
-    </Container>
+    </Styles.Container>
   );
 };
 

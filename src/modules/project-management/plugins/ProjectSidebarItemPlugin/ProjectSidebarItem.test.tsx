@@ -2,6 +2,7 @@ import { renderWithProviders } from "test-utils";
 import ProjectSidebarItem from "./ProjectSidebarItem";
 
 jest.mock("modules/core", () => ({
+  ...jest.requireActual("modules/core"),
   Can: ({ children }: any) => children,
 }));
 

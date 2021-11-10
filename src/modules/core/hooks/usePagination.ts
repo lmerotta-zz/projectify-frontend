@@ -30,7 +30,7 @@ const usePagination = (
       } else if (page < currentPage) {
         variables.last = perPage;
         variables.before = startCursor;
-      } else if (page > currentPage) {
+      } /* istanbul ignore else */ else if (page > currentPage) {
         variables.first = perPage;
         variables.after = endCursor;
       }
@@ -50,7 +50,7 @@ const usePagination = (
 
   const onPerPageChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      const perPage = parseInt(event.target.value, 10) || 10;
+      const perPage = parseInt(event.target.value, 10);
       refetchPagination(0, perPage);
       setCurrentPage(0);
       setCurrentPerPage(perPage);

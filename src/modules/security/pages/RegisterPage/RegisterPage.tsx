@@ -78,14 +78,14 @@ const RegisterPage = () => {
 
   return (
     <RightPane>
-      <Typography variant="h4" component="h1" sx={{ fontWeight: "medium" }}>
+      <Typography variant="h4" component="h1" fontWeight="medium">
         {t("security.register_page.page_title")}
       </Typography>
       <Typography
         variant="subtitle1"
         component="h3"
         color="neutral"
-        sx={{ fontWeight: "medium" }}
+        fontWeight="medium"
       >
         {t("security.register_page.page_subtitle")}
       </Typography>
