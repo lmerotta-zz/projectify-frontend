@@ -11,6 +11,13 @@ describe("usePagination hook", () => {
       expected: { first: 20, last: null, before: null, after: null },
     },
     {
+      description: "resets pagination",
+      initialValues: [null, null],
+      method: "resetPagination",
+      args: [],
+      expected: { first: 10, last: null, before: null, after: null },
+    },
+    {
       description: "navigate to page 1",
       initialValues: ["startCursor", "endCursor"],
       method: "onPageChange",

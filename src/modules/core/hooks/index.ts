@@ -1,2 +1,2 @@
-export { default as usePagination } from "./usePagination";
+export * from "./pagination";
 export { default as usePermissions } from "./usePermissions";

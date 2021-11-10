@@ -9,11 +9,10 @@ import {
   Grid,
 } from "@mui/material";
 import { useCreateProjectMutation } from "generated/graphql";
-import { TextField } from "modules/core";
+import { TextField, usePaginationMethods } from "modules/core";
 import { FormProvider, useForm } from "react-hook-form";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
-import { LIST_PROJECTS_PAGE_QUERY } from "../../ListProjectsPage";
 
 export const CREATE_PROJECT_MUATION = gql`
   mutation createProject($name: String!, $description: String) {
@@ -48,15 +47,17 @@ const ProjectFormDialog = ({ open, onClose }: ProjectFormDialogProps) => {
     },
   });
 
+  const { resetPagination } = usePaginationMethods();
+
   const [createProject] = useCreateProjectMutation({
     onError: (e) => {
       mapViolationsToForm(form.setError, e);
     },
     onCompleted: () => {
+      resetPagination();
       onClose();
       form.reset();
     },
-    refetchQueries: [LIST_PROJECTS_PAGE_QUERY],
   });
 
   const onSubmit = form.handleSubmit(async (values) => {

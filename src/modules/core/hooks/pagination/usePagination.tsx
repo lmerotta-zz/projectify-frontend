@@ -1,5 +1,6 @@
 import { Maybe, Scalars } from "generated/graphql";
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, ReactNode, useCallback, useMemo, useState } from "react";
+import GraphQLPaginationContext from "./GraphQLPaginationContext";
 
 type RefetchFunction = (args: {
   [key: string]: any;
@@ -58,15 +59,24 @@ const usePagination = (
     [refetchPagination]
   );
 
-  return useMemo(
-    () => ({
+  return useMemo(() => {
+    const methods = {
       page: currentPage,
       rowsPerPage: currentPerPage,
       onPageChange,
       onRowsPerPageChange: onPerPageChange,
-    }),
-    [currentPage, currentPerPage, onPageChange, onPerPageChange]
-  );
+      resetPagination: () => onPageChange(null, 0),
+    };
+
+    return {
+      ...methods,
+      PaginationProvider: ({ children }: { children: ReactNode }) => (
+        <GraphQLPaginationContext.Provider value={methods}>
+          {children}
+        </GraphQLPaginationContext.Provider>
+      ),
+    };
+  }, [currentPage, currentPerPage, onPageChange, onPerPageChange]);
 };
 
 export default usePagination;
