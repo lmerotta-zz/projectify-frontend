@@ -45,22 +45,22 @@ export const Title = styled(Typography)(({ theme }) => ({
 
 export const SubTitle = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
-  ...theme.typography.h6,
+  ...(theme.typography.h6 as any),
   fontWeight: "normal",
 
   [theme.breakpoints.up("md")]: {
-    ...theme.typography.h2,
+    ...(theme.typography.h2 as any),
     fontWeight: "normal",
   },
 })) as typeof Typography;
 
 export const Caption = styled(Typography)(({ theme }) => ({
-  ...theme.typography.body2,
+  ...(theme.typography.body2 as any),
   fontWeight: "lighter",
 
   [theme.breakpoints.up("md")]: {
-    ...theme.typography.subtitle1,
-    fontWeight: "ligher",
+    ...(theme.typography.subtitle1 as any),
+    fontWeight: "lighter",
   },
 })) as typeof Typography;
 

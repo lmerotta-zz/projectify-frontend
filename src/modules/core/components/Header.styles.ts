@@ -26,7 +26,7 @@ export const AppBar = styled(MUIAppBar)<AppBarProps>(({ theme, open }) => ({
 
 export const Toolbar = styled(MUIToolbar)(({ theme }) => ({
   // Override media queries injected by theme.mixins.toolbar
-  '@media all': {
+  "@media all": {
     minHeight: 128,
     paddingTop: theme.spacing(1),
     alignItems: "flex-start",
@@ -36,7 +36,7 @@ export const Toolbar = styled(MUIToolbar)(({ theme }) => ({
 
 export const Title = styled(Typography)(({ theme }) => ({
   flexGrow: 1,
-  '@media all': {
+  "@media all": {
     alignSelf: "flex-end",
   },
 })) as typeof Typography;
@@ -72,7 +72,7 @@ export const Drawer = styled(MUIDrawer)(({ theme, open }) => ({
 }));
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
-  ...theme.mixins.toolbar,
+  ...(theme.mixins.toolbar as any),
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",

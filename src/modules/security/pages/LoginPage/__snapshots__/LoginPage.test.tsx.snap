@@ -181,7 +181,7 @@ exports[`LoginPage functional tests Returns an invalid credentials error on wron
 @media (min-width:900px) {
   .emotion-5 {
     font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: ligher;
+    font-weight: lighter;
     font-size: 1rem;
     line-height: 1.75;
     letter-spacing: 0.00938em;
@@ -1012,7 +1012,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 emotion-11"
             >
               <button
-                class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-fullWidth MuiButtonBase-root emotion-23"
+                class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-fullWidth MuiButtonBase-root  emotion-23"
                 tabindex="0"
                 type="submit"
               >
@@ -1049,7 +1049,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 emotion-11"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButton-root MuiButton-outlined MuiButton-outlinedInherit MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorInherit MuiButtonBase-root emotion-31"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButton-root MuiButton-outlined MuiButton-outlinedInherit MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorInherit MuiButtonBase-root  emotion-31"
                 href="http://localhost:8001/actions/security/authentication/oauth/connect/github?_destination=http://localhost:8001/actions/security/authentication/oauth/connected?target=/"
                 tabindex="0"
               >
