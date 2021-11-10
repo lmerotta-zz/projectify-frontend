@@ -30,7 +30,9 @@ describe("Project component unit tests", () => {
       </Table>
     );
 
-    const toggleButton = getByLabelText("Toggle project details");
+    const toggleButton = getByLabelText(
+      "project-management.list_projects_page.project.btn_toggle_details"
+    );
 
     userEvent.click(toggleButton);
 

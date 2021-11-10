@@ -14,6 +14,7 @@ import { ProjectFragmentFragment } from "generated/graphql";
 import { DateTime } from "luxon";
 import { Can } from "modules/core";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import * as Styles from "./Project.styles";
 
 type ProjectProps = {
@@ -22,13 +23,16 @@ type ProjectProps = {
 
 const Project = ({ project }: ProjectProps) => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <>
       <Styles.MainTableRow>
         <TableCell>
           <IconButton
-            aria-label="Toggle project details"
+            aria-label={`${t(
+              "project-management.list_projects_page.project.btn_toggle_details"
+            )}`}
             onClick={() => setOpen(!open)}
             size="small"
           >
@@ -54,7 +58,9 @@ const Project = ({ project }: ProjectProps) => {
               {project.description && (
                 <>
                   <Typography variant="h6" gutterBottom>
-                    Description
+                    {t(
+                      "project-management.list_projects_page.project.description_title"
+                    )}
                   </Typography>
                   <Typography variant="body2" data-testid="project-description">
                     {project.description}
@@ -63,7 +69,9 @@ const Project = ({ project }: ProjectProps) => {
               )}
 
               <Typography variant="h6" component="p" mt={2}>
-                Creator
+                {t(
+                  "project-management.list_projects_page.project.creator_title"
+                )}
               </Typography>
               <Tooltip
                 title={`${project.creator.firstName} ${project.creator.lastName}`}

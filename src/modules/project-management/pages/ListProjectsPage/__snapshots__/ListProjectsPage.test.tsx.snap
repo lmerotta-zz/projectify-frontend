@@ -906,7 +906,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-30:focus::-ms-input-
       <h1
         class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom emotion-1"
       >
-        Projects
+        project-management.list_projects_page.title
       </h1>
       <div
         class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 MuiTableContainer-root emotion-2"
@@ -928,13 +928,13 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-30:focus::-ms-input-
                 class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-6"
                 scope="col"
               >
-                Name
+                project-management.list_projects_page.projects_table.cell_name
               </th>
               <th
                 class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-6"
                 scope="col"
               >
-                Created at
+                project-management.list_projects_page.projects_table.cell_created_at
               </th>
               <th
                 class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-6"
@@ -952,7 +952,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-30:focus::-ms-input-
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-12"
               >
                 <button
-                  aria-label="Toggle project details"
+                  aria-label="project-management.list_projects_page.project.btn_toggle_details"
                   class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall emotion-13"
                   tabindex="0"
                   type="button"
@@ -1364,12 +1364,12 @@ exports[`ListProjectsPage Displays an icon to add a new project if the result is
       <h1
         class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom emotion-1"
       >
-        Projects
+        project-management.list_projects_page.title
       </h1>
       <p
         class="MuiTypography-root MuiTypography-h5 emotion-2"
       >
-        You have no projects, create one by clicking the button above!
+        project-management.list_projects_page.no_projects
       </p>
       <button
         class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-secondary emotion-3"

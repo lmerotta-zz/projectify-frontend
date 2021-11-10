@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { Add } from "@mui/icons-material";
 import {
   Paper,
   Table,
@@ -12,10 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useListProjectsQuery } from "generated/graphql";
-import { Can, Fab, usePagination } from "modules/core";
+import { Can, usePagination } from "modules/core";
+import { useTranslation } from "react-i18next";
+import CreateProject from "./components/CreateProject";
 import Project from "./components/Project/Project";
 import * as Styles from "./ListProjectsPage.styles";
-
 export const LIST_PROJECTS_PAGE_QUERY = gql`
   query ListProjects($first: Int, $last: Int, $before: String, $after: String) {
     projects(first: $first, last: $last, before: $before, after: $after) {
@@ -42,6 +42,8 @@ const ListProjectsPage = () => {
     variables: { first: 10 },
   });
 
+  const { t } = useTranslation();
+
   const paginationParams = usePagination(
     refetch,
     projectsQuery.data?.projects?.pageInfo?.startCursor,
@@ -55,7 +57,7 @@ const ListProjectsPage = () => {
   return (
     <Styles.Container>
       <Typography variant="h4" fontWeight={700} gutterBottom component="h1">
-        Projects
+        {t("project-management.list_projects_page.title")}
       </Typography>
 
       {projectsQuery.data?.projects?.edges?.length! > 0 ? (
@@ -64,8 +66,16 @@ const ListProjectsPage = () => {
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Created at</TableCell>
+                <TableCell>
+                  {t(
+                    "project-management.list_projects_page.projects_table.cell_name"
+                  )}
+                </TableCell>
+                <TableCell>
+                  {t(
+                    "project-management.list_projects_page.projects_table.cell_created_at"
+                  )}
+                </TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -94,14 +104,12 @@ const ListProjectsPage = () => {
           marginTop="auto"
           marginBottom="auto"
         >
-          You have no projects, create one by clicking the button above!
+          {t("project-management.list_projects_page.no_projects")}
         </Typography>
       )}
 
       <Can I="create" a="Project">
-        <Fab color="secondary">
-          <Add />
-        </Fab>
+        <CreateProject />
       </Can>
     </Styles.Container>
   );

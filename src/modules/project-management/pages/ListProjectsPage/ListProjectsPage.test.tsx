@@ -29,9 +29,7 @@ describe("ListProjectsPage", () => {
       }
     );
 
-    await findByText(
-      "You have no projects, create one by clicking the button above!"
-    );
+    await findByText("project-management.list_projects_page.no_projects");
     expect(asFragment()).toMatchSnapshot();
   });
 
