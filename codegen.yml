@@ -1,8 +1,10 @@
 overwrite: true
 schema: ${SCHEMA_PATH}
-documents: "src/**/*.tsx"
+documents: "src/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
+    config:
+      nonOptionalTypename: true
     schema: ./src/generated/rest-schema.graphql
     plugins:
       - "typescript"

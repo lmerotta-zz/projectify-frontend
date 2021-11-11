@@ -27,8 +27,12 @@ class AuthManager {
     return await this.userManager.getUser();
   }
 
-  async logout() {
+  async removeUser() {
     await this.userManager.removeUser();
+  }
+
+  async logout() {
+    await this.userManager.signoutRedirect();
   }
 }
 

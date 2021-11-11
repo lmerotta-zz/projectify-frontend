@@ -33,12 +33,7 @@ function renderWithProviders(
                 <Routes>
                   <Route
                     path="/*"
-                    element={
-                      <>
-                        <h1>TESTSASATATAST</h1>
-                        {children}
-                      </>
-                    }
+                    element={<div data-testid="root">{children}</div>}
                   />
                 </Routes>
               </Suspense>
