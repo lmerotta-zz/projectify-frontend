@@ -11,10 +11,11 @@ import {
 import { useCreateProjectMutation } from "generated/graphql";
 import { TextField, usePaginationMethods } from "modules/core";
 import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import mapViolationsToForm from "utils/mapViolationsToForm";
 import * as yup from "yup";
 
-export const CREATE_PROJECT_MUATION = gql`
+export const CREATE_PROJECT_MUTATION = gql`
   mutation createProject($name: String!, $description: String) {
     createProject(input: { name: $name, description: $description }) {
       clientMutationId
@@ -47,6 +48,7 @@ const ProjectFormDialog = ({ open, onClose }: ProjectFormDialogProps) => {
     },
   });
 
+  const { t } = useTranslation();
   const { resetPagination } = usePaginationMethods();
 
   const [createProject] = useCreateProjectMutation({
@@ -68,14 +70,18 @@ const ProjectFormDialog = ({ open, onClose }: ProjectFormDialogProps) => {
 
   return (
     <Dialog open={open} maxWidth="sm" fullWidth>
-      <DialogTitle>Create a new project</DialogTitle>
+      <DialogTitle>
+        {t("project-management.list_projects_page.project_form_dialog.title")}
+      </DialogTitle>
       <DialogContent>
         <FormProvider {...form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 id="name"
-                label="Project name"
+                label={t(
+                  "project-management.list_projects_page.project_form_dialog.label_name"
+                )}
                 fullWidth
                 variant="outlined"
                 required
@@ -85,7 +91,9 @@ const ProjectFormDialog = ({ open, onClose }: ProjectFormDialogProps) => {
             <Grid item xs={12}>
               <TextField
                 id="description"
-                label="Project description"
+                label={t(
+                  "project-management.list_projects_page.project_form_dialog.label_description"
+                )}
                 fullWidth
                 variant="outlined"
                 rows={10}
@@ -102,14 +110,14 @@ const ProjectFormDialog = ({ open, onClose }: ProjectFormDialogProps) => {
           onClick={onClose}
           disabled={form.formState.isSubmitting}
         >
-          Cancel
+          {t("global.controls.btn_cancel")}
         </Button>
         <Button
           color="primary"
           onClick={onSubmit}
           disabled={form.formState.isSubmitting || !form.formState.isValid}
         >
-          Save
+          {t("global.controls.btn_save")}
         </Button>
       </DialogActions>
     </Dialog>

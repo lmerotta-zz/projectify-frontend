@@ -44,7 +44,11 @@ const ListProjectsPage = () => {
 
   const { t } = useTranslation();
 
-  const { PaginationProvider, resetPagination: _, ...paginationParams } = usePagination(
+  const {
+    PaginationProvider,
+    resetPagination: _,
+    ...paginationParams
+  } = usePagination(
     refetch,
     projectsQuery.data?.projects?.pageInfo?.startCursor,
     projectsQuery.data?.projects?.pageInfo?.endCursor

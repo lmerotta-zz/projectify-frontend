@@ -1118,6 +1118,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-30:focus::-ms-input-
         </table>
       </div>
       <button
+        aria-label="project-management.list_projects_page.create_project.btn_add"
         class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-secondary emotion-38"
         tabindex="0"
         type="button"
@@ -1372,6 +1373,7 @@ exports[`ListProjectsPage Displays an icon to add a new project if the result is
         project-management.list_projects_page.no_projects
       </p>
       <button
+        aria-label="project-management.list_projects_page.create_project.btn_add"
         class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-secondary emotion-3"
         tabindex="0"
         type="button"
